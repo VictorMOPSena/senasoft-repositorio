@@ -13,6 +13,7 @@
         "ispcn"=>"La id sólo puede contener números",
         "hcv"=>"Hay campos vacíos",
         "pac"=>"Persona agregada correctamente",
+        "pacc"=>"Persona actualizada correctamente",
         "pe"=>"Persona existente",
         "pna"=>"Persona no agregada",
         "pne"=>"Persona no existente",

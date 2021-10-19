@@ -255,11 +255,11 @@
 
         //Función para verificar si una persona existe
         function PersonaExistente(){
-            $stmt = $this->Conectar()->prepare("SELECT * FROM persona WHERE cedulaPersona=?");
+            $stmt = $this->Conectar()->prepare("SELECT * FROM persona WHERE idPersona=?");
 
             $respuesta = ["estado"=>false, "respuesta"=>"pne"];
 
-            if(!$stmt->execute(array($this->cedulaPersona))){
+            if(!$stmt->execute(array($this->idPersona))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;
@@ -300,6 +300,37 @@
                 $respuesta["estado"] = true;
                 $respuesta["respuesta"] = "pac";
             }
+
+            $stmt = null;
+            return $respuesta;
+        }
+
+
+
+        //Función para actualizar una persona
+        function ActualizarPersona($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput){
+            $this->SetDatos($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput);
+
+            $validacion = $this->ValidarDatos();
+            if(!$validacion["estado"]){
+                return $validacion;
+            }
+
+            $respuesta = $this->PersonaExistente();
+            if(!$respuesta["estado"]){
+                $respuesta["respuesta"] = "pe";
+                return $respuesta;
+            }
+
+            $stmt = $this->Conectar()->prepare("UPDATE persona SET cedulaPersona=?, nombresPersona=?, apellidosPersona=?, celularPersona=?, correoPersona=?, direccionPersona=?  WHERE idPersona=?");
+            if(!$stmt->execute(array($this->cedulaPersona, $this->nombresPersona, $this->apellidosPersona, $this->celularPersona, $this->correoPersona, $this->direccionPersona, $this->idPersona))){
+                $stmt = null;
+                $respuesta["respuesta"] = "estmt";
+                return $respuesta;
+            }
+            
+            $respuesta["estado"] = true;
+            $respuesta["respuesta"] = "pacc";
 
             $stmt = null;
             return $respuesta;
