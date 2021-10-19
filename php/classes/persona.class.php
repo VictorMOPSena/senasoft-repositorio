@@ -255,7 +255,15 @@
 
         //Función para verificar si una persona existe
         function PersonaExistente($idInput){
+            $this->idPersona = $idInput;
+
             $respuesta = ["estado"=>false, "respuesta"=>"pne"];
+
+            if(!$this->ValidarCaracteresIdPersona()){
+                $respuesta["respuesta"] = "ispcn";
+                return $respuesta;
+            };
+
 
             $stmt = $this->Conectar()->prepare("SELECT * FROM persona WHERE idPersona=?");
 
@@ -284,7 +292,7 @@
                 return $validacion;
             }
 
-            $respuesta = $this->PersonaExistente($idInput);
+            $respuesta = $this->PersonaExistente($this->idPersona);
             if($respuesta["estado"]){
                 $respuesta["respuesta"] = "pe";
                 return $respuesta;
@@ -317,7 +325,7 @@
                 return $validacion;
             }
 
-            $respuesta = $this->PersonaExistente($idInput);
+            $respuesta = $this->PersonaExistente($this->idPersona);
             if(!$respuesta["estado"]){
                 $respuesta["respuesta"] = "pe";
                 return $respuesta;
@@ -344,8 +352,8 @@
 
             $respuesta = ["estado"=>false, "respuesta"=>"pnel"];
 
-            $stmt = $this->Conectar()->prepare("DELETE FROM persona WHERE idPersona=?");
-            if(!$stmt->execute(array($idInput))){
+            $stmt = $this->Conectar()->prepare("DELETE FROM empleados WHERE idEmpleados=?");
+            if(!$stmt->execute(array($id))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;
@@ -353,9 +361,7 @@
 
             if($stmt->rowCount()>0){
                 $respuesta["estado"] = true;
-                $respuesta["respuesta"] = "pelc";
-            }else{
-                $respuesta["respuesta"] = "pne";
+                $respuesta["respuesta"] = "eec";
             }
 
             $stmt = null;
