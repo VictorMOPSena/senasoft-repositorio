@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-10-2021 a las 22:35:24
+-- Tiempo de generación: 19-10-2021 a las 23:51:48
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -35,18 +35,17 @@ CREATE TABLE `especialidad` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `personal`
+-- Estructura de tabla para la tabla `persona`
 --
 
-CREATE TABLE `personal` (
-  `idPersonal` int(11) NOT NULL,
-  `usuarioPersonal` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `contraPersonal` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
-  `nombresPersonal` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `apellidosPersonal` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `celularPersonal` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `correoPersonal` varchar(320) COLLATE utf8_spanish_ci NOT NULL,
-  `idRolPersonal` int(11) NOT NULL
+CREATE TABLE `persona` (
+  `idPersona` int(11) NOT NULL,
+  `cedulaPersona` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `nombresPersona` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `apellidosPersona` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `celularPersona` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `correoPersona` varchar(320) COLLATE utf8_spanish_ci NOT NULL,
+  `direccionPersona` varchar(100) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -56,7 +55,7 @@ CREATE TABLE `personal` (
 --
 
 CREATE TABLE `personalespecialidad` (
-  `idPersonalPE` int(11) NOT NULL,
+  `idPersonaPE` int(11) NOT NULL,
   `idEspecialidadPE` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -71,6 +70,20 @@ CREATE TABLE `rol` (
   `nombreRol` varchar(20) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `idUsuario` int(11) NOT NULL,
+  `usuarioUsuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `contraUsuario` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `idPersonaUsuario` int(11) NOT NULL,
+  `idRolUsuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
 --
 -- Índices para tablas volcadas
 --
@@ -82,24 +95,31 @@ ALTER TABLE `especialidad`
   ADD PRIMARY KEY (`idEspecialidad`);
 
 --
--- Indices de la tabla `personal`
+-- Indices de la tabla `persona`
 --
-ALTER TABLE `personal`
-  ADD PRIMARY KEY (`idPersonal`),
-  ADD KEY `idRolPersonal` (`idRolPersonal`);
+ALTER TABLE `persona`
+  ADD PRIMARY KEY (`idPersona`);
 
 --
 -- Indices de la tabla `personalespecialidad`
 --
 ALTER TABLE `personalespecialidad`
-  ADD KEY `personalespecialidad_ibfk_1` (`idPersonalPE`),
-  ADD KEY `idEspecialidadPE` (`idEspecialidadPE`);
+  ADD KEY `idEspecialidadPE` (`idEspecialidadPE`),
+  ADD KEY `idPersonaPE` (`idPersonaPE`);
 
 --
 -- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`idRol`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`idUsuario`),
+  ADD KEY `idPersonaUsuario` (`idPersonaUsuario`),
+  ADD KEY `idRolUsuario` (`idRolUsuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -112,10 +132,10 @@ ALTER TABLE `especialidad`
   MODIFY `idEspecialidad` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `personal`
+-- AUTO_INCREMENT de la tabla `persona`
 --
-ALTER TABLE `personal`
-  MODIFY `idPersonal` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `persona`
+  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -124,21 +144,28 @@ ALTER TABLE `rol`
   MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Restricciones para tablas volcadas
+-- AUTO_INCREMENT de la tabla `usuario`
 --
+ALTER TABLE `usuario`
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Filtros para la tabla `personal`
+-- Restricciones para tablas volcadas
 --
-ALTER TABLE `personal`
-  ADD CONSTRAINT `personal_ibfk_1` FOREIGN KEY (`idRolPersonal`) REFERENCES `rol` (`idRol`);
 
 --
 -- Filtros para la tabla `personalespecialidad`
 --
 ALTER TABLE `personalespecialidad`
-  ADD CONSTRAINT `personalespecialidad_ibfk_1` FOREIGN KEY (`idPersonalPE`) REFERENCES `personal` (`idPersonal`),
-  ADD CONSTRAINT `personalespecialidad_ibfk_2` FOREIGN KEY (`idEspecialidadPE`) REFERENCES `especialidad` (`idEspecialidad`);
+  ADD CONSTRAINT `personalespecialidad_ibfk_1` FOREIGN KEY (`idEspecialidadPE`) REFERENCES `especialidad` (`idEspecialidad`),
+  ADD CONSTRAINT `personalespecialidad_ibfk_2` FOREIGN KEY (`idPersonaPE`) REFERENCES `persona` (`idPersona`);
+
+--
+-- Filtros para la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`idPersonaUsuario`) REFERENCES `persona` (`idPersona`),
+  ADD CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`idRolUsuario`) REFERENCES `rol` (`idRol`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

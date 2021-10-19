@@ -1,45 +1,54 @@
 <?php
     
-    class Persona extends Conexion {
+    class Personal extends Conexion {
 
-        private $idPersona;
-        private $cedulaPersona;
-        private $nombresPersona;
-        private $apellidosPersona;
-        private $celularPersona;
-        private $correoPersona;
+        private $idPersonal;
+        private $usuarioPersonal;
+        private $contraPersonal;
+        private $cedulaPersonal;
+        private $nombresPersonal;
+        private $apellidosPersonal;
+        private $celularPersonal;
+        private $correoPersonal;
+        private $idRolPersonal;
 
-        private $cedulaPersonaMaxLength;
-        private $nombresPersonaMaxLength;
-        private $apellidosPersonaMaxLength;
-        private $celularPersonaMaxLength;
-        private $correoPersonaMaxLength;
+        private $usuarioPersonalMaxLength;
+        private $contraPersonalMaxLength=20;
+        private $cedulaPersonalMaxLength;
+        private $nombresPersonalMaxLength;
+        private $apellidosPersonalMaxLength;
+        private $celularPersonalMaxLength;
+        private $correoPersonalMaxLength;
 
 
 
         //Función para traer la longitud de caracteres de las columnas de la tabla "personal" desde la base de datos
         function CargarMaxLength(){
-            $stmt = $this->Conectar()->prepare("SELECT COLUMN_NAME as columna, CHARACTER_MAXIMUM_LENGTH as length FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='persona';");
+            $stmt = $this->Conectar()->prepare("SELECT COLUMN_NAME as columna, CHARACTER_MAXIMUM_LENGTH as length FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='personal';");
             $stmt->execute();
             
             if($stmt->rowCount()>0){
 
                 $resultados=$stmt->fetchAll(PDO::FETCH_OBJ);
                 foreach($resultados as $resultado){
-                    if($resultado->columna=="cedulaPersona"){
-                        $cedulaPersonaMaxLength=$resultado->length;
+                    if($resultado->columna=="usuarioPersonal"){
+                        $usuarioPersonalMaxLength=$resultado->length;
+
+                    }else if($resultado->columna=="cedulaPersonal"){
+                        $cedulaPersonalMaxLength=$resultado->length;
                     
-                    }else if($resultado->columna=="nombresPersona"){
-                        $nombresPersonaMaxLength=$resultado->length;
+                    }else if($resultado->columna=="nombresPersonal"){
+                        $nombresPersonalMaxLength=$resultado->length;
                     
-                    }else if($resultado->columna=="apellidosPersona"){
-                        $apellidosPersonaMaxLength=$resultado->length;
+                    }else if($resultado->columna=="apellidosPersonal"){
+                        $apellidosPersonalMaxLength=$resultado->length;
                     
-                    }else if($resultado->columna=="celularPersona"){
-                        $celularPersonaMaxLength=$resultado->length;
+                    }else if($resultado->columna=="celularPersonal"){
+                        $celularPersonalMaxLength=$resultado->length;
                     
-                    }else if($resultado->columna=="correoPersona"){
-                        $correoPersonaMaxLength=$resultado->length;
+                    }
+                    else if($resultado->columna=="correoPersonal"){
+                        $correoPersonalMaxLength=$resultado->length;
                     
                     }
                 }
