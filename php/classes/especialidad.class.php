@@ -1,25 +1,24 @@
 <?php
     
-    class Rol extends Conexion {
+    class Especialidad extends Conexion {
 
-        private $idRol;
-        private $nombreRol;
+        private $idEspecialidad;
+        private $nombreEspecialidad;
 
-        private $nombreRolMaxLength;
+        private $nombreEspecialidadMaxLength;
 
 
 
         //Función para traer la longitud de caracteres de las columnas de la tabla "personal" desde la base de datos
         function CargarMaxLength(){
-            $stmt = $this->Conectar()->prepare("SELECT COLUMN_NAME as columna, CHARACTER_MAXIMUM_LENGTH as length FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='rol';");
+            $stmt = $this->Conectar()->prepare("SELECT COLUMN_NAME as columna, CHARACTER_MAXIMUM_LENGTH as length FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='especialidad';");
             $stmt->execute();
             
             if($stmt->rowCount()>0){
-
                 $resultados=$stmt->fetchAll(PDO::FETCH_OBJ);
                 foreach($resultados as $resultado){
-                    if($resultado->columna=="nombreRol"){
-                        $this->nombreRolMaxLength=$resultado->length;
+                    if($resultado->columna=="nombreEspecialidad"){
+                        $this->nombreEspecialidadMaxLength=$resultado->length;
                     
                     }
                 }
@@ -31,7 +30,7 @@
         //Función para validar que los datos ingresados no estén vacíos
         function ValidarDatosVacios(){
             $respuesta = false;
-            if(!empty($this->idRol) && !empty($this->nombreRol)) {
+            if(!empty($this->idEspecialidad) && !empty($this->nombreEspecialidad)) {
                 $respuesta = true;
             }
             return $respuesta;
@@ -40,17 +39,17 @@
 
 
         //Funciones para validar los caracteres de los datos ingresados
-        function ValidarCaracteresIdRol(){
+        function ValidarCaracteresIdEspecialidad(){
             $respuesta = false;
-            if(preg_match("/^[0-9]*$/", $this->idRol)) {
+            if(preg_match("/^[0-9]*$/", $this->idEspecialidad)) {
                 $respuesta = true;
             }
             return $respuesta;
         }
 
-        function ValidarCaracteresNombreRol(){
+        function ValidarCaracteresNombreEspecialidad(){
             $respuesta = false;
-            if(preg_match("/^[a-zA-Z]*$/", $this->nombreRol)) {
+            if(preg_match("/^[a-zA-Z]*$/", $this->nombreEspecialidad)) {
                 $respuesta = true;
             }
             return $respuesta;
@@ -59,9 +58,9 @@
 
 
         //Funcion para validar la longitud de caracteres de los datos ingresados
-        function ValidarLengthNombreRol(){
+        function ValidarLengthNombreEspecialidad(){
             $respuesta = false;
-            if(strlen($this->nombreRol)<=$this->nombreRolMaxLength){
+            if(strlen($this->nombreEspecialidad)<=$this->nombreEspecialidadMaxLength){
                 $respuesta = true;
             }
             return $respuesta;
@@ -77,14 +76,14 @@
             if (!$this->ValidarDatosVacios()){
                 $respuesta["respuesta"] = "hcv";
 
-            }else if(!$this->ValidarCaracteresIdRol()){
+            }else if(!$this->ValidarCaracteresIdEspecialidad()){
                 $respuesta["respuesta"] = "ispcn";
 
-            }else if(!$this->ValidarCaracteresNombreRol()){
-                $respuesta["respuesta"] = "nrspcl";
+            }else if(!$this->ValidarCaracteresNombreEspecialidad()){
+                $respuesta["respuesta"] = "nespcl";
 
-            }else if(!$this->ValidarLengthNombreRol()){
-                $respuesta["respuesta"] = "nrsmc";
+            }else if(!$this->ValidarLengthNombreEspecialidad()){
+                $respuesta["respuesta"] = "nesmc";
 
             }else{
                 $respuesta["respuesta"] = "";
@@ -98,21 +97,21 @@
 
         //Función para inicializar los atributos de la clase
         function SetDatos($idInput, $nombreInput){
-            $this->idRol = $idInput;
-            $this->nombreRol = $nombreInput;
+            $this->idEspecialidad = $idInput;
+            $this->nombreEspecialidad = $nombreInput;
         }
 
 
 
-        //Funcion para Obtener las los roles
-        function ObtenerRoles(){
-            $stmt = $this->Conectar()->prepare("SELECT * FROM rol");
+        //Funcion para Obtener las especialidades
+        function ObtenerEspecialidades(){
+            $stmt = $this->Conectar()->prepare("SELECT * FROM especialidad");
             $stmt->execute();
             
-            $respuesta = ["estado"=>false, "respuesta"=>"ner"];
+            $respuesta = ["estado"=>false, "respuesta"=>"nee"];
             if($stmt->rowCount()>0){
                 $respuesta["estado"] = true;
-                $respuesta["respuesta"] = "er";
+                $respuesta["respuesta"] = "ee";
                 $respuesta["stmt"] = $stmt; 
             }
 
@@ -121,17 +120,17 @@
 
 
 
-        //Función para verificar si un rol existe, y si existe, trae los datos del rol
-        function RolExistente($columna, $valor){
-            $respuesta = ["estado"=>false, "respuesta"=>"rne"];
+        //Función para verificar si una especialidad existe, y si existe, trae los datos de la especialidad
+        function EspecialidadExistente($columna, $valor){
+            $respuesta = ["estado"=>false, "respuesta"=>"ene"];
 
-            if(!$this->ValidarCaracteresIdRol()){
+            if(!$this->ValidarCaracteresIdEspecialidad()){
                 $respuesta["respuesta"] = "ispcn";
                 return $respuesta;
             };
 
 
-            $stmt = $this->Conectar()->prepare("SELECT * FROM rol WHERE $columna=?");
+            $stmt = $this->Conectar()->prepare("SELECT * FROM especialidad WHERE $columna=?");
 
             if(!$stmt->execute(array($valor))){
                 $stmt = null;
@@ -141,7 +140,7 @@
             
             if($stmt->rowCount()>0){
                 $respuesta["estado"] = true;
-                $respuesta["respuesta"] = "re";
+                $respuesta["respuesta"] = "ese";
                 $respuesta["stmt"] = $stmt; 
             }
 
@@ -149,8 +148,8 @@
         }
 
 
-        //Función para agregar una persona
-        function AgregarRol($idInput, $nombreInput){
+        //Función para agregar una especialidad
+        function AgregarEspecialidad($idInput, $nombreInput){
             $this->SetDatos($idInput, $nombreInput);
 
             $validacion = $this->ValidarDatos();
@@ -158,14 +157,14 @@
                 return $validacion;
             }
 
-            $respuesta = $this->RolExistente("nombreRol", $nombreInput);
+            $respuesta = $this->EspecialidadExistente("nombreEspecialidad", $nombreInput);
             if($respuesta["estado"]){
-                $respuesta["respuesta"] = "re";
+                $respuesta["respuesta"] = "ese";
                 return $respuesta;
             }
 
-            $stmt = $this->Conectar()->prepare("INSERT INTO rol (nombreRol) VALUES(?)");
-            if(!$stmt->execute(array($this->nombreRol))){
+            $stmt = $this->Conectar()->prepare("INSERT INTO especialidad (nombreEspecialidad) VALUES(?)");
+            if(!$stmt->execute(array($this->nombreEspecialidad))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;
@@ -173,7 +172,7 @@
             
             if($stmt->rowCount()>0){
                 $respuesta["estado"] = true;
-                $respuesta["respuesta"] = "rac";
+                $respuesta["respuesta"] = "eac";
             }
 
             $stmt = null;
@@ -182,30 +181,30 @@
 
 
 
-        //Función para actualizar un rol
-        function ActualizarRol($idInput, $nombreInputt){
-            $this->SetDatos($idInput, $nombreInputt);
+        //Función para actualizar una especialidad
+        function ActualizarEspecialidad($idInput, $nombreInput){
+            $this->SetDatos($idInput, $nombreInput);
 
             $validacion = $this->ValidarDatos();
             if(!$validacion["estado"]){
                 return $validacion;
             }
 
-            $respuesta = $this->RolExistente($this->idRol);
+            $respuesta = $this->EspecialidadExistente($this->idEspecialidad);
             if(!$respuesta["estado"]){
-                $respuesta["respuesta"] = "re";
+                $respuesta["respuesta"] = "ese";
                 return $respuesta;
             }
 
-            $stmt = $this->Conectar()->prepare("UPDATE rol SET nombreRol=? WHERE idRol=?");
-            if(!$stmt->execute(array($this->nombreRol, $this->idRol))){
+            $stmt = $this->Conectar()->prepare("UPDATE especialidad SET nombreEspecialidad=? WHERE idEspecialidad=?");
+            if(!$stmt->execute(array($this->nombreEspecialidad, $this->idEspecialidad))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;
             }
             
             $respuesta["estado"] = true;
-            $respuesta["respuesta"] = "racc";
+            $respuesta["respuesta"] = "eacc";
 
             $stmt = null;
             return $respuesta;
@@ -213,12 +212,12 @@
 
 
 
-        //Función para eliminar un rol
-        function EliminarRol($idInput){
+        //Función para eliminar una especialidad
+        function EliminarEspecialidad($idInput){
 
-            $respuesta = ["estado"=>false, "respuesta"=>"rnel"];
+            $respuesta = ["estado"=>false, "respuesta"=>"enel"];
 
-            $stmt = $this->Conectar()->prepare("DELETE FROM rol WHERE idRol=?");
+            $stmt = $this->Conectar()->prepare("DELETE FROM especialidad WHERE idEspecialidad=?");
             if(!$stmt->execute(array($idInput))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
@@ -227,9 +226,9 @@
 
             if($stmt->rowCount()>0){
                 $respuesta["estado"] = true;
-                $respuesta["respuesta"] = "relc";
+                $respuesta["respuesta"] = "eelc";
             }else{
-                $respuesta["respuesta"] = "rne";
+                $respuesta["respuesta"] = "ene";
             }
 
             $stmt = null;

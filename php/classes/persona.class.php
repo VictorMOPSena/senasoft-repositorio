@@ -284,6 +284,38 @@
         }
 
 
+
+        //Función para verificar si una cedula ya está en uso, y si existe, trae los datos de la persona de esa cédula
+        function CedulaExistente($cedulaInput){
+            $this->cedulaPersona = $cedulaInput;
+
+            $respuesta = ["estado"=>false, "respuesta"=>"cneu"];
+
+            if(!$this->ValidarCaracteresCedulaPersona()){
+                $respuesta["respuesta"] = "cspcn";
+                return $respuesta;
+            }
+
+
+            $stmt = $this->Conectar()->prepare("SELECT * FROM persona WHERE idCedula=?");
+
+            if(!$stmt->execute(array($this->cedulaPersona))){
+                $stmt = null;
+                $respuesta["respuesta"] = "estmt";
+                return $respuesta;
+            }
+            
+            if($stmt->rowCount()>0){
+                $respuesta["estado"] = true;
+                $respuesta["respuesta"] = "cyeu";
+                $respuesta["stmt"] = $stmt; 
+            }
+
+            return $respuesta;
+        }
+
+
+
         //Función para agregar una persona
         function AgregarPersona($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput){
             $this->SetDatos($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput);
@@ -296,6 +328,12 @@
             $respuesta = $this->PersonaExistente($this->idPersona);
             if($respuesta["estado"]){
                 $respuesta["respuesta"] = "pe";
+                return $respuesta;
+            }
+
+            $respuesta = $this->CedulaExistente($this->cedulaPersona);
+            if($respuesta["estado"]){
+                $respuesta["respuesta"] = "cyeu";
                 return $respuesta;
             }
 
@@ -332,7 +370,7 @@
                 return $respuesta;
             }
 
-            $stmt = $this->Conectar()->prepare("UPDATE persona SET cedulaPersona=?, nombresPersona=?, apellidosPersona=?, celularPersona=?, correoPersona=?, direccionPersona=?  WHERE idPersona=?");
+            $stmt = $this->Conectar()->prepare("UPDATE persona SET cedulaPersona=?, nombresPersona=?, apellidosPersona=?, celularPersona=?, correoPersona=?, direccionPersona=? WHERE idPersona=?");
             if(!$stmt->execute(array($this->cedulaPersona, $this->nombresPersona, $this->apellidosPersona, $this->celularPersona, $this->correoPersona, $this->direccionPersona, $this->idPersona))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
@@ -348,13 +386,13 @@
 
 
 
-        //
+        //Función para eliminar una persona
         function EliminarPersona($idInput){
 
             $respuesta = ["estado"=>false, "respuesta"=>"pnel"];
 
-            $stmt = $this->Conectar()->prepare("DELETE FROM empleados WHERE idEmpleados=?");
-            if(!$stmt->execute(array($id))){
+            $stmt = $this->Conectar()->prepare("DELETE FROM persona WHERE idPersona=?");
+            if(!$stmt->execute(array($idInput))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;
@@ -362,7 +400,9 @@
 
             if($stmt->rowCount()>0){
                 $respuesta["estado"] = true;
-                $respuesta["respuesta"] = "eec";
+                $respuesta["respuesta"] = "pelc";
+            }else{
+                $respuesta["respuesta"] = "pne";
             }
 
             $stmt = null;
