@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2021 a las 15:32:00
+-- Tiempo de generación: 20-10-2021 a las 17:55:00
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 7.3.27
 
@@ -38,16 +38,12 @@ CREATE TABLE `especialidad` (
 
 INSERT INTO `especialidad` (`idEspecialidad`, `nombreEspecialidad`) VALUES
 (2, 'Doctor'),
-(3, 'Doctor'),
-(4, 'Doctor'),
-(5, 'Doctor'),
-(6, 'Doctor'),
-(7, 'Doctor'),
-(8, 'Doctor'),
-(9, 'Doctor'),
-(10, 'Doctor'),
 (11, 'a'),
-(12, 'b');
+(12, 'b'),
+(13, 'c'),
+(14, 'd'),
+(15, 'fg'),
+(16, 'asdasfsdafasd');
 
 -- --------------------------------------------------------
 
@@ -62,26 +58,18 @@ CREATE TABLE `persona` (
   `apellidosPersona` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `celularPersona` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `correoPersona` varchar(320) COLLATE utf8_spanish_ci NOT NULL,
-  `direccionPersona` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+  `direccionPersona` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `idEspecialidadPersona` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `persona`
 --
 
-INSERT INTO `persona` (`idPersona`, `cedulaPersona`, `nombresPersona`, `apellidosPersona`, `celularPersona`, `correoPersona`, `direccionPersona`) VALUES
-(3, 'a', 'a', 'a', 'a', 'a', 'a');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `personaespecialidad`
---
-
-CREATE TABLE `personaespecialidad` (
-  `idPersonaPE` int(11) NOT NULL,
-  `idEspecialidadPE` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+INSERT INTO `persona` (`idPersona`, `cedulaPersona`, `nombresPersona`, `apellidosPersona`, `celularPersona`, `correoPersona`, `direccionPersona`, `idEspecialidadPersona`) VALUES
+(4, '1', 'a', 'a', '1', 'a@gmail.com', 'a', 14),
+(5, '1', 'a', 'a', '1', 'a@gmail.com', 'a', 15),
+(6, '1', 'a', 'a', '1', 'a@gmail.com', 'a', 16);
 
 -- --------------------------------------------------------
 
@@ -130,14 +118,8 @@ ALTER TABLE `especialidad`
 -- Indices de la tabla `persona`
 --
 ALTER TABLE `persona`
-  ADD PRIMARY KEY (`idPersona`);
-
---
--- Indices de la tabla `personaespecialidad`
---
-ALTER TABLE `personaespecialidad`
-  ADD KEY `idEspecialidadPE` (`idEspecialidadPE`),
-  ADD KEY `idPersonaPE` (`idPersonaPE`);
+  ADD PRIMARY KEY (`idPersona`),
+  ADD KEY `idEspecialidadPersona` (`idEspecialidadPersona`);
 
 --
 -- Indices de la tabla `rol`
@@ -161,13 +143,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `especialidad`
 --
 ALTER TABLE `especialidad`
-  MODIFY `idEspecialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idEspecialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -186,11 +168,10 @@ ALTER TABLE `usuario`
 --
 
 --
--- Filtros para la tabla `personaespecialidad`
+-- Filtros para la tabla `persona`
 --
-ALTER TABLE `personaespecialidad`
-  ADD CONSTRAINT `personaespecialidad_ibfk_1` FOREIGN KEY (`idEspecialidadPE`) REFERENCES `especialidad` (`idEspecialidad`),
-  ADD CONSTRAINT `personaespecialidad_ibfk_2` FOREIGN KEY (`idPersonaPE`) REFERENCES `persona` (`idPersona`);
+ALTER TABLE `persona`
+  ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`idEspecialidadPersona`) REFERENCES `especialidad` (`idEspecialidad`);
 
 --
 -- Filtros para la tabla `usuario`
