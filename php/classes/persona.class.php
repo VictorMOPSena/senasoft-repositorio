@@ -309,7 +309,7 @@
                 return $respuesta;
             }
 
-            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad WHERE idCedula=?;");
+            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad WHERE cedulaPersona=?;");
 
             if(!$stmt->execute(array($this->cedulaPersona))){
                 $stmt = null;
@@ -335,12 +335,6 @@
             $validacion = $this->ValidarDatos();
             if(!$validacion["estado"]){
                 return $validacion;
-            }
-
-            $respuesta = $this->PersonaExistente($this->idPersona);
-            if($respuesta["estado"]){
-                $respuesta["respuesta"] = "pe";
-                return $respuesta;
             }
 
             $respuesta = $this->CedulaExistente($this->cedulaPersona);
@@ -379,6 +373,12 @@
             $respuesta = $this->PersonaExistente($this->idPersona);
             if($respuesta["estado"]){
                 $respuesta["respuesta"] = "pne";
+                return $respuesta;
+            }
+
+            $respuesta = $this->CedulaExistente($this->cedulaPersona);
+            if($respuesta["estado"]){
+                $respuesta["respuesta"] = "cyeu";
                 return $respuesta;
             }
 
