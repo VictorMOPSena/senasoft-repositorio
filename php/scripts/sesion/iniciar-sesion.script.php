@@ -1,34 +1,42 @@
 <?php
 
+    require_once '../../classes/conexion.class.php';
+    require_once '../../classes/usuario.class.php';
+    require_once '../../classes/sesion.class.php';
+    require_once '../../codigos-mensajes.php';
 
+    $nombreUsuarioInput ="victorop";
+    $contraUsuarioInput = "3";
 
-    $usuario = $_POST['usuario'];
-    $contra = $_POST['contra'];
+    $usuarioClass = new Usuario();
+    $respuesta = $usuarioClass->UsuarioExistente("nombreUsuario", $nombreUsuarioInput);
 
-    require_once '../conexion.php';
-    $conexion = EstablecerConexion($usuario, $contra, true);
-    require_once './funciones-login-script.php';
+    if($respuesta["estado"]){
+        $idUsuarioAux;
+        $nombreUsuarioAux;
+        $idPersonaUsarioAux;
+        $idRolUsuarioAux;
 
-    $datos = UsuarioExistente($conexion, $usuario);
+        $contraUsuarioAux;
 
-    if($datos){
-        if(password_verify($contra, $datos['contra'])){
-            session_start();
-            $_SESSION["idUsuarioSenasoft"] = $datos['id'];
-            $_SESSION["nombreUsuarioSenasoft"] = $datos['usuario'];
-            $_SESSION["contraUsuarioSenasoft"] = $contra;
-            $_SESSION["rolUsuarioSenasoft"] = $datos['rango'];
-            $_SESSION["nombreServitecnicosdelcamposasAdministrar"] = $datos['nombre'];
-
-            header("location: ../../interfaz-general.php");
-            exit();
-        }else{
-            header("location: ../../index.php?error=contra");
-            exit();
+        $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
+        foreach($resultados as $resultado){
+            $idUsuarioAux = $resultado->idUsuario;
+            $nombreUsuarioAux = $resultado->nombreUsuario;
+            $idPersonaUsarioAux = $resultado->idPersonaUsuario;
+            $idRolUsuarioAux = $resultado->idRolUsuario;
+            $contraUsuarioAux = $resultado->contraUsuario;
         }
-    }else{
-        header("location: ../../index.php?error=usuario");
-        exit();
+
+        if(password_verify($contraUsuarioInput, $contraUsuarioAux)){
+            $sesionClass = new Sesion();
+            $respuesta = $sesionClass->IniciarSesion($idUsuarioAux, $nombreUsuarioAux, $idPersonaUsarioAux, $idRolUsuarioAux);
+
+        }else{
+            $respuesta["respuesta"] = "cunec";
+        }
     }
+
+    echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
 
 ?>
