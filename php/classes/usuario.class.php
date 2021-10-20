@@ -9,35 +9,20 @@
         private $idRolUsuario;
 
         private $nombreUsuarioMaxLength;
-        private $nombreUsuarioMaxLength
+        private $contraUsuarioMaxLength=20;
 
 
         //Función para traer la longitud de caracteres de las columnas de la tabla "personal" desde la base de datos
         function CargarMaxLength(){
-            $stmt = $this->Conectar()->prepare("SELECT COLUMN_NAME as columna, CHARACTER_MAXIMUM_LENGTH as length FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='persona';");
+            $stmt = $this->Conectar()->prepare("SELECT COLUMN_NAME as columna, CHARACTER_MAXIMUM_LENGTH as length FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='usuario';");
             $stmt->execute();
             
             if($stmt->rowCount()>0){
 
                 $resultados=$stmt->fetchAll(PDO::FETCH_OBJ);
                 foreach($resultados as $resultado){
-                    if($resultado->columna=="cedulaPersona"){
-                        $this->cedulaPersonaMaxLength=$resultado->length;
-                    
-                    }else if($resultado->columna=="nombresPersona"){
-                        $this->nombresPersonaMaxLength=$resultado->length;
-                    
-                    }else if($resultado->columna=="apellidosPersona"){
-                        $this->apellidosPersonaMaxLength=$resultado->length;
-                    
-                    }else if($resultado->columna=="celularPersona"){
-                        $this->celularPersonaMaxLength=$resultado->length;
-                    
-                    }else if($resultado->columna=="correoPersona"){
-                        $this->correoPersonaMaxLength=$resultado->length;
-                    
-                    }else if($resultado->columna=="direccionPersona"){
-                        $this->direccionPersonaMaxLength=$resultado->length;
+                    if($resultado->columna=="nombreUsuario"){
+                        $this->nombreUsuarioMaxLength=$resultado->length;
                     
                     }
                 }
@@ -49,7 +34,7 @@
         //Función para validar que los datos ingresados no estén vacíos
         function ValidarDatosVacios(){
             $respuesta = false;
-            if(!empty($this->idPersona) && !empty($this->cedulaPersona) && !empty($this->nombresPersona) && !empty($this->apellidosPersona) && !empty($this->celularPersona) && !empty($this->correoPersona) && !empty($this->direccionPersona)) {
+            if(!empty($this->idUsuario) && !empty($this->nombreUsuario) && !empty($this->contraUsuario) && !empty($this->idPersonaUsuario) && !empty($this->idRolUsuario)) {
                 $respuesta = true;
             }
             return $respuesta;
@@ -58,52 +43,33 @@
 
 
         //Funciones para validar los caracteres de los datos ingresados
-        function ValidarCaracteresIdPersona(){
+        function ValidarCaracteresIdUsuario(){
             $respuesta = false;
-            if(preg_match("/^[0-9]*$/", $this->idPersona)) {
+            if(preg_match("/^[0-9]*$/", $this->idUsuario)) {
                 $respuesta = true;
             }
             return $respuesta;
         }
 
-        function ValidarCaracteresCedulaPersona(){
+        function ValidarCaracteresNombreUsuario(){
             $respuesta = false;
-            if(preg_match("/^[0-9]*$/", $this->cedulaPersona)) {
+            if(preg_match("/^[a-zA-Z0-9]*$/", $this->nombreUsuario)) {
                 $respuesta = true;
             }
             return $respuesta;
         }
 
-        function ValidarCaracteresNombresPersona(){
+        function ValidarCaracteresIdPersonaUsuario(){
             $respuesta = false;
-            if(preg_match("/^[a-zA-Z ]*$/", $this->nombresPersona)) {
+            if(preg_match("/^[0-9]*$/", $this->idPersonaUsuario)) {
                 $respuesta = true;
             }
             return $respuesta;
         }
 
-        function ValidarCaracteresApellidosPersona(){
+        function ValidarCaracteresIdRolUsuario(){
             $respuesta = false;
-            if(preg_match("/^[a-zA-Z ]*$/", $this->apellidosPersona)) {
-                $respuesta = true;
-            }
-            return $respuesta;
-        }
-
-        function ValidarCaracteresCelularPersona(){
-            $respuesta = false;
-            if(preg_match("/^[0-9]*$/", $this->celularPersona)) {
-                $respuesta = true;
-            }
-            return $respuesta;
-        }
-
-
-
-        //Función para validar los caracteres del correo
-        function ValidarCorreo(){
-            $respuesta = false;
-            if(filter_var($this->correoPersona, FILTER_VALIDATE_EMAIL)) {
+            if(preg_match("/^[0-9]*$/", $this->idRolUsuario)) {
                 $respuesta = true;
             }
             return $respuesta;
@@ -112,53 +78,23 @@
         
 
         //Funciones para validar la longitud de caracteres de los datos ingresados
-        function ValidarLengthCedulaPersona(){
+        function ValidarLengthNombreUsuario(){
             $respuesta = false;
-            if(strlen($this->cedulaPersona)<=$this->cedulaPersonaMaxLength){
+            if(strlen($this->nombreUsuario)<=$this->nombreUsuarioMaxLength){
                 $respuesta = true;
             }
             return $respuesta;
         }
 
-        function ValidarLengthNombresPersona(){
+        function ValidarLengthContraUsuario(){
             $respuesta = false;
-            if(strlen($this->nombresPersona)<=$this->nombresPersonaMaxLength){
+            if(strlen($this->contraUsuario)<=$this->contraUsuarioMaxLength){
                 $respuesta = true;
             }
             return $respuesta;
         }
 
-        function ValidarLengthApellidosPersona(){
-            $respuesta = false;
-            if(strlen($this->apellidosPersona)<=$this->apellidosPersonaMaxLength){
-                $respuesta = true;
-            }
-            return $respuesta;
-        }
 
-        function ValidarLengthCelularPersona(){
-            $respuesta = false;
-            if(strlen($this->celularPersona)<=$this->celularPersonaMaxLength){
-                $respuesta = true;
-            }
-            return $respuesta;
-        }
-
-        function ValidarLengthCorreoPersona(){
-            $respuesta = false;
-            if(strlen($this->correoPersona)<=$this->correoPersonaMaxLength){
-                $respuesta = true;
-            }
-            return $respuesta;
-        }
-
-        function ValidarLengthDireccionPersona(){
-            $respuesta = false;
-            if(strlen($this->direccionPersona)<=$this->direccionPersonaMaxLength){
-                $respuesta = true;
-            }
-            return $respuesta;
-        }
 
 
 
@@ -171,41 +107,23 @@
             if (!$this->ValidarDatosVacios()){
                 $respuesta["respuesta"] = "hcv";
 
-            }else if(!$this->ValidarCaracteresIdPersona()){
+            }else if(!$this->ValidarCaracteresIdUsuario()){
                 $respuesta["respuesta"] = "ispcn";
 
-            }else if(!$this->ValidarCaracteresCedulaPersona()){
-                $respuesta["respuesta"] = "cspcn";
+            }else if(!$this->ValidarCaracteresNombreUsuario()){
+                $respuesta["respuesta"] = "nuspcln";
 
-            }else if(!$this->ValidarCaracteresNombresPersona()){
-                $respuesta["respuesta"] = "nspcl";
+            }else if(!$this->ValidarCaracteresIdPersonaUsuario()){
+                $respuesta["respuesta"] = "ispcn";
 
-            }else if(!$this->ValidarCaracteresApellidosPersona()){
-                $respuesta["respuesta"] = "aspcl";
+            }else if(!$this->ValidarCaracteresIdRolUsuario()){
+                $respuesta["respuesta"] = "ispcn";
 
-            }else if(!$this->ValidarCaracteresCelularPersona()){
-                $respuesta["respuesta"] = "ncspcn";
+            }else if(!$this->ValidarLengthNombreUsuario()){
+                $respuesta["respuesta"] = "nusmc";
 
-            }else if(!$this->ValidarCorreo()){
-                $respuesta["respuesta"] = "cnv";
-
-            }else if(!$this->ValidarLengthCedulaPersona()){
-                $respuesta["respuesta"] = "cesmc";
-
-            }else if(!$this->ValidarLengthNombresPersona()){
-                $respuesta["respuesta"] = "nsmc";
-
-            }else if(!$this->ValidarLengthApellidosPersona()){
-                $respuesta["respuesta"] = "asmc";
-
-            }else if(!$this->ValidarLengthCelularPersona()){
-                $respuesta["respuesta"] = "ncsmc";
-
-            }else if(!$this->ValidarLengthCorreoPersona()){
-                $respuesta["respuesta"] = "cosmc";
-
-            }else if(!$this->ValidarLengthDireccionPersona()){
-                $respuesta["respuesta"] = "dirsmc";
+            }else if(!$this->ValidarLengthContraUsuario()){
+                $respuesta["respuesta"] = "consmc";
 
             }else{
                 $respuesta["respuesta"] = "";
@@ -218,27 +136,25 @@
 
 
         //Función para inicializar los atributos de la clase
-        function SetDatos($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput){
-            $this->idPersona = $idInput;
-            $this->cedulaPersona = $cedulaInput;
-            $this->nombresPersona = $nombresInput;
-            $this->apellidosPersona = $apellidosInput;
-            $this->celularPersona = $celularInput;
-            $this->correoPersona = $correoInput;
-            $this->direccionPersona = $direccionInput;
+        function SetDatos($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput){
+            $this->idUsuario = $idUsuarioInput;
+            $this->nombreUsuario = $nombreInput;
+            $this->contraUsuario = $contraInput;
+            $this->idPersonaUsuario = $idPersonaInput;
+            $this->idRolUsuario = $idRolInput;
         }
 
 
 
-        //Funcion para Obtener las personas
-        function ObtenerPersonas(){
-            $stmt = $this->Conectar()->prepare("SELECT * FROM persona");
+        //Funcion para obtener los usuario
+        function ObtenerUsuarios(){
+            $stmt = $this->Conectar()->prepare("SELECT * FROM usuario");
             $stmt->execute();
             
-            $respuesta = ["estado"=>false, "respuesta"=>"nep"];
+            $respuesta = ["estado"=>false, "respuesta"=>"neu"];
             if($stmt->rowCount()>0){
                 $respuesta["estado"] = true;
-                $respuesta["respuesta"] = "ep";
+                $respuesta["respuesta"] = "eu";
                 $respuesta["stmt"] = $stmt;
             }
 
@@ -247,21 +163,13 @@
 
 
 
-        //Función para verificar si una persona existe, y si existe, trae los datos de la persona
-        function PersonaExistente($idInput){
-            $this->idPersona = $idInput;
+        //Función para verificar si un usuario existe, y si existe, trae los datos del usuario
+        function UsuarioExistente($columna, $valor){
+            $respuesta = ["estado"=>false, "respuesta"=>"une"];
 
-            $respuesta = ["estado"=>false, "respuesta"=>"pne"];
+            $stmt = $this->Conectar()->prepare("SELECT * FROM usuario WHERE $columna=?");
 
-            if(!$this->ValidarCaracteresIdPersona()){
-                $respuesta["respuesta"] = "ispcn";
-                return $respuesta;
-            };
-
-
-            $stmt = $this->Conectar()->prepare("SELECT * FROM persona WHERE idPersona=?");
-
-            if(!$stmt->execute(array($this->idPersona))){
+            if(!$stmt->execute(array($valor))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;
@@ -269,38 +177,7 @@
             
             if($stmt->rowCount()>0){
                 $respuesta["estado"] = true;
-                $respuesta["respuesta"] = "pe";
-                $respuesta["stmt"] = $stmt; 
-            }
-
-            return $respuesta;
-        }
-
-
-
-        //Función para verificar si una cedula ya está en uso, y si existe, trae los datos de la persona de esa cédula
-        function CedulaExistente($cedulaInput){
-            $this->cedulaPersona = $cedulaInput;
-
-            $respuesta = ["estado"=>false, "respuesta"=>"cneu"];
-
-            if(!$this->ValidarCaracteresCedulaPersona()){
-                $respuesta["respuesta"] = "cspcn";
-                return $respuesta;
-            }
-
-
-            $stmt = $this->Conectar()->prepare("SELECT * FROM persona WHERE idCedula=?");
-
-            if(!$stmt->execute(array($this->cedulaPersona))){
-                $stmt = null;
-                $respuesta["respuesta"] = "estmt";
-                return $respuesta;
-            }
-            
-            if($stmt->rowCount()>0){
-                $respuesta["estado"] = true;
-                $respuesta["respuesta"] = "cyeu";
+                $respuesta["respuesta"] = "ue";
                 $respuesta["stmt"] = $stmt; 
             }
 
@@ -310,28 +187,22 @@
 
 
         //Función para agregar una persona
-        function AgregarPersona($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput){
-            $this->SetDatos($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput);
+        function AgregarUsuario($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput){
+            $this->SetDatos($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput);
 
             $validacion = $this->ValidarDatos();
             if(!$validacion["estado"]){
                 return $validacion;
             }
 
-            $respuesta = $this->PersonaExistente($this->idPersona);
+            $respuesta = $this->UsuarioExistente("nombreUsuario", $nombreInput);
             if($respuesta["estado"]){
-                $respuesta["respuesta"] = "pe";
+                $respuesta["respuesta"] = "ue";
                 return $respuesta;
             }
 
-            $respuesta = $this->CedulaExistente($this->cedulaPersona);
-            if($respuesta["estado"]){
-                $respuesta["respuesta"] = "cyeu";
-                return $respuesta;
-            }
-
-            $stmt = $this->Conectar()->prepare("INSERT INTO persona (cedulaPersona, nombresPersona, apellidosPersona, celularPersona, correoPersona, direccionPersona) VALUES(?,?,?,?,?,?)");
-            if(!$stmt->execute(array($this->cedulaPersona, $this->nombresPersona, $this->apellidosPersona, $this->celularPersona, $this->correoPersona, $this->direccionPersona))){
+            $stmt = $this->Conectar()->prepare("INSERT INTO usuario (nombreUsuario, contraUsuario, idPersonaUsuario, idRolUsuario) VALUES(?,?,?,?)");
+            if(!$stmt->execute(array($this->nombreUsuario, $this->contraUsuario, $this->idPersonaUsuario, $this->idRolUsuario))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;
@@ -339,7 +210,7 @@
             
             if($stmt->rowCount()>0){
                 $respuesta["estado"] = true;
-                $respuesta["respuesta"] = "pac";
+                $respuesta["respuesta"] = "uac";
             }
 
             $stmt = null;
@@ -349,29 +220,29 @@
 
 
         //Función para actualizar una persona
-        function ActualizarPersona($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput){
-            $this->SetDatos($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput);
+        function ActualizarUsuario($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput){
+            $this->SetDatos($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput);
 
             $validacion = $this->ValidarDatos();
             if(!$validacion["estado"]){
                 return $validacion;
             }
 
-            $respuesta = $this->PersonaExistente($this->idPersona);
-            if(!$respuesta["estado"]){
-                $respuesta["respuesta"] = "pe";
+            $respuesta = $this->UsuarioExistente("idUsuario", $idUsuarioInput);
+            if($respuesta["estado"]){
+                $respuesta["respuesta"] = "ue";
                 return $respuesta;
             }
 
-            $stmt = $this->Conectar()->prepare("UPDATE persona SET cedulaPersona=?, nombresPersona=?, apellidosPersona=?, celularPersona=?, correoPersona=?, direccionPersona=? WHERE idPersona=?");
-            if(!$stmt->execute(array($this->cedulaPersona, $this->nombresPersona, $this->apellidosPersona, $this->celularPersona, $this->correoPersona, $this->direccionPersona, $this->idPersona))){
+            $stmt = $this->Conectar()->prepare("UPDATE usuario SET nombreUsuario=?, contraUsuario=?, idPersonaUsuario=?, idRolUsuario=? WHERE idUsuario=?");
+            if(!$stmt->execute(array($this->nombreUsuario, $this->contraUsuario, $this->idPersonaUsuario, $this->idRolUsuario, $this->idUsuario))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;
             }
             
             $respuesta["estado"] = true;
-            $respuesta["respuesta"] = "pacc";
+            $respuesta["respuesta"] = "uacc";
 
             $stmt = null;
             return $respuesta;

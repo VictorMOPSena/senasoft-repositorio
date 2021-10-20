@@ -9,6 +9,7 @@
         private $celularPersona;
         private $correoPersona;
         private $direccionPersona;
+        private $idEspecialidadPersona;
 
         private $cedulaPersonaMaxLength;
         private $nombresPersonaMaxLength;
@@ -56,7 +57,7 @@
         //Función para validar que los datos ingresados no estén vacíos
         function ValidarDatosVacios(){
             $respuesta = false;
-            if(!empty($this->idPersona) && !empty($this->cedulaPersona) && !empty($this->nombresPersona) && !empty($this->apellidosPersona) && !empty($this->celularPersona) && !empty($this->correoPersona) && !empty($this->direccionPersona)) {
+            if(!empty($this->idPersona) && !empty($this->cedulaPersona) && !empty($this->nombresPersona) && !empty($this->apellidosPersona) && !empty($this->celularPersona) && !empty($this->correoPersona) && !empty($this->direccionPersona) && !empty($this->idEspecialidadPersona)) {
                 $respuesta = true;
             }
             return $respuesta;
@@ -100,6 +101,14 @@
         function ValidarCaracteresCelularPersona(){
             $respuesta = false;
             if(preg_match("/^[0-9]*$/", $this->celularPersona)) {
+                $respuesta = true;
+            }
+            return $respuesta;
+        }
+
+        function ValidarCaracteresIdEspecialidadPersona(){
+            $respuesta = false;
+            if(preg_match("/^[0-9]*$/", $this->idEspecialidadPersona)) {
                 $respuesta = true;
             }
             return $respuesta;
@@ -193,6 +202,9 @@
             }else if(!$this->ValidarCaracteresCelularPersona()){
                 $respuesta["respuesta"] = "ncspcn";
 
+            }else if(!$this->ValidarCaracteresIdEspecialidadPersona()){
+                $respuesta["respuesta"] = "ispcn";
+
             }else if(!$this->ValidarCorreo()){
                 $respuesta["respuesta"] = "cnv";
 
@@ -225,7 +237,7 @@
 
 
         //Función para inicializar los atributos de la clase
-        function SetDatos($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput){
+        function SetDatos($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput, $idEspecialidadInput){
             $this->idPersona = $idInput;
             $this->cedulaPersona = $cedulaInput;
             $this->nombresPersona = $nombresInput;
@@ -233,6 +245,7 @@
             $this->celularPersona = $celularInput;
             $this->correoPersona = $correoInput;
             $this->direccionPersona = $direccionInput;
+            $this->idEspecialidadPersona = $idEspecialidadInput;
         }
 
 
@@ -317,8 +330,8 @@
 
 
         //Función para agregar una persona
-        function AgregarPersona($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput){
-            $this->SetDatos($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput);
+        function AgregarPersona($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput, $idEspecialidadInput){
+            $this->SetDatos($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput, $idEspecialidadInput);
 
             $validacion = $this->ValidarDatos();
             if(!$validacion["estado"]){
@@ -337,8 +350,8 @@
                 return $respuesta;
             }
 
-            $stmt = $this->Conectar()->prepare("INSERT INTO persona (cedulaPersona, nombresPersona, apellidosPersona, celularPersona, correoPersona, direccionPersona) VALUES(?,?,?,?,?,?)");
-            if(!$stmt->execute(array($this->cedulaPersona, $this->nombresPersona, $this->apellidosPersona, $this->celularPersona, $this->correoPersona, $this->direccionPersona))){
+            $stmt = $this->Conectar()->prepare("INSERT INTO persona (cedulaPersona, nombresPersona, apellidosPersona, celularPersona, correoPersona, direccionPersona, idEspecialidadPersona) VALUES(?,?,?,?,?,?,?)");
+            if(!$stmt->execute(array($this->cedulaPersona, $this->nombresPersona, $this->apellidosPersona, $this->celularPersona, $this->correoPersona, $this->direccionPersona, $this->idEspecialidadPersona))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;
@@ -356,8 +369,8 @@
 
 
         //Función para actualizar una persona
-        function ActualizarPersona($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput){
-            $this->SetDatos($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput);
+        function ActualizarPersona($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput, $idEspecialidadInput){
+            $this->SetDatos($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput, $idEspecialidadInput);
 
             $validacion = $this->ValidarDatos();
             if(!$validacion["estado"]){
@@ -370,8 +383,8 @@
                 return $respuesta;
             }
 
-            $stmt = $this->Conectar()->prepare("UPDATE persona SET cedulaPersona=?, nombresPersona=?, apellidosPersona=?, celularPersona=?, correoPersona=?, direccionPersona=? WHERE idPersona=?");
-            if(!$stmt->execute(array($this->cedulaPersona, $this->nombresPersona, $this->apellidosPersona, $this->celularPersona, $this->correoPersona, $this->direccionPersona, $this->idPersona))){
+            $stmt = $this->Conectar()->prepare("UPDATE persona SET cedulaPersona=?, nombresPersona=?, apellidosPersona=?, celularPersona=?, correoPersona=?, direccionPersona=?, idEspecialidadPersona WHERE idPersona=?");
+            if(!$stmt->execute(array($this->cedulaPersona, $this->nombresPersona, $this->apellidosPersona, $this->celularPersona, $this->correoPersona, $this->direccionPersona, $this->idEspecialidadPersona, $this->idPersona))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;
