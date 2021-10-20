@@ -36,19 +36,24 @@
             require_once "./php/classes/conexion.class.php";
             require_once "./php/classes/persona.class.php";
             require_once "./php/codigos-mensajes.php";
-
+            
             $personaClass = new Persona();
 
-            $respuesta=$personaClass->PersonaExistente(1);
+            $respuesta=$personaClass->ObtenerPersonas();
 
             if($respuesta["estado"]){
                  $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
                      foreach($resultados as $resultado){
                          ?>
                          <tr>
-                             <td><?php echo $resultado->idPersona;?></td>
                              <td><?php echo $resultado->cedulaPersona;?></td>
                              <td><?php echo $resultado->nombresPersona;?></td>
+                             <td><?php echo $resultado->apellidosPersona;?></td>
+                             <td><?php echo $resultado->celularPersona;?></td>
+                             <td><?php echo $resultado->correoPersona;?></td>
+                             <td><?php echo $resultado->direccionPersona;?></td>
+                             <td><a href=""><input type="submit" value="Acualizar"></a></td>
+                             <td><a href=""><input type="submit" value="Eliminar"></a></td>
                          </tr>
                          <?php
                          
