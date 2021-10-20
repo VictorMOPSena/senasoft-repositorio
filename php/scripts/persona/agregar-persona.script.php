@@ -18,7 +18,7 @@
     $respuesta = $especialidadClass->AgregarEspecialidad($especialidadInput);
     $respuesta = $especialidadClass->EspecialidadExistente("nombreEspecialidad", $especialidadInput);
     $idEspecialidadInput;
-    
+
     if($respuesta["estado"]){
         $resultados=$respuesta["respuesta"]->fetchAll(PDO::FETCH_OBJ);
         foreach($resultados as $resultado){
@@ -27,9 +27,10 @@
 
         $personaClass = new Persona();
         $respuesta = $personaClass->AgregarPersona(1, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput, $idEspecialidadInput);
-        echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
-
+        
     }
+
+    echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
 
     
 ?>
