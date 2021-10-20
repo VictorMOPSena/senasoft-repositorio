@@ -1,13 +1,17 @@
 @import url(varibles.css);
 
 body{
-    background: var(--backgraund-color);
+    background: url(../img/img-background_sesion.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container_principal{
-    background: var(--backgraund-color);
-    width: 100%;
+    width: 50%;
     height:100%;
+    margin-top: 15%;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .container_principal .container_form{
@@ -21,6 +25,7 @@ body{
 
 .container_principal .container_form h1{
     color: var(--color-text-menu);
+    font-family: 'Gothic A1', sans-serif;
     text-align: center;
     font-size: var(--font-size-tittle);
     padding-top: var(--padding);
@@ -47,6 +52,7 @@ body{
     border: none;
     cursor: pointer;
     width: 100px;
+    color: var(--color-text-input);
     font-size: var(--font-size-s);
     transition: 1s;
 }
