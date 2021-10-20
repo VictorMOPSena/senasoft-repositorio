@@ -252,7 +252,7 @@
 
         //Funcion para Obtener las personas
         function ObtenerPersonas(){
-            $stmt = $this->Conectar()->prepare("SELECT * FROM persona");
+            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad");
             $stmt->execute();
             
             $respuesta = ["estado"=>false, "respuesta"=>"nep"];

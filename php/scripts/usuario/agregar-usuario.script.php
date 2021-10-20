@@ -6,11 +6,10 @@
     require_once '../../classes/usuario.class.php';
     require_once '../../codigos-mensajes.php';
 
-    $nombreInput = "usuario1w2";
-    $contraInput = "123";
-    $cedulaPersonaInput = 7;
+    $nombreInput = "victorop";
+    $contraInput = "1";
+    $cedulaPersonaInput = 1126458612;
     $idRolInput = 1;
-
 
     $rolClass = new Rol();
     $respuesta = $rolClass->RolExistente("idRol", $idRolInput);
@@ -25,9 +24,17 @@
             foreach($resultados as $resultado){
                 $idPersonaAux = $resultado->idPersona;
             }
+
             $usuarioClass = new Usuario();
-            $respuesta = $usuarioClass->AgregarUsuario(1, $nombreInput, $contraInput, $idPersonaAux, $idRolInput);
-            
+            $respuesta = $usuarioClass->UsuarioExistente("idPersonaUsuario", $idPersonaAux);
+
+            if(!$respuesta["estado"]){
+                $respuesta = $usuarioClass->AgregarUsuario(1, $nombreInput, $contraInput, $idPersonaAux, $idRolInput);
+
+            }else{
+                $respuesta["respuesta"] = "yhucc";
+
+            }
         }   
     }
 
