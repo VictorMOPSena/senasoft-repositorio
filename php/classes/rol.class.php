@@ -220,9 +220,16 @@
 
             $stmt = $this->Conectar()->prepare("DELETE FROM rol WHERE idRol=?");
             if(!$stmt->execute(array($idInput))){
-                $stmt = null;
-                $respuesta["respuesta"] = "estmt";
-                return $respuesta;
+                if($stmt->errorInfo()[1]==1451){
+                    $stmt = null;
+                    $respuesta["respuesta"] = "reuu";
+                    return $respuesta;
+                }else{
+                    $stmt = null;
+                    $respuesta["respuesta"] = "estmt";
+                    return $respuesta;
+
+                }
             }
 
             if($stmt->rowCount()>0){

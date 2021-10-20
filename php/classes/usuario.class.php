@@ -186,7 +186,7 @@
 
 
 
-        //Función para agregar una persona
+        //Función para agregar un usuario
         function AgregarUsuario($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput){
             $this->SetDatos($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput);
 
@@ -219,7 +219,7 @@
 
 
 
-        //Función para actualizar una persona
+        //Función para actualizar un usuario
         function ActualizarUsuario($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput){
             $this->SetDatos($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput);
 
@@ -229,8 +229,8 @@
             }
 
             $respuesta = $this->UsuarioExistente("idUsuario", $idUsuarioInput);
-            if($respuesta["estado"]){
-                $respuesta["respuesta"] = "ue";
+            if(!$respuesta["estado"]){
+                $respuesta["respuesta"] = "une";
                 return $respuesta;
             }
 
@@ -250,12 +250,12 @@
 
 
 
-        //Función para eliminar una persona
-        function EliminarPersona($idInput){
+        //Función para eliminar um usuario
+        function EliminarUsuario($idInput){
 
-            $respuesta = ["estado"=>false, "respuesta"=>"pnel"];
+            $respuesta = ["estado"=>false, "respuesta"=>"unel"];
 
-            $stmt = $this->Conectar()->prepare("DELETE FROM persona WHERE idPersona=?");
+            $stmt = $this->Conectar()->prepare("DELETE FROM usuario WHERE idUsuario=?");
             if(!$stmt->execute(array($idInput))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
@@ -264,9 +264,9 @@
 
             if($stmt->rowCount()>0){
                 $respuesta["estado"] = true;
-                $respuesta["respuesta"] = "pelc";
+                $respuesta["respuesta"] = "uelc";
             }else{
-                $respuesta["respuesta"] = "pne";
+                $respuesta["respuesta"] = "une";
             }
 
             $stmt = null;

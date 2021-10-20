@@ -309,7 +309,7 @@
                 return $respuesta;
             }
 
-            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad WHERE idCedula=?;");
+            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad WHERE cedulaPersona=?;");
 
             if(!$stmt->execute(array($this->cedulaPersona))){
                 $stmt = null;
@@ -335,12 +335,6 @@
             $validacion = $this->ValidarDatos();
             if(!$validacion["estado"]){
                 return $validacion;
-            }
-
-            $respuesta = $this->PersonaExistente($this->idPersona);
-            if($respuesta["estado"]){
-                $respuesta["respuesta"] = "pe";
-                return $respuesta;
             }
 
             $respuesta = $this->CedulaExistente($this->cedulaPersona);
@@ -377,8 +371,14 @@
             }
 
             $respuesta = $this->PersonaExistente($this->idPersona);
-            if($respuesta["estado"]){
+            if(!$respuesta["estado"]){
                 $respuesta["respuesta"] = "pne";
+                return $respuesta;
+            }
+
+            $respuesta = $this->CedulaExistente($this->cedulaPersona);
+            if($respuesta["estado"]){
+                $respuesta["respuesta"] = "cyeu";
                 return $respuesta;
             }
 
@@ -405,9 +405,16 @@
 
             $stmt = $this->Conectar()->prepare("DELETE FROM persona WHERE idPersona=?");
             if(!$stmt->execute(array($idInput))){
-                $stmt = null;
-                $respuesta["respuesta"] = "estmt";
-                return $respuesta;
+                if($stmt->errorInfo()[1]==1451){
+                    $stmt = null;
+                    $respuesta["respuesta"] = "peuu";
+                    return $respuesta;
+                }else{
+                    $stmt = null;
+                    $respuesta["respuesta"] = "estmt";
+                    return $respuesta;
+
+                }
             }
 
             if($stmt->rowCount()>0){

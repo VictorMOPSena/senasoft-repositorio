@@ -4,7 +4,8 @@
     require_once '../../classes/persona.class.php';
     require_once '../../codigos-mensajes.php';
 
-    $idInput = $_GET['id'];
+    // $idInput = $_GET['id'];
+    $idInput = 13;
 
 
     $personaClass = new Persona();
