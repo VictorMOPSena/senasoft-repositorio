@@ -1,6 +1,2 @@
 @import url(../barra_usuario.css);
 
-.container_menu{
-    background: var(--backgraund-color_menu);
-    width: 100%;
-}

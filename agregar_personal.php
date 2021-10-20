@@ -28,6 +28,29 @@
             <input type="text" name="celular" placeholder="Celular">
             <input type="email" name="correo" placeholder="Correo Electronico">
             <input type="text" name="direccion" placeholder="Direcion">
+            <input list="especialidades" name="especialidad" placeholder="Especialidad">
+            
+            <datalist id="especialidades">
+                <?php
+
+                    require_once "./php/classes/conexion.class.php";
+                    require_once "./php/classes/especialidad.class.php";
+                
+                    $especialidadClass = new Especialidad();
+                    
+                    $respuesta=$especialidadClass->ObtenerEspecialidades();
+                    
+                    if($respuesta["estado"]){
+                        $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
+                            foreach($resultados as $resultado){
+                ?>
+                                    <option value="<?php echo $resultado->nombreEspecialidad;?>"></option>
+                <?php                       
+                            }     
+                    }
+
+                ?>
+            </datalist>
             <input type="submit" value="Agregar personal">
         </form>
     </div>
