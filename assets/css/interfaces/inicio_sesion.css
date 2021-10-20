@@ -25,7 +25,7 @@ body{
 
 .container_principal .container_form h1{
     color: var(--color-text-menu);
-    font-family: 'Gothic A1', sans-serif;
+    font-family: 'Ubuntu Condensed', sans-serif;
     text-align: center;
     font-size: var(--font-size-tittle);
     padding-top: var(--padding);

@@ -1,0 +1,14 @@
+@import url(../barra_usuario.css);
+
+.container_table{
+    background: var(--background-table);
+    border-radius: 5px;
+    width: 100%;
+    margin: 0 auto;
+} 
+
+.container_table .tabla_ver_personas{
+    border-bottom: 1px solid var(--border-buttom-table);
+    width: 100%;
+    padding: var(--padding);
+}

@@ -59,14 +59,22 @@ table {
 
     --font-size-tittle: 26px;
     --font-size-s: 18px;
-    --font-size-xs: 12px;
+    --font-size-xs: 14px;
+    --font-size-xsl: 12px;
 
     --backgraund-color: var(--fourth-color);
+    --backgraund-color-a: var(--third-color);
     --backgraund-color-div: var(--primary-color);
     --backgraund-color_menu: var(--primary-color);
+    --background-table: var(--fourth-color);
+    --border-buttom-table: var(--primary-color);
+    --border-color-div: var(--fourth-color);
+    --icon-color: var(--secundary-color);
+    --text-color-h1:var(--secundary-color);
     --color-text-menu: var(--third-color);
     --color-text-input:var(--third-color);
+    --btn-text-color: var(--third-color);
     --btn-backgraund-color: var(--secundary-color);
     --btn-backgraund-color-hover: var(--third-color);
-    --btn-text-color: var(--third-color);
+    
 }
