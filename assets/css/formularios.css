@@ -1,26 +1,25 @@
-@import url(../varibles.css);
-
 body{
-    background: url(../../img/img_fondo.jpg);
+    background: url(../img/img_fondo.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .container_principal{
     width: 50%;
-    height:100%;
-    margin-top: 15%;
+    min-height:250px;
+    margin-top: 10%;
     margin-right: auto;
     margin-left: auto;
 }
 
 .container_principal .container_form{
     background: var(--backgraund-color-div);
+    min-height: 250px;
     width: 50%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10%;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 .container_principal .container_form h1{
@@ -31,14 +30,10 @@ body{
     padding-top: var(--padding);
 }
 
-.container_principal .container_form i{
-    color: var( --third-color);
-    font-size: 20px;
-}
-
 .container_principal .container_form .input_text{
     background: none;
     margin-left: 10px;
+    margin-top: 30px;
     font-size: var(--font-size-s);
     color: var(--color-text-input);
     border: none;
@@ -49,6 +44,8 @@ body{
 .container_principal .container_form .btn_input{
     background-color: var(--btn-backgraund-color);
     border-radius: 8px;
+    margin-top: 30px;
+    margin-bottom: 10px;
     border: none;
     cursor: pointer;
     width: 100px;
