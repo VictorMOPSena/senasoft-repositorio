@@ -6,10 +6,10 @@
     require_once '../../classes/usuario.class.php';
     require_once '../../codigos-mensajes.php';
 
-    $nombreInput = "victorop";
-    $contraInput = "1";
-    $cedulaPersonaInput = 1126458612;
-    $idRolInput = 1;
+    $nombreInput = $_POST['usuario'];
+    $contraInput =  $_POST['contraseña'];
+    $cedulaPersonaInput = $_POST['documento'];
+    $idRolInput = $_POST['rol'];
 
     $rolClass = new Rol();
     $respuesta = $rolClass->RolExistente("idRol", $idRolInput);
