@@ -29,7 +29,7 @@ if($usuario == null || $usuario == ""){
 <body>
     <div class="container_menu">
         <div class="container_img_logo">
-            <img src="./assests/" alt="">
+            <img src="./assets/img/Logo.png" alt="">
         </div>
         <div class="container_perfil">
             <div class="container_name_user">
@@ -88,7 +88,7 @@ if($usuario == null || $usuario == ""){
         </div>
 
         <div class="container_crear_usuario">
-            <a href="agregar_personal.php">
+            <a href="crear_usuario.php">
             <div class="icono_crear_usuario">
                 <i class="fas fa-users"></i>
             </div>
