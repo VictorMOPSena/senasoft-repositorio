@@ -12,10 +12,9 @@
     --font-size-s: 12px;
     --font-size-xs: 8px;
 
-    --backgraund-color: url(--fourth-color);
-    --color-text-menu: url(--third-color);
-    --btn-backgraund-color: url(--secundary-color);
-    --btn-color: url(--third-color);
-
-
+    --backgraund-color: var(--fourth-color);
+    --backgraund-color_menu: var(--primary-color);
+    --color-text-menu: var(--third-color);
+    --btn-backgraund-color: var(--secundary-color);
+    --btn-text-color: var(--third-color);
 }
