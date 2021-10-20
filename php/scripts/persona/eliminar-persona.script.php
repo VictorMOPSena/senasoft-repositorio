@@ -1,14 +1,13 @@
 <?php
 
     require_once '../../classes/conexion.class.php';
-    require_once '../../classes/empleado.class.php';
+    require_once '../../classes/persona.class.php';
     require_once '../../codigos-mensajes.php';
 
-    $id = "3";
+    $idInput = 1;
 
-    $empleadoClass = new Empleado();
-    $respuesta = $empleadoClass->EliminarEmpleado($id);
+    $personaClass = new Persona();
+    $respuesta = $personaClass->EliminarPersona($idInput);
     echo $codigosMensajes[$respuesta["respuesta"]];
-
 
 ?>
