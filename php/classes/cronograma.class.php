@@ -2,8 +2,8 @@
 
     class Cronograma extends Conexion {
 
-        function TomarTurno(){
-            
+        function TomarTurno($idUSuarioInput, ){
+
         }
 
     }
