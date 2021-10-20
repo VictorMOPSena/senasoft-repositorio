@@ -68,5 +68,5 @@ table {
     --color-text-input:var(--third-color);
     --btn-backgraund-color: var(--secundary-color);
     --btn-backgraund-color-hover: var(--third-color);
-    --btn-text-color: var(--secundary-color);
+    --btn-text-color: var(--third-color);
 }
