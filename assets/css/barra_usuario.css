@@ -1,1 +1,31 @@
 @import url(varibles.css);
+
+.container_menu{
+    background: var(--backgraund-color_menu);
+    width: 100%;
+    min-height: 50px;
+    position: relative;
+}
+
+.container_menu .container_img_logo{
+    position: absolute;
+    color: var(--color-text-menu);
+    width: 30%;
+}
+
+.container_menu .container_perfil{
+    color: var(--color-text-menu);
+    position: absolute;
+    width: 30%;
+    right: 10px;
+}
+
+.container_menu .container_perfil .container_name_user{
+    background: seagreen;
+position: relative;
+}
+
+.container_menu .container_perfil .container_img_profile{
+background: seagreen;
+position: relative;
+}

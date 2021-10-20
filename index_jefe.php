@@ -17,6 +17,7 @@ if($usuario == null || $usuario == ""){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/interfaces/index_jefe.css">
     <title>Index jefe</title>
 </head>
 <body>
@@ -25,7 +26,7 @@ if($usuario == null || $usuario == ""){
             imagen del logo
         </div>
         <div class="container_perfil">
-            <div class="">
+            <div class="nombre usuario">
                 nombre usuario
             </div>
             <div class="container_img_profile">

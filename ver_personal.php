@@ -30,6 +30,7 @@
                 <th>Celular</th>
                 <th>Correo Electronico</th>
                 <th>Direccion</th>
+                <th>Especialidad</th>
             </tr>
 
             <?php
@@ -52,13 +53,10 @@
                              <td><?php echo $resultado->celularPersona;?></td>
                              <td><?php echo $resultado->correoPersona;?></td>
                              <td><?php echo $resultado->direccionPersona;?></td>
-                             <td><a href=""><input type="submit" value="Acualizar"></a></td>
-                             <td><a href=""><input type="submit" value="Eliminar"></a></td>
+                             <td><a href="actualizar_personal.php?id=<?php echo $resultado->idPersona?>"><input type="submit" value="Acualizar"></a></td>
+                             <td><a href="./php/scripts/persona/eliminar-persona.script.php?id=<?php echo $resultado->idPersona?>"><input type="submit" value="Eliminar"></a></td>
                          </tr>
-                         <?php
-                         
-
-                       
+                         <?php                       
                      }
             
                  }else{
