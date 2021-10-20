@@ -279,7 +279,7 @@
             };
 
 
-            $stmt = $this->Conectar()->prepare("SELECT * FROM persona WHERE idPersona=?");
+            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad WHERE idPersona=?;");
 
             if(!$stmt->execute(array($this->idPersona))){
                 $stmt = null;
@@ -309,8 +309,7 @@
                 return $respuesta;
             }
 
-
-            $stmt = $this->Conectar()->prepare("SELECT * FROM persona WHERE idCedula=?");
+            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad WHERE idCedula=?;");
 
             if(!$stmt->execute(array($this->cedulaPersona))){
                 $stmt = null;
@@ -378,8 +377,8 @@
             }
 
             $respuesta = $this->PersonaExistente($this->idPersona);
-            if(!$respuesta["estado"]){
-                $respuesta["respuesta"] = "pe";
+            if($respuesta["estado"]){
+                $respuesta["respuesta"] = "pne";
                 return $respuesta;
             }
 
