@@ -15,7 +15,7 @@
 
 
     $especialidadClass = new Especialidad();
-    $respuesta = $especialidadClass->AgregarEspecialidad($especialidadInput);
+    $respuesta = $especialidadClass->AgregarEspecialidad(1, $especialidadInput);
     $respuesta = $especialidadClass->EspecialidadExistente("nombreEspecialidad", $especialidadInput);
     $idEspecialidadInput;
 
