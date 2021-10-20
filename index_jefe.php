@@ -26,7 +26,7 @@ if($usuario == null || $usuario == ""){
             imagen del logo
         </div>
         <div class="container_perfil">
-            <div class="nombre usuario">
+            <div class="container_name_user">
                 nombre usuario
             </div>
             <div class="container_img_profile">

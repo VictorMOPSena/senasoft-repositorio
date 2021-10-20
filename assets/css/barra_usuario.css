@@ -21,11 +21,15 @@
 }
 
 .container_menu .container_perfil .container_name_user{
-    background: seagreen;
-position: relative;
+    background: magenta;
+    position: relative;
+    width: 50%;
+    float: left;
 }
 
 .container_menu .container_perfil .container_img_profile{
-background: seagreen;
-position: relative;
+    background: seagreen;
+    position: relative;
+    width: 40%;
+    float: left;
 }
