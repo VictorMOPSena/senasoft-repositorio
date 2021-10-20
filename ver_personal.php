@@ -39,6 +39,7 @@
                 <th>Correo Electronico</th>
                 <th>Direccion</th>
                 <th>Especialidad</th>
+                <th>Accion</th>
             </tr>
 
             <?php
@@ -54,7 +55,7 @@
                  $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
                      foreach($resultados as $resultado){
                          ?>
-                         <tr>
+                         <tr class="datos">
                              <td><?php echo $resultado->cedulaPersona;?></td>
                              <td><?php echo $resultado->nombresPersona;?></td>
                              <td><?php echo $resultado->apellidosPersona;?></td>
@@ -62,8 +63,7 @@
                              <td><?php echo $resultado->correoPersona;?></td>
                              <td><?php echo $resultado->direccionPersona;?></td>
                              <td><?php echo $resultado->nombreEspecialidad?></td>
-                             <td><a href="actualizar_personal.php?id=<?php echo $resultado->idPersona?>"><input type="submit" value="Acualizar"></a></td>
-                             <td><a href="./php/scripts/persona/eliminar-persona.script.php?id=<?php echo $resultado->idPersona?>"><input type="submit" value="Eliminar"></a></td>
+                             <td><a href="./php/scripts/persona/eliminar-persona.script.php?id=<?php echo $resultado->idPersona?>"><input type="submit" value="Eliminar" class="btn_input"></a></td>
                          </tr>
                          <?php                       
                      }
