@@ -29,7 +29,7 @@ if($usuario == null || $usuario == ""){
 <body>
     <div class="container_menu">
         <div class="container_img_logo">
-            imagen del logo
+            <img src="./assests/" alt="">
         </div>
         <div class="container_perfil">
             <div class="container_name_user">

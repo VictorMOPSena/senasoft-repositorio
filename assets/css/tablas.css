@@ -1,0 +1,60 @@
+@import url(varibles.css);
+.container_table{
+    background: white;
+    border-radius: 5px;
+    width: 100%;
+    margin: 0 auto;
+} 
+
+.container_table .tabla_ver_personas{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.container_table .tabla_ver_personas,
+.container_table .tabla_ver_personas th,
+.container_table .tabla_ver_personas td{
+    padding: var(--padding-xs);
+}
+
+.container_table .tabla_ver_personas .colspan{
+    text-align: center;
+}
+
+.container_table .tabla_ver_personas th{
+    font-weight: bolder;
+    text-align: left;
+    border-bottom: 1px solid var;
+    font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+.container_table .tabla_ver_personas td{
+    border-bottom: 1px solid var(--border-buttom-table);
+    font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+.container_table .tabla_ver_personas tbody tr:nth-child(even){
+    background: var(--background-table);
+}
+
+.container_table .tabla_ver_personas tbody .datos:hover{
+    background-color: var(--backgraund-color_menu);
+    color: white;
+}
+
+.tabla_ver_personas .datos .btn_input{  
+    background-color: var(--btn-backgraund-color);
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    color: var(--color-text-input);
+    font-size: var(--font-size-s);
+    transition: 1s;
+}
+
+.tabla_ver_personas .datos .btn_input:hover{
+    background: var(--btn-backgraund-color-hover);
+    color: var(--btn-text-color);
+}
+
