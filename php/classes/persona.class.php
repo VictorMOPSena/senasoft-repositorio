@@ -242,10 +242,11 @@
             $stmt = $this->Conectar()->prepare("SELECT * FROM persona");
             $stmt->execute();
             
-            $respuesta = ["estado"=>false, "respuesta"=>"ne"];
+            $respuesta = ["estado"=>false, "respuesta"=>"nep"];
             if($stmt->rowCount()>0){
                 $respuesta["estado"] = true;
-                $respuesta["respuesta"] = $stmt;  
+                $respuesta["respuesta"] = "ep";
+                $respuesta["stmt"] = $stmt;
             }
 
             return $respuesta;
@@ -253,7 +254,7 @@
 
 
 
-        //Función para verificar si una persona existe
+        //Función para verificar si una persona existe, y si existe, trae los datos de la persona
         function PersonaExistente($idInput){
             $this->idPersona = $idInput;
 

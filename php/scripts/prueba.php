@@ -1,15 +1,14 @@
 <?php
 
     require_once '../classes/conexion.class.php';
-    require_once '../classes/empleado.class.php';
-    require_once '../classes/rango.class.php';
+    require_once '../classes/persona.class.php';
     require_once "../codigos-mensajes.php";
 
     // $empleado = new Empleado();
     // $respuesta = $empleado->AgregarEmpleado("fsss","e","easd@g.com","aasa");
     // echo $codigosMensajes[$respuesta["respuesta"]];
 
-    $rango = new Rango();
+    // $rango = new Rango();
     // $respuesta = $rango->AgregarRango("aasd");
     // echo $codigosMensajes[$respuesta["respuesta"]];
 
@@ -30,17 +29,14 @@
     // }
 
 
-    $empleado = new Empleado();
-    $respuesta = $empleado->ObtenerEmpleados();
+    $personaClass = new Persona();
+    $respuesta = $personaClass->PersonaExistente(2);
 
     if($respuesta["estado"]){
-        $resultados=$respuesta["respuesta"]->fetchAll(PDO::FETCH_OBJ);
+        $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
         foreach($resultados as $resultado){
-            echo $resultado->idEmpleados." - ";
-            echo $resultado->usuario." - ";
-            echo $resultado->contra." - ";
-            echo $resultado->correo." - ";
-            echo $resultado->rango;
+            echo $resultado->idPersona." - ";
+            echo $resultado->cedulaPersona." - ";
             echo "<br>";
         } 
 
