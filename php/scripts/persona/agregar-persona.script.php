@@ -20,7 +20,7 @@
     $idEspecialidadInput;
 
     if($respuesta["estado"]){
-        $resultados=$respuesta["respuesta"]->fetchAll(PDO::FETCH_OBJ);
+        $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
         foreach($resultados as $resultado){
             $idEspecialidadInput = $resultado->idEspecialidad;
         }
