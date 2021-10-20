@@ -1,0 +1,21 @@
+:root{
+    --primary-color:  #14244c;
+    --secundary-color:  #4493d2;
+    --third-color: #e8e1df;
+    --fourth-color: #b8c6d6;
+
+    --padding: 12px;
+    --padding-s: 10px;
+    --padding-xs: 8px;
+
+    --font-size: 18px;
+    --font-size-s: 12px;
+    --font-size-xs: 8px;
+
+    --backgraund-color: url(--fourth-color);
+    --color-text-menu: url(--third-color);
+    --btn-backgraund-color: url(--secundary-color);
+    --btn-color: url(--third-color);
+
+
+}
