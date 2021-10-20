@@ -1,12 +1,15 @@
 <?php
-/*
-session_start();
 
-$usuario = $_SESSION[''];
+    session_start();
 
-if($usuario == null || $usuario == ""){
-    echo "no tiene permiso";
-}*/
+    if(isset($_SESSION['idRolUsuarioSenasoft'])){
+        if($_SESSION['idRolUsuarioSenasoft'] != 1){
+            header ("location: index.php");
+        }
+    }else{
+        header ("location: index.php");
+    }
+
 
 ?>
 
@@ -33,7 +36,7 @@ if($usuario == null || $usuario == ""){
         </div>
         <div class="container_perfil">
             <div class="container_name_user">
-                nombre usuario
+                Bienvenido <?php echo $_SESSION['nombreUsuarioSenasoft']?>
             </div>
             <div class="container_img_profile">
                 <a href=""><img src="./assets/img/img_profile.jpg" alt=""></a>
@@ -88,12 +91,12 @@ if($usuario == null || $usuario == ""){
         </div>
 
         <div class="container_crear_usuario">
-            <a href="crear_usuario.php">
+            <a href="crear_usuario_admin.php">
             <div class="icono_crear_usuario">
                 <i class="fas fa-users"></i>
             </div>
             <div class="informacion_crear_usuarios">
-                <h1>Crear usuario nuevo</h1>
+                <h1>Crear usuario administrador</h1>
                 <p>Podra crear un usuario <br>
                 para el ingreso de los  <br>
                 distintos tipos de empleados

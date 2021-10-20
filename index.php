@@ -1,3 +1,18 @@
+<?php
+
+    session_start();
+
+    if(isset($_SESSION['idRolUsuarioSenasoft'])){
+        if($_SESSION['idRolUsuarioSenasoft'] == 1){
+            header ("location: index_jefe.php");
+        }else{
+            header ("location: index_empleados.php");
+        }
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,13 +29,15 @@
 </head>
 <body>
     <div class="container_principal">
-        <div class="container_form"> 
+        <div class="container_form">    
+            <form action="./php/scripts/sesion/iniciar-sesion.script.php" method="POST">
                 <h1>INICIO DE SESION</h1><br><br>
             <center>
-                <i class="fas fa-user-circle"><input type="text" class="input_text" placeholder="Usuario"></i><br><br>
-                <i class="fas fa-key"><input type="password" class="input_text" placeholder="Contraseña"></i><br><br>
+                <i class="fas fa-user-circle"><input type="text" name="usuario" class="input_text" placeholder="Usuario"></i><br><br>
+                <i class="fas fa-key"><input type="password" name="contraseña" class="input_text" placeholder="Contraseña"></i><br><br>
                 <input type="submit" class="btn_input" value="Ingresar"><br><br>
             </center>
+            </form> 
         </div>
     </div>
 </body>

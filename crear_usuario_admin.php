@@ -33,12 +33,13 @@
     <div class="container_principal">
         <div class="container_form">
 
-        <form action="./php/scripts/persona/agregar-persona.script.php" method="POST" class="container_crear_usuario">
-            <h1>CREAR NUEVO USUARIO</h1>
+        <form action="./php/scripts/usuario/agregar-usuario.script.php" method="POST" class="container_crear_usuario">
+            <h1>CREAR NUEVO ADMINISTRADOR</h1>
             <center>
+            <input type="hidden" name="rol" value="1">
             <input type="text" class="input_text" name="usuario" placeholder="Crear Usuario"><br>
             <input type="text" class="input_text" name="contraseña" placeholder="Crear Contraseñas"><br>
-            <input list="cedulas" class="input_text" name="docuementos" placeholder="Documentos"><br>
+            <input list="cedulas" class="input_text" name="documento" placeholder="Documentos"><br>
             <datalist id="cedulas">
                 <?php
                  require_once "./php/classes/conexion.class.php";

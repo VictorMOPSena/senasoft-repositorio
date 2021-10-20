@@ -5,8 +5,8 @@
     require_once '../../classes/sesion.class.php';
     require_once '../../codigos-mensajes.php';
 
-    $nombreUsuarioInput ="victorop";
-    $contraUsuarioInput = "3";
+    $nombreUsuarioInput = $_POST['usuario'];
+    $contraUsuarioInput = $_POST['contraseña'];
 
     $usuarioClass = new Usuario();
     $respuesta = $usuarioClass->UsuarioExistente("nombreUsuario", $nombreUsuarioInput);
@@ -37,6 +37,12 @@
         }
     }
 
-    echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
+    if($respuesta["estado"]){
+        header ("location: ../../../index_jefe.php");
+    }else{
+        $mensaje = $respuesta["respuesta"];
+        header ("location: ../../../index.php?msm=$mensaje");
+    }
+    //echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
 
 ?>
