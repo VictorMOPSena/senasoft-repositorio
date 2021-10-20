@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2021 a las 04:27:35
--- Versión del servidor: 10.4.20-MariaDB
--- Versión de PHP: 8.0.9
+-- Tiempo de generación: 20-10-2021 a las 15:32:00
+-- Versión del servidor: 10.4.18-MariaDB
+-- Versión de PHP: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -110,7 +110,7 @@ INSERT INTO `rol` (`idRol`, `nombreRol`) VALUES
 
 CREATE TABLE `usuario` (
   `idUsuario` int(11) NOT NULL,
-  `usuarioUsuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `nombreUsuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `contraUsuario` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `idPersonaUsuario` int(11) NOT NULL,
   `idRolUsuario` int(11) NOT NULL
