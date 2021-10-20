@@ -192,7 +192,7 @@
 
             $respuesta = $this->EspecialidadExistente($this->idEspecialidad);
             if(!$respuesta["estado"]){
-                $respuesta["respuesta"] = "ese";
+                $respuesta["respuesta"] = "ene";
                 return $respuesta;
             }
 
@@ -219,9 +219,16 @@
 
             $stmt = $this->Conectar()->prepare("DELETE FROM especialidad WHERE idEspecialidad=?");
             if(!$stmt->execute(array($idInput))){
-                $stmt = null;
-                $respuesta["respuesta"] = "estmt";
-                return $respuesta;
+                if($stmt->errorInfo()[1]==1451){
+                    $stmt = null;
+                    $respuesta["respuesta"] = "eseup";
+                    return $respuesta;
+                }else{
+                    $stmt = null;
+                    $respuesta["respuesta"] = "estmt";
+                    return $respuesta;
+
+                }
             }
 
             if($stmt->rowCount()>0){

@@ -12,16 +12,24 @@
     $celularInput = $_POST['celular'];
     $correoInput =$_POST['correo'];
     $direccionInput = $_POST['direccion'];
-    $idEspecialidadInput = $_POST['especialidad'];
+    $especialidadInput = $_POST['especialidad'];
 
     $especialidadClass = new Especialidad();
-    $respuesta = $especialidadClass->EspecialidadExistente("idEspecialidad", $idEspecialidadInput);
+    $respuesta = $especialidadClass->AgregarEspecialidad(1, $especialidadInput);
+    $respuesta = $especialidadClass->EspecialidadExistente("nombreEspecialidad", $especialidadInput);
+    
     if($respuesta["estado"]){
+        $idEspecialidadInput;
+        $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
+        foreach($resultados as $resultado){
+            $idEspecialidadInput = $resultado->idEspecialidad;
+        }
+
         $personaClass = new Persona();
         $respuesta = $personaClass->ActualizarPersona($idInput, $cedulaInput, $nombresInput, $apellidosInput, $celularInput, $correoInput, $direccionInput, $idEspecialidadInput);
+        
     }
 
-    
     echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
 
 ?>

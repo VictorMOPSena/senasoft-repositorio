@@ -371,7 +371,7 @@
             }
 
             $respuesta = $this->PersonaExistente($this->idPersona);
-            if($respuesta["estado"]){
+            if(!$respuesta["estado"]){
                 $respuesta["respuesta"] = "pne";
                 return $respuesta;
             }
@@ -405,9 +405,16 @@
 
             $stmt = $this->Conectar()->prepare("DELETE FROM persona WHERE idPersona=?");
             if(!$stmt->execute(array($idInput))){
-                $stmt = null;
-                $respuesta["respuesta"] = "estmt";
-                return $respuesta;
+                if($stmt->errorInfo()[1]==1451){
+                    $stmt = null;
+                    $respuesta["respuesta"] = "peuu";
+                    return $respuesta;
+                }else{
+                    $stmt = null;
+                    $respuesta["respuesta"] = "estmt";
+                    return $respuesta;
+
+                }
             }
 
             if($stmt->rowCount()>0){

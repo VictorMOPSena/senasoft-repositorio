@@ -4,7 +4,7 @@
     require_once '../../classes/especialidad.class.php';
     require_once '../../codigos-mensajes.php';
 
-    $idInput = 1;
+    $idInput = 2;
 
     $especialidadClass = new Especialidad();
     $respuesta = $especialidadClass->EliminarEspecialidad($idInput);
