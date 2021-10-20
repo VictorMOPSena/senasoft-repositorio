@@ -23,11 +23,11 @@ if($usuario == null || $usuario == ""){
 <body>
     <div class="container_menu">
         <div class="container_img_logo">
-            imagen del logo
+            
         </div>
         <div class="container_perfil">
             <div class="container_name_user">
-                nombre usuario
+                Bienvenido nombre usuario
             </div>
             <div class="container_img_profile">
                 imagen de perfil del usuario

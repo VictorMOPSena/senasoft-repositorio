@@ -8,15 +8,18 @@
 }
 
 .container_menu .container_img_logo{
+    left: 30px;
+    min-height: 50px;
     position: absolute;
     color: var(--color-text-menu);
-    width: 30%;
+    width: 20%;
 }
 
 .container_menu .container_perfil{
     color: var(--color-text-menu);
     position: absolute;
     width: 30%;
+    min-height: 50px;
     right: 10px;
 }
 
@@ -24,12 +27,16 @@
     background: magenta;
     position: relative;
     width: 50%;
+    max-height: 30px;
+    margin-top: 10px;
     float: left;
 }
 
 .container_menu .container_perfil .container_img_profile{
     background: seagreen;
     position: relative;
-    width: 40%;
+    width: 20%;
+    max-height: 30px;
+    margin-top: 10px;
     float: left;
 }
