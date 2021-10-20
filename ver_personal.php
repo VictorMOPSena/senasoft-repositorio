@@ -61,6 +61,7 @@
                              <td><?php echo $resultado->celularPersona;?></td>
                              <td><?php echo $resultado->correoPersona;?></td>
                              <td><?php echo $resultado->direccionPersona;?></td>
+                             <td><?php echo $resultado->NombreEspecialidad?></td>
                              <td><a href="actualizar_personal.php?id=<?php echo $resultado->idPersona?>"><input type="submit" value="Acualizar"></a></td>
                              <td><a href="./php/scripts/persona/eliminar-persona.script.php?id=<?php echo $resultado->idPersona?>"><input type="submit" value="Eliminar"></a></td>
                          </tr>

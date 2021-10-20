@@ -8,7 +8,18 @@
 } 
 
 .container_table .tabla_ver_personas{
-    border-bottom: 1px solid var(--border-buttom-table);
     width: 100%;
-    padding: var(--padding);
+    border-collapse: collapse;
+}
+
+.container_table .tabla_ver_personas,
+.container_table .tabla_ver_personas th,
+.container_table .tabla_ver_personas td{
+    padding: var(--padding-xs);
+}
+
+.container_table .tabla_ver_personas th{
+    font-weight: bolder;
+    text-align: left;
+    border-bottom: 1px solid var;
 }
