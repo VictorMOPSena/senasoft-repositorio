@@ -252,7 +252,7 @@
 
         //Funcion para Obtener las personas
         function ObtenerPersonas(){
-            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad");
+            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad WHERE persona.idEspecialidadPersona=especialidad.idEspecialidad");
             $stmt->execute();
             
             $respuesta = ["estado"=>false, "respuesta"=>"nep"];
@@ -279,7 +279,7 @@
             };
 
 
-            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad WHERE idPersona=?;");
+            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad WHERE idPersona=? AND persona.idEspecialidadPersona=especialidad.idEspecialidad;");
 
             if(!$stmt->execute(array($this->idPersona))){
                 $stmt = null;
@@ -309,7 +309,7 @@
                 return $respuesta;
             }
 
-            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad WHERE cedulaPersona=?;");
+            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad WHERE cedulaPersona=? AND persona.idEspecialidadPersona=especialidad.idEspecialidad;");
 
             if(!$stmt->execute(array($this->cedulaPersona))){
                 $stmt = null;

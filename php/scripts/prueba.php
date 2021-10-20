@@ -30,20 +30,46 @@
 
 
     $personaClass = new Persona();
-    $respuesta = $personaClass->PersonaExistente(2);
+    $respuesta = $personaClass->CedulaExistente(1126458612);
 
     if($respuesta["estado"]){
-        $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
-        foreach($resultados as $resultado){
-            echo $resultado->idPersona." - ";
-            echo $resultado->cedulaPersona." - ";
-            echo "<br>";
-        } 
+    $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
+    foreach($resultados as $resultado){
+        echo $resultado->idPersona." - ";
+        echo $resultado->cedulaPersona." - ";
+        echo $resultado->nombresPersona." - ";
+        echo $resultado->apellidosPersona." - ";
+        echo $resultado->celularPersona." - ";
+        echo $resultado->correoPersona." - ";
+        echo $resultado->direccionPersona." - ";
+        echo $resultado->idEspecialidadPersona." - ";
+        echo $resultado->nombreEspecialidad." - ";
+        echo "<br>";
 
-    }else{
+    }}else{
         echo $codigosMensajes[$respuesta["respuesta"]];
-
+    
     }
+
+    // if($respuesta["estado"]){
+    //     $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
+    //     foreach($resultados as $resultado){
+    //         echo $resultado->idPersona." - ";
+    //         echo $resultado->cedulaPersona." - ";
+    //         echo $resultado->nombresPersona." - ";
+    //         echo $resultado->apellidosPersona." - ";
+    //         echo $resultado->celularPersona." - ";
+    //         echo $resultado->correoPersona." - ";
+    //         echo $resultado->direccionPersona." - ";
+    //         echo $resultado->idEspecialidadPersona." - ";
+    //         echo $resultado->nombreEspecialidad." - ";
+    //         echo "<br>";
+    //     } 
+
+    // }else{
+    //     echo $codigosMensajes[$respuesta["respuesta"]];
+
+    // }
 
 
     //SELECT COLUMN_NAME as columna, CHARACTER_MAXIMUM_LENGTH as length FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='empleados';
