@@ -1,0 +1,37 @@
+@import url(varibles.css);
+.container_table{
+    background: white;
+    border-radius: 5px;
+    width: 100%;
+    margin: 0 auto;
+} 
+
+.container_table .tabla_ver_personas{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.container_table .tabla_ver_personas,
+.container_table .tabla_ver_personas th,
+.container_table .tabla_ver_personas td{
+    padding: var(--padding-xs);
+}
+
+.container_table .tabla_ver_personas th{
+    font-weight: bolder;
+    text-align: left;
+    border-bottom: 1px solid var;
+}
+
+.container_table .tabla_ver_personas td{
+    border-bottom: 1px solid var(--border-buttom-table);
+}
+
+.container_table .tabla_ver_personas tbody tr:nth-child(even){
+    background: var(--background-table);
+}
+
+.container_table .tabla_ver_personas tbody tr:hover{
+    background-color: var(--backgraund-color_menu);
+    color: white;
+}

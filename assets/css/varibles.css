@@ -66,7 +66,8 @@ table {
     --backgraund-color-a: var(--third-color);
     --backgraund-color-div: var(--primary-color);
     --backgraund-color_menu: var(--primary-color);
-    --background-table: var(--fourth-color);
+    --background-table: var(--third-color);
+    --background-table-tbody: var(--fourth-color);
     --border-buttom-table: var(--primary-color);
     --border-color-div: var(--fourth-color);
     --icon-color: var(--secundary-color);
