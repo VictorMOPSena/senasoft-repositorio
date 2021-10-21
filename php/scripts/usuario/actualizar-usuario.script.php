@@ -6,19 +6,19 @@
     require_once '../../classes/usuario.class.php';
     require_once '../../codigos-mensajes.php';
 
-    // $idUsuarioInput = $_POST['id'];
-    // $nombreInput = $_POST['usuario'];
-    // $contraInput = $_POST['contraseña'];
-    // $contraConfirmacionInput = $_POST['confirmacion'];
-    // $cedulaPersonaInput = $_POST['cedula'];
-    // $idRolInput = $_POST['rol'];
-
-    $idUsuarioInput = 2;
+    $idUsuarioInput = $_POST['id'];
     $nombreInput = $_POST['usuario'];
     $contraInput = $_POST['contraseña'];
     $contraConfirmacionInput = $_POST['confirmacion'];
     $cedulaPersonaInput = $_POST['cedula'];
-    idRolInput = $_POST['rol'];
+    $idRolInput = $_POST['rol'];
+
+    // $idUsuarioInput = 5;
+    // $nombreInput = "pedros";
+    // $contraInput = "123";
+    // $contraConfirmacionInput = "123";
+    // $cedulaPersonaInput = "3214523126";
+    // $idRolInput = 1;
 
 
     $rolClass = new Rol();
@@ -46,7 +46,7 @@
                     foreach($resultados as $resultado){
                         $idUsuarioConEsaPersona = $resultado->idUsuario;
                     }
-    
+
                     if($idUsuarioConEsaPersona==$idUsuarioInput){
                         $respuesta = $usuarioClass->ActualizarUsuario($idUsuarioInput, $nombreInput, $contraInput, $contraConfirmacionInput, $idPersonaAux, $idRolInput);
     
