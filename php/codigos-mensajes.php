@@ -32,6 +32,7 @@
         "hnv"=>"Horario no disponible",
         "irspcn"=>"La id del rol sólo puede contener números",
         "ispcn"=>"La id sólo puede contener números",
+        "lcnc"=>"Las contraseñas no coinciden",
         "ncsmc"=>"El número celular sobrepasa el máximo de carácteres permitidos",
         "ncspcn"=>"El número celular sólo puede contener números",
         "nee"=>"No existen especialidades",
