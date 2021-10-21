@@ -39,10 +39,13 @@
                 Bienvenido <?php echo $_SESSION['nombreUsuarioSenasoft']?>
             </div>
             <div class="container_img_profile">
-                <a href=""><img src="./assets/img/img_profile.jpg" alt=""></a>
+                <a href="actualizar_perfil.php"><img src="./assets/img/img_profile.jpg" alt=""></a>
             </div>
             <div class="container_cerrar_sesion">
                 <a href="./php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>
+            </div>
+            <div class="container_regresar">
+                <a href="index_jefe.php"><i class="fas fa-undo-alt"> Regresar</i></a>
             </div>
         </div>
     </div>
@@ -56,10 +59,10 @@
             <center>
             <input type="text" class="input_text" name="cedula" placeholder="Documento"><br>
             <input type="text" class="input_text" name="nombre" placeholder="Nombres"><br>
-            <input type="text" class="input_text" name="apellido" placeholder="Apllidos"><br>
+            <input type="text" class="input_text" name="apellido" placeholder="Apellidos"><br>
             <input type="text" class="input_text" name="celular" placeholder="Celular"><br>
             <input type="email" class="input_text" name="correo" placeholder="Correo Electronico"><br>
-            <input type="text" class="input_text" name="direccion" placeholder="Direcion"><br>
+            <input type="text" class="input_text" name="direccion" placeholder="Direccion"><br>
             <input list="especialidades" class="input_text" name="especialidad" placeholder="Especialidad"><br>
             
             <datalist id="especialidades">

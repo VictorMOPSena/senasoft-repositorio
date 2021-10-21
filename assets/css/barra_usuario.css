@@ -27,9 +27,9 @@
 .container_menu .container_perfil{
     color: var(--color-text-menu);
     position: absolute;
-    width: 30%;
+    width: 50%;
     min-height: 80px;
-    right: 30px;
+    right: 200px;
 }
 
 .container_menu .container_perfil .container_name_user{
@@ -58,21 +58,59 @@
 }
 
 .container_menu .container_perfil .container_cerrar_sesion{
-    background: chartreuse;
     position: absolute;
-    width: 30%;
+    width:14%;
+    right: 150px;
+    margin-top: 30px;
+    background: var(--btn-backgraund-color);
+    border-radius: 20px;
+    transition: 1s;
+}
+
+.container_menu .container_perfil .container_cerrar_sesion:hover{
+    background-color: var(--btn-backgraund-color-hover);
+}
+
+.container_menu .container_perfil .container_cerrar_sesion a{
+    font-family: 'Ubuntu Condensed', sans-serif; 
+    margin-left: 5px;
+}
+
+.container_menu .container_perfil .container_cerrar_sesion i{
+    color: var(--icon-white-close);
+    transition: 1s;
+}
+
+.container_menu .container_perfil .container_cerrar_sesion i:hover{
+    color: var(--btn-text-color);
+    padding: var(--padding-xs);
+}
+
+.container_menu .container_perfil .container_regresar{
+    position: absolute;
+    width:12%;
     right: 10px;
     margin-top: 30px;
     background: var(--btn-backgraund-color);
     border-radius: 20px;
 }
 
-.container_menu .container_perfil .container_cerrar_sesion a{
+.container_menu .container_perfil .container_regresar:hover{
+    background-color: var(--btn-backgraund-color-hover);
+}
+
+.container_menu .container_perfil .container_regresar a{
     color: black;
     font-family: 'Ubuntu Condensed', sans-serif; 
     margin-left: 5px;   
 }
 
-.container_menu .container_perfil .container_cerrar_sesion i{
+.container_menu .container_perfil .container_regresar i{
     color: var(--icon-white-close);
+    transition: 1s;
+}
+
+.container_menu .container_perfil .container_regresar i:hover{
+    color: var(--btn-text-color);
+    padding: var(--padding-xs);
 }
