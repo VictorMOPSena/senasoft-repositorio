@@ -2,13 +2,11 @@
 
     session_start();
 
-    if(isset($_SESSION['idRolUsuarioSenasoft'])){
-        if($_SESSION['idRolUsuarioSenasoft'] != 1){
-            header ("location: index.php");
-        }
-    }else{
+    if(!isset($_SESSION['idRolUsuarioSenasoft'])){
         header ("location: index.php");
     }
+
+    // echo $_SESSION['nombreEspecialidadUsuarioSenasoft'];
 
 ?>
 
@@ -67,12 +65,6 @@
 
                 <tr class="info_turnos">
                     <td>6:00</td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
                     <td><input type="submit" class="btn_turno"></td>
                 </tr>
 
