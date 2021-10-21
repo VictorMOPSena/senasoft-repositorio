@@ -16,12 +16,12 @@
         foreach($resultados as $resultado){
             $idUsuarioAux = $resultado->idUsuario;
         }
-
+    
         $respuesta = $usuarioClass->EliminarUsuario($idUsuarioAux);
-
-        $personaClass = new Persona();
-        $respuesta = $personaClass->EliminarPersona($idPersonaInput);
     }
+
+    // $personaClass = new Persona();
+    // $respuesta = $personaClass->EliminarPersona($idPersonaInput);
 
     echo $codigosMensajes[$respuesta["respuesta"]];
 
