@@ -5,10 +5,10 @@ session_start();
 $usuario = $_SESSION[''];
 
 if($usuario == null || $usuario == ""){
-    echo "no tiene permiso";
+    echo "no tiene permiso";    
 }*/
 
-?>
+?>  
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,6 +54,7 @@ if($usuario == null || $usuario == ""){
             </div>
             <div class="informacion">
                 <h1>presione ver los turnos de la semana</h1>
+                <a href="./php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>
             </div>
         </div>
 
