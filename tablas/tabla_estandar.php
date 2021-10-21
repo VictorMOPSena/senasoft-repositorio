@@ -46,7 +46,7 @@
                 <a href=""><img src="../assets/img/img_profile.jpg" alt=""></a>
             </div>
             <div class="container_cerrar_sesion">
-                <a href="./php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>
+                <a href="../php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>
             </div>
         </div>
     </div>
