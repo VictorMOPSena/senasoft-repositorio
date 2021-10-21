@@ -1,5 +1,6 @@
 <?php
 
+
     session_start();
 
     if(isset($_SESSION['idRolUsuarioSenasoft'])){
@@ -9,7 +10,6 @@
     }else{
         header ("location: index.php");
     }
-
 
 ?>
 
@@ -66,7 +66,7 @@
         </div>  
 
         <div class="container_ver_turnos">
-            <a href="">
+            <a href="./tablas/tabla_estandar.php">
             <div class="icono_calendario">
                 <i class="fas fa-calendar"></i>
             </div>

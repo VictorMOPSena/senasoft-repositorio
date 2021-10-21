@@ -1,3 +1,18 @@
+<?php
+
+    session_start();
+
+    if(isset($_SESSION['idRolUsuarioSenasoft'])){
+        if($_SESSION['idRolUsuarioSenasoft'] != 1){
+            header ("location: index.php");
+        }
+    }else{
+        header ("location: index.php");
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,11 +32,11 @@
 <body>
 <div class="container_menu">
         <div class="container_img_logo">
-            imagen del logo
+            <img src="./assets/img/Logo.png" alt="">
         </div>
         <div class="container_perfil">
             <div class="container_name_user">
-                nombre usuario
+                Bienvenido <?php echo $_SESSION['nombreUsuarioSenasoft']?>
             </div>
             <div class="container_img_profile">
                 <a href=""><img src="./assets/img/img_profile.jpg" alt=""></a>
