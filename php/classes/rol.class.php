@@ -149,7 +149,7 @@
         }
 
 
-        //Función para agregar una persona
+        //Función para agregar un rol
         function AgregarRol($idInput, $nombreInput){
             $this->SetDatos($idInput, $nombreInput);
 
