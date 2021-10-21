@@ -74,15 +74,6 @@
 
                 <tr class="info_turnos">
                     <td>6:00</td>
-<<<<<<< HEAD
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-=======
                     <td><div dia="0" horario="1" class="btn_turno"></td>
                     <td><div dia="1" horario="1" class="btn_turno"></td>
                     <td><div dia="2" horario="1" class="btn_turno"></td>
@@ -90,7 +81,6 @@
                     <td><div dia="4" horario="1" class="btn_turno"></td>
                     <td><div dia="5" horario="1" class="btn_turno"></td>
                     <td><div dia="6" horario="1" class="btn_turno"></td>
->>>>>>> 7c2581ee84b8d53792e4034592d242ec27079bb4
                 </tr>
 
                 <tr class="info_turnos">
