@@ -22,11 +22,8 @@
 
     $personaClass = new Persona();
     $respuesta = $personaClass->EliminarPersona($idPersonaInput);
-<<<<<<< HEAD
-=======
     
     echo $codigosMensajes[$respuesta["respuesta"]];
->>>>>>> 5d042bc04edc41f3c8370d77cac767cbd6a68f31
 
     
 ?>
