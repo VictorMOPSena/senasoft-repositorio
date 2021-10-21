@@ -22,7 +22,7 @@
 
     $personaClass = new Persona();
     $respuesta = $personaClass->EliminarPersona($idPersonaInput);
-
+    
     echo $codigosMensajes[$respuesta["respuesta"]];
 
     
