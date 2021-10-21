@@ -253,7 +253,7 @@
 
 
         //Función para actualizar un usuario
-        function ActualizarUsuario($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput){
+        function ActualizarUsuario($idUsuarioInput, $nombreInput, $contraInput, $contraConfirmacionInput, $idPersonaInput, $idRolInput){
             $this->SetDatos($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput);
 
             $validacion = $this->ValidarDatos();
@@ -267,6 +267,11 @@
                 return $respuesta;
             }
 
+            if($contraInput!=$contraConfirmacionInput){
+                $respuesta["estado"] = false;
+                $respuesta["respuesta"] = "lcnc";
+                return $respuesta;
+            }
             
             $this->contraUsuario = password_hash($this->contraUsuario, PASSWORD_DEFAULT);
             
