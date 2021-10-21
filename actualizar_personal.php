@@ -60,26 +60,53 @@
                  $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
                      foreach($resultados as $resultado){
                          ?>
-                         <form action="./php/scripts/persona/actualizar-persona.script.php" method="POST">
-                            <input type="hidden" name="id" value="<?php echo $resultado->idPersona;?>">  
-                            <input type="text" name="cedula" value="<?php echo $resultado->cedulaPersona;?>">
-                            <input type="text" name="nombre" value="<?php echo $resultado->nombresPersona;?>">
-                            <input type="text" name="apellido" value="<?php echo $resultado->apellidosPersona;?>">
-                            <input type="text" name="celular" value="<?php echo $resultado->celularPersona;?>">
-                            <input type="email" name="correo" value="<?php echo $resultado->correoPersona;?>">
-                            <input type="text" name="direccion" value="<?php echo $resultado->direccionPersona;?>">
+                        <form action="./php/scripts/persona/actualizar-persona.script.php" method="POST">
+                            <input type="hidden" class="input_text" name="id" value="<?php echo $resultado->idPersona;?>">  
+                            <input type="text" class="input_text" name="cedula" value="<?php echo $resultado->cedulaPersona;?>">
+                            <input type="text" class="input_text" name="nombre" value="<?php echo $resultado->nombresPersona;?>">
+                            <input type="text" class="input_text" name="apellido" value="<?php echo $resultado->apellidosPersona;?>">
+                            <input type="text" class="input_text" name="celular" value="<?php echo $resultado->celularPersona;?>">
+                            <input type="email" class="input_text" name="correo" value="<?php echo $resultado->correoPersona;?>">
+                            <input type="text" class="input_text" name="direccion" value="<?php echo $resultado->direccionPersona;?>">
+                            <input list="especialidades" class="input_text" name="especialidad" placeholder="Especialidad"><br>
+            
+                            <datalist id="especialidades">
+                            <?php
+
+                                require_once "./php/classes/conexion.class.php";
+                                require_once "./php/classes/especialidad.class.php";
+                        
+                                $especialidadClass = new Especialidad();
+                            
+                                $respuesta=$especialidadClass->ObtenerEspecialidades();
+                            
+                                if($respuesta["estado"]){
+                                    $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
+                                        foreach($resultados as $resultado){
+                                            if($resultado->nombreEspecialidad == "No existente"){
+                                             continue;
+                                            }
+                            ?>
+                                            <option value="<?php echo $resultado->nombreEspecialidad;?>"></option>
+                            <?php                       
+                                        }     
+                                }
+
+                            ?>
+                            </datalist>
                             <input type="submit" value="Acualizar"></a></td>
-                         </form>
-                         <?php
-                     }
-            
-                 }else{
-                     echo $codigosMensajes[$respuesta["respuesta"]];
-            
-                }
 
-            ?>
+                            </form>
+                            <?php
+                            }
+                        
+                            }else{
+                                echo $codigosMensajes[$respuesta["respuesta"]];
+                        
+                            }
 
+                            ?>
+            
     </div>
 </body>
 </html>
