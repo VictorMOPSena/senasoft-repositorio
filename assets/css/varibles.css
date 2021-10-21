@@ -71,6 +71,7 @@ table {
     --border-buttom-table: var(--primary-color);
     --border-color-div: var(--fourth-color);
     --icon-color: var(--secundary-color);
+    --icon-white-close: var(--third-color);
     --text-color-h1:var(--secundary-color);
     --color-text-menu: var(--third-color);
     --color-text-input:var(--third-color);
