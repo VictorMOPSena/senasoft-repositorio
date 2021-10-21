@@ -1,3 +1,19 @@
+<?php
+
+    session_start();
+
+    if(isset($_SESSION['idRolUsuarioSenasoft'])){
+        if($_SESSION['idRolUsuarioSenasoft'] != 1){
+            header ("location: index.php");
+        }
+    }else{
+        header ("location: index.php");
+    }
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +55,7 @@
             <input type="hidden" name="rol" value="1">
             <input type="text" class="input_text" name="usuario" placeholder="Crear Usuario"><br>
             <input type="text" class="input_text" name="contraseña" placeholder="Crear Contraseñas"><br>
-            <input list="cedulas" class="input_text" name="documento" placeholder="Documentos"><br>
+            <input list="cedulas" class="input_text" name="documento" placeholder="Documento"><br>
             <datalist id="cedulas">
                 <?php
                  require_once "./php/classes/conexion.class.php";

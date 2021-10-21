@@ -6,6 +6,8 @@
 
     $sesionClass = new Sesion();
     $respuesta = $sesionClass->CerrarSesion();
-    echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
+    $mensaje=$respuesta["respuesta"];
+    
+   header ("Location: ../../../index.php?msn=$mensaje");
 
 ?>
