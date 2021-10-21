@@ -11,57 +11,66 @@
     $contraInput = $_POST['contraseña'];
     $contraConfirmacionInput = $_POST['confirmacion'];
     $cedulaPersonaInput = $_POST['cedula'];
-    $idRolInput = $_POST['rol'];
+    $nombreRolInput = $_POST['rol'];
 
     // $idUsuarioInput = 5;
-    // $nombreInput = "pedros";
+    // $nombreInput = "pedro";
     // $contraInput = "123";
     // $contraConfirmacionInput = "123";
     // $cedulaPersonaInput = "3214523126";
-    // $idRolInput = 1;
+    // $nombreRolInput = "Administrador";
 
 
     $rolClass = new Rol();
-    $respuesta = $rolClass->RolExistente("idRol", $idRolInput);
-
+    $respuesta = $rolClass->RolExistente("nombreRol", $nombreRolInput);
     if($respuesta["estado"]){
-        $personaClass = new Persona();
-        $respuesta = $personaClass->CedulaExistente($cedulaPersonaInput);
+        $idRolInput;
+        $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
+        foreach($resultados as $resultado){
+            $idRolInput = $resultado->idRol;
+        }
+        $respuesta = $rolClass->RolExistente("idRol", $idRolInput);
 
         if($respuesta["estado"]){
-            $idPersonaAux;
-            $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
-            foreach($resultados as $resultado){
-                $idPersonaAux = $resultado->idPersona;
-            }
-
-            $usuarioClass = new Usuario();
-            $respuesta = $usuarioClass->UsuarioExistente("idUsuario", $idUsuarioInput);
+            $personaClass = new Persona();
+            $respuesta = $personaClass->CedulaExistente($cedulaPersonaInput);
+    
             if($respuesta["estado"]){
-                $respuesta = $usuarioClass->UsuarioExistente("idPersonaUsuario", $idPersonaAux);
-
+                $idPersonaAux;
+                $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
+                foreach($resultados as $resultado){
+                    $idPersonaAux = $resultado->idPersona;
+                }
+    
+                $usuarioClass = new Usuario();
+                $respuesta = $usuarioClass->UsuarioExistente("idUsuario", $idUsuarioInput);
                 if($respuesta["estado"]){
-                    $idUsuarioConEsaPersona;
-                    $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
-                    foreach($resultados as $resultado){
-                        $idUsuarioConEsaPersona = $resultado->idUsuario;
-                    }
-
-                    if($idUsuarioConEsaPersona==$idUsuarioInput){
+                    $respuesta = $usuarioClass->UsuarioExistente("idPersonaUsuario", $idPersonaAux);
+    
+                    if($respuesta["estado"]){
+                        $idUsuarioConEsaPersona;
+                        $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
+                        foreach($resultados as $resultado){
+                            $idUsuarioConEsaPersona = $resultado->idUsuario;
+                        }
+    
+                        if($idUsuarioConEsaPersona==$idUsuarioInput){
+                            $respuesta = $usuarioClass->ActualizarUsuario($idUsuarioInput, $nombreInput, $contraInput, $contraConfirmacionInput, $idPersonaAux, $idRolInput);
+        
+                        }else{
+                            $respuesta["respuesta"] = "yhucc";
+                        }
+                        
+        
+                    }else{
                         $respuesta = $usuarioClass->ActualizarUsuario($idUsuarioInput, $nombreInput, $contraInput, $contraConfirmacionInput, $idPersonaAux, $idRolInput);
     
-                    }else{
-                        $respuesta["respuesta"] = "yhucc";
                     }
-                    
-    
-                }else{
-                    $respuesta = $usuarioClass->ActualizarUsuario($idUsuarioInput, $nombreInput, $contraInput, $contraConfirmacionInput, $idPersonaAux, $idRolInput);
-
                 }
-            }
-        }   
+            }   
+        }
     }
+
 
     echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
     

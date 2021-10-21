@@ -20,12 +20,8 @@
         $respuesta = $usuarioClass->EliminarUsuario($idUsuarioAux);
     }
 
-    // $personaClass = new Persona();
-    // $respuesta = $personaClass->EliminarPersona($idPersonaInput);
-    
-    $mensaje = $respuesta['respuesta'];
-
-    header ("location: ../../../ver_personal.php?msn $mensaje");
+    $personaClass = new Persona();
+    $respuesta = $personaClass->EliminarPersona($idPersonaInput);
 
 
     
