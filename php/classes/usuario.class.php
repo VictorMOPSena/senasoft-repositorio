@@ -217,6 +217,31 @@
 
 
 
+        //Función para verificar que sólo se pueda tomar un nombre de usuario si no existe o
+        //si ya le pertenecía con anterioridad
+        function UsuarioNombreExistentePorId($idUsuarioInput, $nombreUsuarioInput){
+            $respuesta = ["estado"=>false, "respuesta"=>"une"];
+
+            $stmt = $this->Conectar()->prepare("SELECT * FROM usuario WHERE idUsuario=? AND nombreUsuario=?");
+
+            if(!$stmt->execute(array($idUsuarioInput, $nombreUsuarioInput))){
+                $stmt = null;
+                $respuesta["respuesta"] = "estmt";
+                return $respuesta;
+            }
+            
+            if($stmt->rowCount()>0){
+                $respuesta["estado"] = true;
+                $respuesta["respuesta"] = "ue";
+                $respuesta["stmt"] = $stmt; 
+            }
+
+            return $respuesta;
+        }
+
+
+
+
         //Función para agregar un usuario
         function AgregarUsuario($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput){
             $this->SetDatos($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput);
@@ -265,6 +290,18 @@
             if(!$respuesta["estado"]){
                 $respuesta["respuesta"] = "une";
                 return $respuesta;
+            }
+
+            $respuesta = $this->UsuarioExistente("nombreUsuario", $nombreInput);
+            if($respuesta["estado"]){
+                $respuesta["respuesta"] = "ue";
+                $respuesta = $this->UsuarioNombreExistentePorId($idUsuarioInput, $nombreInput);
+                if(!$respuesta["estado"]){
+                    $respuesta["respuesta"] = "und";
+                    return $respuesta;
+                }else{
+                    $respuesta["respuesta"] = "ud";
+                }
             }
 
             if($contraInput!=$contraConfirmacionInput){

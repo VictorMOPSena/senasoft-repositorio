@@ -89,7 +89,12 @@
 
             ?>
         </table>
-
     </div>
+    <?php
+        if(isset($_GET['msm'])){
+            $mensaje = $codigosMensajes[$_GET['msm']];
+            echo $mensaje;
+        }   
+    ?>
 </body>
 </html>

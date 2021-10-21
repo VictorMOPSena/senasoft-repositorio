@@ -72,10 +72,7 @@
     }
 
     $mensaje = $respuesta["respuesta"];
-    
-    echo '<script type="text/javascript">
-    alert("El usuario se actualizo correctamente ");
-    window.location.href="../../../ver_usuarios.php?msn' .$mensaje.'";
-    </script>';
+    header("location: ../../../ver_usuarios.php?msm=$mensaje");
+    // echo $codigosMensajes[$mensaje]."<br>";
     
 ?>
