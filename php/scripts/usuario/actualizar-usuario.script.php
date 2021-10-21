@@ -71,9 +71,9 @@
         }
     }
 
-    $mensaje=$respuesta["respuesta"];
-
-    header ("location: ../../../actualizar_usuario.php");
+    $mensaje = $respuesta["respuesta"];
+    header("location: ../../../ver_usuarios.php?msm=$mensaje");
+    // echo $codigosMensajes[$mensaje]."<br>";
     
 
 ?>

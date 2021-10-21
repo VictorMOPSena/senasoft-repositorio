@@ -91,6 +91,8 @@
         "uacc"=>"Usuario actualizado correctamente",
         "ue"=>"El usuario ya existe",
         "uelc"=>"Usuario eliminado correctamente",
+        "ud"=>"Usuario disponible",
+        "und"=>"Usuario no disponible",
         "une"=>"Usuario no existente",
         "unec"=>"Usuario 'No existente' colocado",
         "unel"=>"Usuario no eliminado",
