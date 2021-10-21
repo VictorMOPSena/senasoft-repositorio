@@ -57,7 +57,7 @@
                 <th>Correo Electronico</th>
                 <th>Direccion</th>
                 <th>Especialidad</th>
-                <th>Accion</th>
+                <th class="accion_center">Accion</th>
             </tr>
 
             <?php

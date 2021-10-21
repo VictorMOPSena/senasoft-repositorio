@@ -52,7 +52,7 @@
             <tr>
                 <th>Empleado</th>
                 <th>Usuario</th>
-                <th>Acciones</th>
+                <th class="accion_center">Acciones</th>
             </tr>
 
             <?php

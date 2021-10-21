@@ -11,6 +11,11 @@
     border-collapse: collapse;
 }
 
+.container_table .tabla_ver_personas .accion_center{
+    text-align: center;
+}
+
+
 .container_table .tabla_ver_personas,
 .container_table .tabla_ver_personas th,
 .container_table .tabla_ver_personas td{
@@ -57,4 +62,6 @@
     background: var(--btn-backgraund-color-hover);
     color: var(--btn-text-color);
 }
+
+
 
