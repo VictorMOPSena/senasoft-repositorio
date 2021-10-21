@@ -58,11 +58,11 @@
             <h1>ACTUALIZAR USUARIO</h1>
             <center>
         
-            <input type="hidden" class="input_text" name="id" value="<?php echo  $_SESSION['idPersonaUsuarioSenasoft']?>"><br>
-            <input type="text" class="input_text" name="usuario"placeholder="Nuevo usuario"><br>
+            <input type="hidden" class="input_text" name="id" value="<?php echo $_SESSION['idUsuarioSenasoft']?>"><br>
+            <input type="text" class="input_text" name="usuario" placeholder="Nuevo usuario"><br>
             <input type="password" class="input_text" name="contraseña" placeholder="Contraseña contraseña"><br>
             <input type="password" class="input_text" name="confirmacion" placeholder="Confirmar contraseña"><br>
-            <input type="text" class="input_text" name="cedula" value="<?php echo  $_GET['cedula']?>" placeholder="Nuevo usuario"><br>
+            <input type="text" class="input_text" name="cedula" value="<?php echo  $_GET['cedula']?>" placeholder="Cedula"><br>
             <input list="roles" class="input_text" name="rol" placeholder="rol"><br>
             
             <datalist id="roles">
