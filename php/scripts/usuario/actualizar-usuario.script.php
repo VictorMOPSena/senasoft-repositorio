@@ -8,8 +8,7 @@
 
     $idUsuarioInput = 12;
     $nombreInput = "victorop";
-    $contraAntiguaInput = "2";
-    $contraNuevaInput = "3";
+    $contraInput = "2";
     $cedulaPersonaInput = 1126458612;
     $idRolInput = 1;
 
@@ -41,7 +40,7 @@
                     }
     
                     if($idUsuarioConEsaPersona==$idUsuarioInput){
-                        $respuesta = $usuarioClass->ActualizarUsuario($idUsuarioInput, $nombreInput, $contraAntiguaInput, $contraNuevaInput, $idPersonaAux, $idRolInput);
+                        $respuesta = $usuarioClass->ActualizarUsuario($idUsuarioInput, $nombreInput, $contraInput, $idPersonaAux, $idRolInput);
     
                     }else{
                         $respuesta["respuesta"] = "yhucc";
@@ -49,7 +48,7 @@
                     
     
                 }else{
-                    $respuesta = $usuarioClass->ActualizarUsuario($idUsuarioInput, $nombreInput, $contraAntiguaInput, $contraNuevaInput, $idPersonaAux, $idRolInput);
+                    $respuesta = $usuarioClass->ActualizarUsuario($idUsuarioInput, $nombreInput, $contraInput, $idPersonaAux, $idRolInput);
 
                 }
             }

@@ -253,8 +253,8 @@
 
 
         //Función para actualizar un usuario
-        function ActualizarUsuario($idUsuarioInput, $nombreInput, $contraAntiguaInput, $contraNuevaInput, $idPersonaInput, $idRolInput){
-            $this->SetDatos($idUsuarioInput, $nombreInput, $contraAntiguaInput, $idPersonaInput, $idRolInput);
+        function ActualizarUsuario($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput){
+            $this->SetDatos($idUsuarioInput, $nombreInput, $contraInput, $idPersonaInput, $idRolInput);
 
             $validacion = $this->ValidarDatos();
             if(!$validacion["estado"]){
@@ -267,24 +267,9 @@
                 return $respuesta;
             }
 
-            $contraAux;
-            $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
-            foreach($resultados as $resultado){
-                $contraAux = $resultado->contraUsuario;
-            }
-            if(!password_verify($this->contraUsuario, $contraAux)){
-                $respuesta["respuesta"] = "cunec";
-                return $respuesta;
-
-            }
-
-            $this->contraUsuario = $contraAux;
             
-            if(!empty($contraNuevaInput)){
-                $this->contraUsuario  = password_hash($contraNuevaInput, PASSWORD_DEFAULT);
-                
-            }
-
+            $this->contraUsuario = password_hash($this->contraUsuario, PASSWORD_DEFAULT);
+            
             $stmt = $this->Conectar()->prepare("UPDATE usuario SET nombreUsuario=?, contraUsuario=?, idPersonaUsuario=?, idRolUsuario=? WHERE idUsuario=?");
             if(!$stmt->execute(array($this->nombreUsuario, $this->contraUsuario, $this->idPersonaUsuario, $this->idRolUsuario, $this->idUsuario))){
                 $stmt = null;

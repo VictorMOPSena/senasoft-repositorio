@@ -33,15 +33,17 @@
         $respuesta = $personaClass->PersonaExistente($idPersonaUsarioAux);
         if($respuesta["estado"]){
             $idEspecialidadPersonaAux;
+            $nombreEspecialidadPersonaAux;
 
             $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
             foreach($resultados as $resultado){
                 $idEspecialidadPersonaAux = $resultado->idEspecialidadPersona;
+                $nombreEspecialidadPersonaAux = $resultado->nombreEspecialidad;
             }
 
             if(password_verify($contraUsuarioInput, $contraUsuarioAux)){
                 $sesionClass = new Sesion();
-                $respuesta = $sesionClass->IniciarSesion($idUsuarioAux, $nombreUsuarioAux, $idPersonaUsarioAux, $idRolUsuarioAux, $idEspecialidadPersonaAux);
+                $respuesta = $sesionClass->IniciarSesion($idUsuarioAux, $nombreUsuarioAux, $idPersonaUsarioAux, $idRolUsuarioAux, $idEspecialidadPersonaAux, $nombreEspecialidadPersonaAux);
     
             }else{
                 $respuesta["respuesta"] = "cunec";

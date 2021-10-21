@@ -31,6 +31,9 @@ if($usuario == null || $usuario == ""){
             <div class="container_img_profile">
                 imagen de perfil del usuario
             </div>
+            <div class="container_cerrar_sesion">
+                <a href="./php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>
+            </div>
         </div>
 
     </div>
