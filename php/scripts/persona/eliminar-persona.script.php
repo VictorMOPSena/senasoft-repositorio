@@ -23,6 +23,5 @@
     $personaClass = new Persona();
     $respuesta = $personaClass->EliminarPersona($idPersonaInput);
 
-
     
 ?>
