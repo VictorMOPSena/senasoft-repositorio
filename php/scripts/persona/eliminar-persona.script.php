@@ -4,9 +4,7 @@
     require_once '../../classes/persona.class.php';
     require_once '../../codigos-mensajes.php';
 
-    // $idInput = $_GET['id'];
-    $idInput = 13;
-
+    $idInput = $_GET['id'];
 
     $personaClass = new Persona();
     $respuesta = $personaClass->EliminarPersona($idInput);

@@ -146,6 +146,37 @@
 
 
 
+        //Función para obtener el número de usuarios
+        function ObtenerNumeroUsuariosEmpleados(){
+            $stmt = $this->Conectar()->prepare("SELECT COUNT(idUsuario) as cantidad FROM usuario WHERE idRolUsuario=?");
+
+            $respuesta = ["estado"=>false, "respuesta"=>"neu"];
+
+            if(!$stmt->execute(array(2))){
+                $stmt = null;
+                $respuesta["respuesta"] = "estmt";
+                return $respuesta;
+            }
+             
+            if($stmt->rowCount()>0){
+                $respuesta["estado"] = true;
+                $respuesta["respuesta"] = "eu";
+
+                $resultados=$stmt->fetchAll(PDO::FETCH_OBJ);
+                foreach($resultados as $resultado){
+                    $respuesta["cantidad"] = $resultado->cantidad;
+                }
+                
+            }else{
+                $respuesta["respuesta"] = "neu";
+            }
+
+            return $respuesta;
+        }
+
+
+
+
         //Funcion para obtener los usuario
         function ObtenerUsuarios(){
             $stmt = $this->Conectar()->prepare("SELECT * FROM usuario");

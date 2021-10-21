@@ -1,0 +1,3 @@
+*Implementar función que no permita tomar turnos cuando ya ha tomado 5 dias de turnos
+*Implementar función de dejar turno
+*Terminar funcion de obtener turnos por fecha, se dejó en la parte de separar los turnos y guardarlos por campos de array Ejem: Turnos de "Domingo1", "Domingo2", etc...

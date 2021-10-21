@@ -13,6 +13,14 @@
     $direccionInput =$_POST['direccion'];
     $especialidadInput = $_POST['especialidad'];
 
+    // $cedulaInput = 7;
+    // $nombresInput = "a";
+    // $apellidosInput = "a";
+    // $celularInput = "1";
+    // $correoInput = "a@gmail.com";
+    // $direccionInput = "a";
+    // $especialidadInput = "Doctor";
+
 
     $especialidadClass = new Especialidad();
     $respuesta = $especialidadClass->AgregarEspecialidad(1, $especialidadInput);

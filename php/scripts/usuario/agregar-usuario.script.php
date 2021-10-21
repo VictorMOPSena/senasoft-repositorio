@@ -11,6 +11,11 @@
     $cedulaPersonaInput = $_POST['documento'];
     $idRolInput = $_POST['rol'];
 
+    // $nombreInput = "g";
+    // $contraInput =  "a";
+    // $cedulaPersonaInput = 7;
+    // $idRolInput = 2;
+
     $rolClass = new Rol();
     $respuesta = $rolClass->RolExistente("idRol", $idRolInput);
 

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2021 a las 17:55:00
--- Versión del servidor: 10.4.18-MariaDB
--- Versión de PHP: 7.3.27
+-- Tiempo de generación: 21-10-2021 a las 04:58:07
+-- Versión del servidor: 10.4.20-MariaDB
+-- Versión de PHP: 8.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,33 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `senasoft`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cronogramaactual`
+--
+
+CREATE TABLE `cronogramaactual` (
+  `idCronogramaActual` int(11) NOT NULL,
+  `idUsuarioCronogramaActual` int(11) NOT NULL,
+  `horarioCronogramaActual` int(11) NOT NULL,
+  `fechaCronogramaActual` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `cronogramaactual`
+--
+
+INSERT INTO `cronogramaactual` (`idCronogramaActual`, `idUsuarioCronogramaActual`, `horarioCronogramaActual`, `fechaCronogramaActual`) VALUES
+(16, 2, 1, '2021-10-13'),
+(17, 4, 1, '2021-10-13'),
+(18, 5, 1, '2021-10-13'),
+(24, 6, 2, '2021-10-13'),
+(25, 7, 2, '2021-10-13'),
+(26, 8, 2, '2021-10-13'),
+(27, 2, 1, '2021-10-14'),
+(36, 2, 1, '2021-10-17');
 
 -- --------------------------------------------------------
 
@@ -68,8 +95,12 @@ CREATE TABLE `persona` (
 
 INSERT INTO `persona` (`idPersona`, `cedulaPersona`, `nombresPersona`, `apellidosPersona`, `celularPersona`, `correoPersona`, `direccionPersona`, `idEspecialidadPersona`) VALUES
 (4, '1', 'a', 'a', '1', 'a@gmail.com', 'a', 14),
-(5, '1', 'a', 'a', '1', 'a@gmail.com', 'a', 15),
-(6, '1', 'a', 'a', '1', 'a@gmail.com', 'a', 16);
+(7, '2', 'a', 'a', '1', 'a@gmail.com', 'a', 2),
+(8, '3', 'a', 'a', '1', 'a@gmail.com', 'a', 2),
+(9, '4', 'a', 'a', '1', 'a@gmail.com', 'a', 2),
+(10, '5', 'a', 'a', '1', 'a@gmail.com', 'a', 2),
+(11, '6', 'a', 'a', '1', 'a@gmail.com', 'a', 2),
+(12, '7', 'a', 'a', '1', 'a@gmail.com', 'a', 2);
 
 -- --------------------------------------------------------
 
@@ -87,8 +118,8 @@ CREATE TABLE `rol` (
 --
 
 INSERT INTO `rol` (`idRol`, `nombreRol`) VALUES
-(2, 'Administrador'),
-(3, 'Administradsor');
+(1, 'Administrador'),
+(2, 'Empleado');
 
 -- --------------------------------------------------------
 
@@ -105,8 +136,28 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`idUsuario`, `nombreUsuario`, `contraUsuario`, `idPersonaUsuario`, `idRolUsuario`) VALUES
+(2, 'a', '$2y$10$jjEdvf/iRs.RFzCakhz/tOcI0.wjt9jtnsBP3BSrd1P12mvKRi4N6', 4, 1),
+(4, 'b', '$2y$10$JdWgyaRbIHX5dVls/wxQSet/FLehwWt5yVL2EOVZeccSTa6IqiybG', 7, 2),
+(5, 'c', '$2y$10$h5ijqRUydFXKaj2SXq1kWuNqFDcjyvawbZVgMcbtV2qxlsuxeOlhq', 8, 2),
+(6, 'd', '$2y$10$MmtxXTybVoy8L0.g4jyOSOjhDLjZQ0/vb2LD9qR2XLseZ2W0/28wm', 9, 2),
+(7, 'e', '$2y$10$WFKBJ6p9/eO.38j3vK9SvujnJFess1YRzFGfMehre2FUxBF/womsW', 10, 2),
+(8, 'f', '$2y$10$jYC/S0TUfrQxx0geO8o5meiUHbQBF79WxyR0VeH6jAhZKQm0AW5n6', 11, 2),
+(9, 'g', '$2y$10$Ab9tjxTCzWiMoplfq6GWK.TlX3CcaflEMUzdpBhaQM8ezSbv3vNIi', 12, 2);
+
+--
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `cronogramaactual`
+--
+ALTER TABLE `cronogramaactual`
+  ADD PRIMARY KEY (`idCronogramaActual`),
+  ADD KEY `idUsuarioCronogramaActual` (`idUsuarioCronogramaActual`);
 
 --
 -- Indices de la tabla `especialidad`
@@ -140,6 +191,12 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `cronogramaactual`
+--
+ALTER TABLE `cronogramaactual`
+  MODIFY `idCronogramaActual` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
 -- AUTO_INCREMENT de la tabla `especialidad`
 --
 ALTER TABLE `especialidad`
@@ -149,23 +206,29 @@ ALTER TABLE `especialidad`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `cronogramaactual`
+--
+ALTER TABLE `cronogramaactual`
+  ADD CONSTRAINT `cronogramaactual_ibfk_1` FOREIGN KEY (`idUsuarioCronogramaActual`) REFERENCES `usuario` (`idUsuario`);
 
 --
 -- Filtros para la tabla `persona`
