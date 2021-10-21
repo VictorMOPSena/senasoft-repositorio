@@ -415,7 +415,7 @@
                 return $respuesta;
             }
 
-            $stmt = $this->Conectar()->prepare("UPDATE persona SET cedulaPersona=?, nombresPersona=?, apellidosPersona=?, celularPersona=?, correoPersona=?, direccionPersona=?, idEspecialidadPersona WHERE idPersona=?");
+            $stmt = $this->Conectar()->prepare("UPDATE persona SET cedulaPersona=?, nombresPersona=?, apellidosPersona=?, celularPersona=?, correoPersona=?, direccionPersona=?, idEspecialidadPersona=? WHERE idPersona=?");
             if(!$stmt->execute(array($this->cedulaPersona, $this->nombresPersona, $this->apellidosPersona, $this->celularPersona, $this->correoPersona, $this->direccionPersona, $this->idEspecialidadPersona, $this->idPersona))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
