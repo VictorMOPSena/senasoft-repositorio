@@ -13,11 +13,11 @@
     $cedulaPersonaInput = $_POST['cedula'];
     $nombreRolInput = $_POST['rol'];
 
-    // $idUsuarioInput = 5;
-    // $nombreInput = "pedro";
+    // $idUsuarioInput = 2;
+    // $nombreInput = "francis";
     // $contraInput = "123";
     // $contraConfirmacionInput = "123";
-    // $cedulaPersonaInput = "3214523126";
+    // $cedulaPersonaInput = "1000126434";
     // $nombreRolInput = "Administrador";
 
 
@@ -53,7 +53,7 @@
                         foreach($resultados as $resultado){
                             $idUsuarioConEsaPersona = $resultado->idUsuario;
                         }
-    
+
                         if($idUsuarioConEsaPersona==$idUsuarioInput){
                             $respuesta = $usuarioClass->ActualizarUsuario($idUsuarioInput, $nombreInput, $contraInput, $contraConfirmacionInput, $idPersonaAux, $idRolInput);
         
