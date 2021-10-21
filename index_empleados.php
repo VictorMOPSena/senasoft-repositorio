@@ -5,10 +5,10 @@ session_start();
 $usuario = $_SESSION[''];
 
 if($usuario == null || $usuario == ""){
-    echo "no tiene permiso";
+    echo "no tiene permiso";    
 }*/
 
-?>
+?>  
 
 <!DOCTYPE html>
 <html lang="en">
