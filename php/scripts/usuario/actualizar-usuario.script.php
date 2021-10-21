@@ -71,11 +71,9 @@
         }
     }
 
-    $mensaje = $respuesta["respuesta"];
+    $mensaje=$respuesta["respuesta"];
+
+    header ("location: ../../../actualizar_usuario.php");
     
-    echo '<script type="text/javascript">
-    alert("El usuario se actualizo correctamente ");
-    window.location.href="../../../ver_usuarios.php?msn' .$mensaje.'";
-    </script>';
-    
+
 ?>

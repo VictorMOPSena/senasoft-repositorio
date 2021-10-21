@@ -19,8 +19,8 @@
     $mensaje = $respuesta["respuesta"];
     
     echo '<script type="text/javascript">
-    alert(El usuario se elimino correctamente");
-    window.location.href="../../../ver_usuarios.php?msn' .$mensaje.'";
+    alert("El usuario se elimino correctamente");
+    window.location.href="../../../ver_usuarios.php?msn' . $mensaje .'";
     </script>';
 
 ?>
