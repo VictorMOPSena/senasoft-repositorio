@@ -59,6 +59,33 @@
             <input type="text" class="input_text" name="usuario "placeholder="Nuevo usuario"><br>
             <input type="password" class="input_text" name="contraseña" placeholder="Contraseña contraseña"><br>
             <input type="password" class="input_text" name="confirmar" placeholder="Confirmar contraseña"><br>
+            <input type="text" class="input_text" name="cedula" value="<?php echo  $_GET['cedula']?>" placeholder="Nuevo usuario"><br>
+            <input list="roles" class="input_text" name="rol" placeholder="rol"><br>
+            
+            <datalist id="roles">
+                <?php
+
+                    require_once "./php/classes/conexion.class.php";
+                    require_once "./php/classes/rol.class.php";
+                
+                    $especialidadClass = new Rol();
+                    
+                    $respuesta=$especialidadClass->ObtenerRoles();
+                    
+                    if($respuesta["estado"]){
+                        $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
+                            foreach($resultados as $resultado){
+                                if($resultado->nombreRol == "No existente"){
+                                    continue;
+                                 }
+                ?>
+                                    <option value="<?php echo $resultado->nombreRol;?>"></option>
+                <?php                       
+                            }     
+                    }
+
+                ?>
+            </datalist>
             <input type="submit" class="btn_input" value="Actualizar">
 
             </center>

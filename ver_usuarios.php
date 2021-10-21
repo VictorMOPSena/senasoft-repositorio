@@ -75,7 +75,7 @@
                              <td><?php echo $resultado->nombresPersona.' '.$resultado->apellidosPersona;?></td>
                              <td><?php echo $resultado->nombreUsuario;?></td>
                              <td><a href="./php/scripts/usuario/eliminar-usuario.script.php?id=<?php echo $resultado->idUsuario?>"><input type="submit" value="Eliminar" class="btn_input"></a></td>
-                             <td><a href="actualizar_usuario.php?id=<?php echo $resultado->idPersona?>"><input type="submit" value="Actualizar" class="btn_input"></a></td>
+                             <td><a href="actualizar_usuario.php?id=<?php echo $resultado->idPersona?>&cedula=<?php echo $resultado->cedulaPersona?>"><input type="submit" value="Actualizar" class="btn_input"></a></td>
                          </tr>
                          <?php                       
                      }
