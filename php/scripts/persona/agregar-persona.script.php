@@ -39,7 +39,11 @@
     }
 
     $mensaje = $respuesta["respuesta"];
-    header ('location: ../../../agregar_personal.php?msn=$mensaje');
+    
+    echo '<script type="text/javascript">
+    alert("La persona se registro correctamente ");
+    window.location.href="../../../agregar_personal.php?msn' .$mensaje.'";
+    </script>';
 
     
 ?>

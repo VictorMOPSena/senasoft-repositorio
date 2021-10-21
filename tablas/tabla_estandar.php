@@ -2,11 +2,13 @@
 
     session_start();
 
-    if(!isset($_SESSION['idRolUsuarioSenasoft'])){
+    if(isset($_SESSION['idRolUsuarioSenasoft'])){
+        if($_SESSION['idRolUsuarioSenasoft'] != 1){
+            header ("location: index.php");
+        }
+    }else{
         header ("location: index.php");
     }
-
-    // echo $_SESSION['nombreEspecialidadUsuarioSenasoft'];
 
 ?>
 
@@ -29,7 +31,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
     <title>Index jefe</title>
-    <title>Document</title>
+    <title>Tabla estandar</title>
 </head>
 <body>
 <div class="container_menu">
@@ -41,7 +43,7 @@
                 Bienvenido <?php echo $_SESSION['nombreUsuarioSenasoft']?>
             </div>
             <div class="container_img_profile">
-                <a href="../actualizar_perfil.php"><img src="../assets/img/img_profile.jpg" alt=""></a>
+                <img src="../assets/img/img_profile.jpg" alt="">
             </div>
             <div class="container_cerrar_sesion">
                 <a href="../php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>
@@ -68,6 +70,12 @@
 
                 <tr class="info_turnos">
                     <td>6:00</td>
+                    <td><input type="submit" class="btn_turno"></td>
+                    <td><input type="submit" class="btn_turno"></td>
+                    <td><input type="submit" class="btn_turno"></td>
+                    <td><input type="submit" class="btn_turno"></td>
+                    <td><input type="submit" class="btn_turno"></td>
+                    <td><input type="submit" class="btn_turno"></td>
                     <td><input type="submit" class="btn_turno"></td>
                 </tr>
 

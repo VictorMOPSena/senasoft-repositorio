@@ -43,7 +43,10 @@
         }   
     }
 
-    echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
-
+    $mensaje = $respuesta["respuesta"];
     
+    echo '<script type="text/javascript">
+    alert("El usuario se agrego correctamente ");
+    window.location.href="../../../crear_usuario_admin.php?msn' .$mensaje.'";
+    </script>';
 ?>

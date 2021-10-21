@@ -27,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
-    <title>Crear Usuario</title>
+    <title>Actualizar Usuario</title>
 </head>
 <body>
 
@@ -40,7 +40,7 @@
                 Bienvenido <?php echo $_SESSION['nombreUsuarioSenasoft']?>
             </div>
             <div class="container_img_profile">
-                <a href="actualizar_perfil.php"><img src="./assets/img/img_profile.jpg" alt=""></a>
+                <img src="./assets/img/img_profile.jpg" alt="img_perfil">
             </div>
             <div class="container_cerrar_sesion">
                 <a href="./php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>
@@ -55,7 +55,7 @@
         <div class="container_form">
 
         <form action="./php/scripts/usuario/actualizar-usuario.script.php" method="POST" class="container_crear_usuario">
-            <h1>ACTUALIZAR PERFIL</h1>
+            <h1>ACTUALIZAR USUARIO</h1>
             <center>
         
             <input type="hidden" class="input_text" name="id" value="<?php echo  $_SESSION['idPersonaUsuarioSenasoft']?>"><br>

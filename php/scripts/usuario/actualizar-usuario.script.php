@@ -71,7 +71,11 @@
         }
     }
 
-    echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
+    $mensaje = $respuesta["respuesta"];
     
-
+    echo '<script type="text/javascript">
+    alert("El usuario se actualizo correctamente ");
+    window.location.href="../../../ver_usuarios.php?msn' .$mensaje.'";
+    </script>';
+    
 ?>

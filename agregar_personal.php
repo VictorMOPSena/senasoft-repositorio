@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
-    <title>Agregar Persona</title>
+    <title>Agregar Personal</title>
 </head>
 <body>
 
@@ -39,7 +39,7 @@
                 Bienvenido <?php echo $_SESSION['nombreUsuarioSenasoft']?>
             </div>
             <div class="container_img_profile">
-                <a href="actualizar_perfil.php"><img src="./assets/img/img_profile.jpg" alt=""></a>
+                <img src="./assets/img/img_profile.jpg" alt="img_perfil">
             </div>
             <div class="container_cerrar_sesion">
                 <a href="./php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>

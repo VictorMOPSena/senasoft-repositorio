@@ -17,8 +17,10 @@
     }
 
     $mensaje = $respuesta["respuesta"];
-    header ("location: ../../../ver_usuarios.php?msn=$mensaje");
-
-    // echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
+    
+    echo '<script type="text/javascript">
+    alert(El usuario se elimino correctamente");
+    window.location.href="../../../ver_usuarios.php?msn' .$mensaje.'";
+    </script>';
 
 ?>

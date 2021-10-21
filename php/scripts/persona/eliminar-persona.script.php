@@ -24,8 +24,10 @@
     $respuesta = $personaClass->EliminarPersona($idPersonaInput);
 
     $mensaje = $respuesta["respuesta"];
-    
-    header ("location: ../../../ver_personal.php");
 
+    echo '<script type="text/javascript">
+    alert("Se elimino correctamente");
+    window.location.href="../../../ver_personal.php?msn' .$mensaje.'";
+    </script>';
     
 ?>

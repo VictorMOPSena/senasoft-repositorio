@@ -32,7 +32,9 @@
 
     $mensaje = $respuesta["respuesta"];
 
-    header ("location: ../../../ver_personal.php?msn$mensaje");
-
+    echo '<script type="text/javascript">
+    alert("La persona actualizo correctamente ");
+    window.location.href="../../../ver_personal.php?msn' .$mensaje.'";
+    </script>';
 
 ?>

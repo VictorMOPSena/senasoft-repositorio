@@ -1,6 +1,4 @@
 <?php
-
-
     session_start();
 
     if(isset($_SESSION['idRolUsuarioSenasoft'])){
@@ -39,7 +37,7 @@
                 Bienvenido <?php echo $_SESSION['nombreUsuarioSenasoft']?>
             </div>
             <div class="container_img_profile">
-                <a href="actualizar_perfil.php"><img src="./assets/img/img_profile.jpg" alt=""></a>
+                <img src="./assets/img/img_profile.jpg" alt="img_perfil">
             </div>
             <div class="container_cerrar_sesion">
                 <a href="./php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>
