@@ -32,7 +32,7 @@
 
 .container_principal .container_tabla_turnos .tabla_turnos .info_turnos {
     height: 2px;
-    height: 200px;
+    height: 150px;
 }
 
 .container_principal .container_tabla_turnos .tabla_turnos .info_turnos td{
@@ -43,3 +43,22 @@
     font-family: 'Ubuntu Condensed', sans-serif;
 }
 
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .btn_turno {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    cursor: pointer;
+    border: solid black 1px;
+}
+
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_disponible {
+    background-color: rgb(176, 255, 216);
+}
+
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_disponible {
+    background-color: rgb(255, 166, 166);
+}
+
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_Escogido {
+    background-color: rgb(198, 199, 255);
+}

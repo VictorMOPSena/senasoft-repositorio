@@ -33,6 +33,7 @@
 </head>
 <body>
 <div class="container_menu">
+    
         <div class="container_img_logo">
             <img src="../assets/img/Logo.png" alt="">
         </div>
@@ -48,40 +49,49 @@
             </div>
         </div>
     </div>
-
+    <center>
+        <h1 id="h1FechaCronograma">Hola</h1>
+    </center>
+    
     <div class="container_principal">
         <div class="container_tabla_turnos">
             <table class="tabla_turnos">
                 <tr class="titulos_tabla">
                     <th>HORARIOS</th>
+                    <th>DOMINGO</th>
                     <th>LUNES</th>
                     <th>MARTES</th>
                     <th>MIERCOLES</th>
                     <th>JUEVES</th>
                     <th>VIERNES</th>
                     <th>SABADO</th>
-                    <th>DOMINGO</th>
                 </tr>
 
                 <tr class="info_turnos">
                     <td>6:00</td>
-                    <td><input type="submit" class="btn_turno"></td>
+                    <td><div dia="0" horario="1" class="btn_turno"></td>
+                    <td><div dia="1" horario="1" class="btn_turno"></td>
+                    <td><div dia="2" horario="1" class="btn_turno"></td>
+                    <td><div dia="3" horario="1" class="btn_turno"></td>
+                    <td><div dia="4" horario="1" class="btn_turno"></td>
+                    <td><div dia="5" horario="1" class="btn_turno"></td>
+                    <td><div dia="6" horario="1" class="btn_turno"></td>
                 </tr>
 
                 <tr class="info_turnos">
                     <td>18:00</td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
-                    <td><input type="submit" class="btn_turno"></td>
+                    <td><div dia="0" horario="2" class="btn_turno"></td>
+                    <td><div dia="1" horario="2" class="btn_turno"></td>
+                    <td><div dia="2" horario="2" class="btn_turno"></td>
+                    <td><div dia="3" horario="2" class="btn_turno"></td>
+                    <td><div dia="4" horario="2" class="btn_turno"></td>
+                    <td><div dia="5" horario="2" class="btn_turno"></td>
+                    <td><div dia="6" horario="2" class="btn_turno"></td>
                 </tr>
             </table>
         </div>
     </div>
-
+    <script src="../assets/js/escoger-turno.js"></script>
 
 </body>
 </html>
