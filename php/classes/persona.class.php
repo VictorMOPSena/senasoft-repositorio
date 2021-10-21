@@ -320,7 +320,40 @@
             if($stmt->rowCount()>0){
                 $respuesta["estado"] = true;
                 $respuesta["respuesta"] = "cyeu";
-                $respuesta["stmt"] = $stmt; 
+                $respuesta["stmt"] = $stmt;
+            }
+
+            return $respuesta;
+        }
+
+
+
+        //Función para verificar si una cedula ya está en uso, y si existe, trae los datos de la persona de esa cédula
+        function CedulaExistenteId($idInput, $cedulaInput){
+            $this->idPersona = $idInput;
+            $this->cedulaPersona = $cedulaInput;
+
+            $respuesta = ["estado"=>false, "respuesta"=>"cneu"];
+
+            if(!$this->ValidarCaracteresCedulaPersona()){
+                $respuesta["respuesta"] = "cspcn";
+                return $respuesta;
+            }
+
+            $stmt = $this->Conectar()->prepare("SELECT * FROM persona INNER JOIN especialidad WHERE idPersona=? AND cedulaPersona=? AND persona.idEspecialidadPersona=especialidad.idEspecialidad;");
+
+            if(!$stmt->execute(array($this->idPersona, $this->cedulaPersona))){
+                $stmt = null;
+                $respuesta["respuesta"] = "estmt";
+                return $respuesta;
+            }
+            
+            if($stmt->rowCount()>0){
+                $respuesta["estado"] = true;
+                $respuesta["respuesta"] = "cpap";
+                $respuesta["stmt"] = $stmt;
+            }else{
+                $respuesta["respuesta"] = "cnpap";
             }
 
             return $respuesta;
@@ -376,8 +409,8 @@
                 return $respuesta;
             }
 
-            $respuesta = $this->CedulaExistente($this->cedulaPersona);
-            if($respuesta["estado"]){
+            $respuesta = $this->CedulaExistenteId($this->idPersona, $this->cedulaPersona);
+            if(!$respuesta["estado"]){
                 $respuesta["respuesta"] = "cyeu";
                 return $respuesta;
             }

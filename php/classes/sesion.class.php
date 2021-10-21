@@ -136,7 +136,7 @@
             $_SESSION["idPersonaUsuarioSenasoft"] = $this->idPersonaUsuarioSesion;
             $_SESSION["idRolUsuarioSenasoft"] = $this->idRolUsuarioSesion;
             $_SESSION["idEspecialidadUsuarioSenasoft"] = $this->idEspecialidadUsuarioSesion;
-            $_SESSION["nombreEspecialidadUsuarioSenasoft"] = $this->idEspecialidadUsuarioSesion;
+            $_SESSION["nombreEspecialidadUsuarioSenasoft"] = $this->nombreEspecialidadUsuarioSesion;
 
             $respuesta = ["estado"=>true, "respuesta"=>"sic"];
             return $respuesta;
