@@ -6,12 +6,13 @@
         private $nombreUsuarioSesion;
         private $idPersonaUsuarioSesion;
         private $idRolUsuarioSesion;
+        private $idEspecialidadUsuarioSesion;
 
 
         //Función para validar que los campos no estén vacíos
         function ValidarDatosVacios(){
             $respuesta = false;
-            if(!empty($this->idUsuarioSesion) && !empty($this->nombreUsuarioSesion) && !empty($this->idPersonaUsuarioSesion) && !empty($this->idRolUsuarioSesion)) {
+            if(!empty($this->idUsuarioSesion) && !empty($this->nombreUsuarioSesion) && !empty($this->idPersonaUsuarioSesion) && !empty($this->idRolUsuarioSesion) && !empty($this->idEspecialidadUsuarioSesion)) {
                 $respuesta = true;
             }
             return $respuesta;
@@ -52,6 +53,14 @@
             return $respuesta;
         }
 
+        function ValidarCaracteresIdEspecialidadUsuarioSesion(){
+            $respuesta = false;
+            if(preg_match("/^[0-9]*$/", $this->idEspecialidadUsuarioSesion)) {
+                $respuesta = true;
+            }
+            return $respuesta;
+        }
+
 
 
         //Función que llama a todas las funciones para validar los datos
@@ -73,6 +82,9 @@
             }else if(!$this->ValidarCaracteresIdRolUsuarioSesion()){
                 $respuesta["respuesta"] = "ispcn";
 
+            }else if(!$this->ValidarCaracteresIdEspecialidadUsuarioSesion()){
+                $respuesta["respuesta"] = "ispcn";
+
             }else{
                 $respuesta["respuesta"] = "";
                 $respuesta["estado"] = true;
@@ -84,18 +96,19 @@
 
 
         //Función para inicializaar los atributos de la clase
-        function SetDatos($idUsuarioInput, $nombreUsuarioInput, $idPersonaUsarioInput, $idRolUsuarioInput){
+        function SetDatos($idUsuarioInput, $nombreUsuarioInput, $idPersonaUsarioInput, $idRolUsuarioInput, $idEspecialidadUsuarioInput){
             $this->idUsuarioSesion = $idUsuarioInput;
             $this->nombreUsuarioSesion = $nombreUsuarioInput;
-            $this->idPersonaUsuarioSesion = $idPersonaUsarioInput;
+            $this->idPersonaUsuarioSesion = $idPersonaUsarioInput; 
             $this->idRolUsuarioSesion = $idRolUsuarioInput;
+            $this->idEspecialidadUsuarioSesion = $idEspecialidadUsuarioInput;
         }
 
 
 
         //Función para iniciar sesión
-        function IniciarSesion($idUsuarioInput, $nombreUsuarioInput, $idPersonaUsarioInput, $idRolUsuarioInput){
-            $this->SetDatos($idUsuarioInput, $nombreUsuarioInput, $idPersonaUsarioInput, $idRolUsuarioInput);
+        function IniciarSesion($idUsuarioInput, $nombreUsuarioInput, $idPersonaUsarioInput, $idRolUsuarioInput, $idEspecialidadUsuarioInput){
+            $this->SetDatos($idUsuarioInput, $nombreUsuarioInput, $idPersonaUsarioInput, $idRolUsuarioInput, $idEspecialidadUsuarioInput);
 
             $respuesta = ["estado"=>false, "respuesta"=>"nspis"];
 
@@ -109,6 +122,7 @@
             $_SESSION["nombreUsuarioSenasoft"] = $this->nombreUsuarioSesion;
             $_SESSION["idPersonaUsuarioSenasoft"] = $this->idPersonaUsuarioSesion;
             $_SESSION["idRolUsuarioSenasoft"] = $this->idRolUsuarioSesion;
+            $_SESSION["idEspecialidadUsuarioSenasoft"] = $this->idEspecialidadUsuarioSesion;
 
             $respuesta = ["estado"=>true, "respuesta"=>"sic"];
             return $respuesta;

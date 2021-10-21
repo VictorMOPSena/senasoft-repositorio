@@ -3,6 +3,7 @@
     require_once '../../classes/conexion.class.php';
     require_once '../../classes/usuario.class.php';
     require_once '../../classes/sesion.class.php';
+    require_once '../../classes/persona.class.php';
     require_once '../../codigos-mensajes.php';
 
     $nombreUsuarioInput = $_POST['usuario'];
@@ -28,13 +29,26 @@
             $contraUsuarioAux = $resultado->contraUsuario;
         }
 
-        if(password_verify($contraUsuarioInput, $contraUsuarioAux)){
-            $sesionClass = new Sesion();
-            $respuesta = $sesionClass->IniciarSesion($idUsuarioAux, $nombreUsuarioAux, $idPersonaUsarioAux, $idRolUsuarioAux);
+        $personaClass = new Persona();
+        $respuesta = $personaClass->PersonaExistente($idPersonaUsarioAux);
+        if($respuesta["estado"]){
+            $idEspecialidadPersonaAux;
 
-        }else{
-            $respuesta["respuesta"] = "cunec";
+            $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
+            foreach($resultados as $resultado){
+                $idEspecialidadPersonaAux = $resultado->idEspecialidadPersona;
+            }
+
+            if(password_verify($contraUsuarioInput, $contraUsuarioAux)){
+                $sesionClass = new Sesion();
+                $respuesta = $sesionClass->IniciarSesion($idUsuarioAux, $nombreUsuarioAux, $idPersonaUsarioAux, $idRolUsuarioAux, $idEspecialidadPersonaAux);
+    
+            }else{
+                $respuesta["respuesta"] = "cunec";
+            }
         }
+
+        
     }
 
     if($respuesta["estado"]){

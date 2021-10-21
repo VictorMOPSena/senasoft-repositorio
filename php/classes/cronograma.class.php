@@ -171,6 +171,67 @@
 
 
 
+        //Función para verificar que sólo pueda tomar 5 turnos, ya que 2 días a la semana son descansos
+        function VerificarCantidadTurnos(){
+            $respuesta = ["estado"=>false, "respuesta"=>"cttnv"];
+
+            $fechaSepara = explode("-", $this->fechaCronograma);
+
+            $numDia = $fechaSepara[2];
+
+            $mktimeFecha = mktime(0, 0, 0, date($fechaSepara[1]), date($numDia), date($fechaSepara[0]));
+            $diaInicio = date("l", $mktimeFecha);
+            $fechaInicio = date("Y-m-d", $mktimeFecha);
+
+            while($diaInicio!="Sunday") {
+                $numDia--;
+                $mktimeFecha = mktime(0, 0, 0, date($fechaSepara[1]), date($numDia), date($fechaSepara[0]));
+                $diaInicio = date("l", $mktimeFecha);
+            }
+
+            $fechaInicio = date("Y-m-d", $mktimeFecha);
+
+
+            $mktimeFecha = mktime(0, 0, 0, date($fechaSepara[1]), date($numDia+6), date($fechaSepara[0]));
+            $fechaFinal = date("Y-m-d", $mktimeFecha);
+            $diaFinal = date("l", $mktimeFecha);
+
+
+            $stmt = $this->Conectar()->prepare("SELECT COUNT(idCronogramaActual) as cantidad FROM cronogramaactual WHERE idUsuarioCronogramaActual=? AND fechaCronogramaActual BETWEEN ? AND ?;");
+
+            if(!$stmt->execute(array($this->idUsuarioCronograma, $fechaInicio, $fechaFinal))){
+                $stmt = null;
+                $respuesta["respuesta"] = "estmt";
+                return $respuesta;
+            }
+
+            if($stmt->rowCount()>0){
+                $respuesta["respuesta"] = "et";
+
+                $resultados=$stmt->fetchAll(PDO::FETCH_OBJ);
+                foreach($resultados as $resultado){
+                    $respuesta["cantidad"] = $resultado->cantidad;
+                }
+                
+                if($respuesta["cantidad"]<5){
+                    $respuesta["estado"] = true;
+                    $respuesta["respuesta"] = "td";
+                }else{
+                    $respuesta["respuesta"] = "nptmt";
+                }
+
+            }else{
+                $respuesta["estado"] = true;
+                $respuesta["respuesta"] = "td";
+            }
+
+
+            $stmt = null;
+            return $respuesta;
+        }
+
+
+
         //Función para verificar que el turno seleccionado no esté lleno
         function VerificarTurnoLLeno(){
             $respuesta = ["estado"=>false, "respuesta"=>"tllnv"];
@@ -276,6 +337,11 @@
                 return $respuesta;
             }
 
+            $respuesta = $this->VerificarCantidadTurnos();
+            if(!$respuesta["estado"]){
+                return $respuesta;
+            }
+
             $respuesta = $this->VerificarTurnoLleno();
             if(!$respuesta["estado"]){
                 return $respuesta;
@@ -296,6 +362,31 @@
             if($stmt->rowCount()>0){
                 $respuesta["estado"] = true;
                 $respuesta["respuesta"] = "ttc";
+            }
+
+            $stmt = null;
+            return $respuesta;
+        }
+
+
+
+        //Función para dejar el turno
+        function AbandonarTurno($idUSuarioInput, $horarioInput, $fechaInput){
+
+            $respuesta = ["estado"=>false, "respuesta"=>"tna"];
+
+            $stmt = $this->Conectar()->prepare("DELETE FROM cronogramaactual WHERE idUsuarioCronogramaActual=? AND horarioCronogramaActual=? AND fechaCronogramaActual=?");
+            if(!$stmt->execute(array($idUSuarioInput, $horarioInput, $fechaInput))){
+                $stmt = null;
+                $respuesta["respuesta"] = "estmt";
+                return $respuesta;
+            }
+
+            if($stmt->rowCount()>0){
+                $respuesta["estado"] = true;
+                $respuesta["respuesta"] = "tac";
+            }else{
+                $respuesta["respuesta"] = "tne";
             }
 
             $stmt = null;
