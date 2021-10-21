@@ -393,6 +393,20 @@
             return $respuesta;
         }
 
+
+
+        //Función para actualizar id de usuario
+        function EliminarIdUsuario($idUsuarioInput){
+            $this->contraUsuario = password_hash($this->contraUsuario, PASSWORD_DEFAULT);
+            
+            $stmt = $this->Conectar()->prepare("UPDATE usuario SET nombreUsuario=?, contraUsuario=?, idPersonaUsuario=?, idRolUsuario=? WHERE idUsuario=?");
+            if(!$stmt->execute(array($this->nombreUsuario, $this->contraUsuario, $this->idPersonaUsuario, $this->idRolUsuario, $this->idUsuario))){
+                $stmt = null;
+                $respuesta["respuesta"] = "estmt";
+                return $respuesta;
+            }
+        }
+
     }
 
 ?>
