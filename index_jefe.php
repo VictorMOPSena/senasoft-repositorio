@@ -39,7 +39,7 @@
                 Bienvenido <?php echo $_SESSION['nombreUsuarioSenasoft']?>
             </div>
             <div class="container_img_profile">
-                <a href=""><img src="./assets/img/img_profile.jpg" alt=""></a>
+                <a href="actualizar_usuario.php"><img src="./assets/img/img_profile.jpg" alt=""></a>
             </div>
             <div class="container_cerrar_sesion">
                 <a href="./php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>
@@ -102,7 +102,35 @@
                 <h1>Crear usuario administrador</h1>
                 <p>Podra crear un usuario <br>
                 para el ingreso de los  <br>
+                jefes 
+            </div>
+            </a>
+        </div>
+
+        <div class="container_crear_usuario">
+            <a href="crear_usuario_empleado.php">
+            <div class="icono_crear_usuario">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="informacion_crear_usuarios">
+                <h1>Crear usuario empleado</h1>
+                <p>Podra crear un usuario <br>
+                para el ingreso de los  <br>
                 distintos tipos de empleados
+            </div>
+            </a>
+        </div>
+
+        <div class="container_crear_usuario">
+            <a href="crear_usuario_empleado.php">
+            <div class="icono_crear_usuario">
+             <i class="fas fa-user-edit"></i>
+            </div>
+            <div class="informacion_crear_usuarios">
+                <h1>Actualizar Usuarios Empleados</h1>
+                <p>podra modificar la <br>
+                informacion de aquiellos<br>
+                usuarios que lo requiran
             </div>
             </a>
         </div>

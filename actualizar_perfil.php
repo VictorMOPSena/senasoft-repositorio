@@ -18,18 +18,19 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/css/interfaces/ver_personal.css">
+    <link rel="stylesheet" href="./assets/css/interfaces/agregar_usuario.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
-    <title>Ver empleados</title>
+    <title>Crear Usuario</title>
 </head>
 <body>
+
 <div class="container_menu">
         <div class="container_img_logo">
             <img src="./assets/img/Logo.png" alt="">
@@ -39,7 +40,7 @@
                 Bienvenido <?php echo $_SESSION['nombreUsuarioSenasoft']?>
             </div>
             <div class="container_img_profile">
-                <a href=""><img src="./assets/img/img_profile.jpg" alt=""></a>
+                <a href="actualizar_perfil.php"><img src="./assets/img/img_profile.jpg" alt=""></a>
             </div>
             <div class="container_cerrar_sesion">
                 <a href="./php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>
@@ -47,19 +48,12 @@
         </div>
     </div>
 
-    <div class="container_table">
-        <table class="tabla_ver_personas">
-            <tr>
-                <th>Cedula</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Celular</th>
-                <th>Correo Electronico</th>
-                <th>Direccion</th>
-                <th>Especialidad</th>
-                <th>Accion</th>
-            </tr>
+    <div class="container_principal">
+        <div class="container_form">
 
+        <form action="./php/scripts/persona/actualizar-persona.script.php" method="POST" class="container_crear_usuario">
+            <h1>ACTUALIZAR PERFIL</h1>
+            <center>
             <?php
             require_once "./php/classes/conexion.class.php";
             require_once "./php/classes/persona.class.php";
@@ -67,33 +61,37 @@
             
             $personaClass = new Persona();
 
-            $respuesta=$personaClass->ObtenerPersonas();
+            $respuesta=$personaClass->PersonaExistente($_SESSION['idPersonaUsuarioSenasoft']);
 
             if($respuesta["estado"]){
                  $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
                      foreach($resultados as $resultado){
                          ?>
-                         <tr class="datos">
-                             <td><?php echo $resultado->cedulaPersona;?></td>
-                             <td><?php echo $resultado->nombresPersona;?></td>
-                             <td><?php echo $resultado->apellidosPersona;?></td>
-                             <td><?php echo $resultado->celularPersona;?></td>
-                             <td><?php echo $resultado->correoPersona;?></td>
-                             <td><?php echo $resultado->direccionPersona;?></td>
-                             <td><?php echo $resultado->nombreEspecialidad?></td>
-                             <td><a href="./php/scripts/persona/eliminar-persona.script.php?id=<?php echo $resultado->idPersona?>"><input type="submit" value="Eliminar" class="btn_input"></a></td>
-                             <td><a href="actualizar_perfil.php?id=<?php echo $resultado->idPersona?>"><input type="submit" value="Actualizar" class="btn_input"></a></td>
-                         </tr>
-                         <?php                       
+
+                            <input type="hidden" class="input_text" name="id" value="<?php echo  $_SESSION['idPersonaUsuarioSenasoft']?>"><br>
+                            <input type="hidden" class="input_text" name="especialidad" value="<?php echo  $_SESSION['nombreEspecialidadUsuarioSenasoft']?>"><br>
+                            <input type="text" class="input_text" name="cedula" value="<?php echo  $resultado->cedulaPersona?>"><br>
+                            <input type="text" class="input_text" name="nombre" value="<?php echo $resultado->nombresPersona?>"><br>
+                            <input type="text" class="input_text" name="apellido" value="<?php echo $resultado->apellidosPersona?>"><br>
+                            <input type="text" class="input_text" name="celular" value="<?php echo $resultado->celularPersona?>"><br>
+                            <input type="email" class="input_text" name="correo" value="<?php echo $resultado->correoPersona?>"><br>
+                            <input type="text" class="input_text" name="direccion" value="<?php echo $resultado->direccionPersona?>"><br>
+                            <input type="submit" class="btn_input" value="Actualizar">
+                            <?php                       
                      }
             
                  }else{
                      echo $codigosMensajes[$respuesta["respuesta"]];
+            
                 }
 
             ?>
-        </table>
+            </center>
+            
+        </form>
 
+        </div>
     </div>
+
 </body>
 </html>

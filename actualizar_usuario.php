@@ -40,7 +40,7 @@
                 Bienvenido <?php echo $_SESSION['nombreUsuarioSenasoft']?>
             </div>
             <div class="container_img_profile">
-                <a href=""><img src="./assets/img/img_profile.jpg" alt=""></a>
+                <a href="actualizar_perfil.php"><img src="./assets/img/img_profile.jpg" alt=""></a>
             </div>
             <div class="container_cerrar_sesion">
                 <a href="./php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>
@@ -51,36 +51,18 @@
     <div class="container_principal">
         <div class="container_form">
 
-        <form action="./php/scripts/usuario/agregar-usuario.script.php" method="POST" class="container_crear_usuario">
-            <h1>CREAR NUEVO EMPLEADO</h1>
+        <form action="./php/scripts/persona/actualizar-persona.script.php" method="POST" class="container_crear_usuario">
+            <h1>ACTUALIZAR PERFIL</h1>
             <center>
-            <input type="hidden" name="rol" value="2">
-            <input type="text" class="input_text" name="usuario" placeholder="Crear Usuario"><br>
-            <input type="text" class="input_text" name="contraseña" placeholder="Crear Contraseñas"><br>
-            <input list="cedulas" class="input_text" name="documento" placeholder="Documento"><br>
-            <datalist id="cedulas">
-                <?php
-                 require_once "./php/classes/conexion.class.php";
-                 require_once "./php/classes/persona.class.php";
+        
+            <input type="hidden" class="input_text" name="id" value="<?php echo  $_SESSION['idPersonaUsuarioSenasoft']?>"><br>
+            <input type="text" class="input_text" name="usuario "placeholder="Nuevo usuario"><br>
+            <input type="password" class="input_text" name="contraseña" placeholder="Nueva contraseña"><br>
+            <input type="password" class="input_text" name="confirmar" placeholder="Confirmar contraseña"><br>
+            <input type="submit" class="btn_input" value="Actualizar">
 
-                 $personaClass = new Persona();
-                    
-                    $respuesta=$personaClass->ObtenerPersonas();
-                    
-                    if($respuesta["estado"]){
-                        $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
-                            foreach($resultados as $resultado){
-                ?>
-                    <option value="<?php echo $resultado->cedulaPersona;?>"></option>
-                <?php                       
-                            }     
-                    }        
-                ?>
-            </datalist>
-            
-    
-            <input type="submit" class="btn_input" value="Crear">
             </center>
+            
         </form>
 
         </div>
