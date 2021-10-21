@@ -179,7 +179,7 @@
 
         //Funcion para obtener los usuario
         function ObtenerUsuarios(){
-            $stmt = $this->Conectar()->prepare("SELECT * FROM usuario");
+            $stmt = $this->Conectar()->prepare("SELECT * FROM usuario INNER JOIN persona WHERE usuario.idPersonaUsuario=persona.idPersona;");
             $stmt->execute();
             
             $respuesta = ["estado"=>false, "respuesta"=>"neu"];
@@ -198,7 +198,7 @@
         function UsuarioExistente($columna, $valor){
             $respuesta = ["estado"=>false, "respuesta"=>"une"];
 
-            $stmt = $this->Conectar()->prepare("SELECT * FROM usuario WHERE $columna=?");
+            $stmt = $this->Conectar()->prepare("SELECT * FROM usuario INNER JOIN persona WHERE $columna=? AND usuario.idPersonaUsuario=persona.idPersona;");
 
             if(!$stmt->execute(array($valor))){
                 $stmt = null;
