@@ -108,29 +108,40 @@
                 $respuesta["estado"] = true;
                 $respuesta["respuesta"] = "toc";
                 $respuesta["stmt"] = $stmt;
+                $idCronogramas = [];
+                $idUsuarios = [];
+                $horarioCronogramas = [];
+                $fechaCronogramas = [];
 
                 $resultados=$stmt->fetchAll(PDO::FETCH_OBJ);
                 foreach($resultados as $resultado){
-                    $fechaSeparaAux = explode("-", $resultado->fechaCronogramaActual);
-                    $mktimeFecha = mktime(0, 0, 0, date($fechaSeparaAux[1]), date($fechaSeparaAux[2]), date($fechaSeparaAux[0]));
+                    array_push($idCronogramas, $resultado->idCronogramaActual);
+                    array_push($idUsuarios, $resultado->idUsuarioCronogramaActual);
+                    array_push($horarioCronogramas, $resultado->horarioCronogramaActual);
+                    array_push($fechaCronogramas, $resultado->fechaCronogramaActual);
+                    // $fechaSeparaAux = explode("-", $resultado->fechaCronogramaActual);
+                    // $mktimeFecha = mktime(0, 0, 0, date($fechaSeparaAux[1]), date($fechaSeparaAux[2]), date($fechaSeparaAux[0]));
 
-                    $dia = date("l", $mktimeFecha);
-                    if($dia=="Sunday"){
-                        if($resultado->horarioCronogramaActual==1){
-                            echo "Hola1";
+                    // $dia = date("l", $mktimeFecha);
+                    // if($dia=="Sunday"){
+                    //     if($resultado->horarioCronogramaActual==1){
+                    //         echo "Hola1";
 
-                        }else if($resultado->horarioCronogramaActual==2){
-                            echo "Hola2";
+                    //     }else if($resultado->horarioCronogramaActual==2){
+                    //         echo "Hola2";
 
-                        }
-                        echo "<br>";
-                    }
-                    // echo $resultado->idCronogramaActual." - ";
-                    // echo $resultado->idUsuarioCronogramaActual." - ";
-                    // echo $resultado->horarioCronogramaActual." - ";
-                    // echo $resultado->fechaCronogramaActual." - ";
-                    // echo "<br>";
+                    //     }
+                    //     echo "<br>";
+                        
+                    // }
                 }
+
+                $respuesta["datos"] = [];
+                array_push($respuesta["datos"], $idCronogramas);
+                array_push($respuesta["datos"], $idUsuarios);
+                array_push($respuesta["datos"], $horarioCronogramas);
+                array_push($respuesta["datos"], $fechaCronogramas);
+                
 
             }else {
                 $respuesta["respuesta"] = "tsne";
@@ -337,6 +348,11 @@
                 return $respuesta;
             }
 
+            $respuesta = $this->CambiarHorarioTurno();
+            if($respuesta["estado"]){
+                return $respuesta;
+            }
+
             $respuesta = $this->VerificarCantidadTurnos();
             if(!$respuesta["estado"]){
                 return $respuesta;
@@ -344,11 +360,6 @@
 
             $respuesta = $this->VerificarTurnoLleno();
             if(!$respuesta["estado"]){
-                return $respuesta;
-            }
-
-            $respuesta = $this->CambiarHorarioTurno();
-            if($respuesta["estado"]){
                 return $respuesta;
             }
 
