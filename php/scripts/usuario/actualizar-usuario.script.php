@@ -71,7 +71,6 @@
         }
     }
 
-
     echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
     
 
