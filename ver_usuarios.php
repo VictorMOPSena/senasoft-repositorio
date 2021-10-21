@@ -52,11 +52,12 @@
             <tr>
                 <th>Empleado</th>
                 <th>Usuario</th>
+                <th>Acciones</th>
             </tr>
 
             <?php
             require_once "./php/classes/conexion.class.php";
-            require_once "./php/classes/persona.class.php";
+            require_once "./php/classes/usuario.class.php";
             require_once "./php/codigos-mensajes.php";
             
             $personaClass = new Usuario();
@@ -66,12 +67,15 @@
             if($respuesta["estado"]){
                  $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
                      foreach($resultados as $resultado){
+                         if($resultado->nombreUsuario == "No existente"){
+                            continue;
+                         }
                          ?>
                          <tr class="datos">
-                             <td><?php echo $resultado->;?></td>
-                             <td><?php echo $resultado->;?></td>
-                             <td><a href="./php/scripts/persona/eliminar-persona.script.php?id=<?php echo $resultado->idPersona?>"><input type="submit" value="Eliminar" class="btn_input"></a></td>
-                             <td><a href="actualizar_perfil.php?id=<?php echo $resultado->idPersona?>"><input type="submit" value="Actualizar" class="btn_input"></a></td>
+                             <td><?php echo $resultado->nombresPersona.' '.$resultado->apellidosPersona;?></td>
+                             <td><?php echo $resultado->nombreUsuario;?></td>
+                             <td><a href="./php/scripts/usuario/eliminar-usuario.script.php?id=<?php echo $resultado->idUsuario?>"><input type="submit" value="Eliminar" class="btn_input"></a></td>
+                             <td><a href="actualizar_usuario.php?id=<?php echo $resultado->idPersona?>"><input type="submit" value="Actualizar" class="btn_input"></a></td>
                          </tr>
                          <?php                       
                      }

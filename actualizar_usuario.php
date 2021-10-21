@@ -51,13 +51,13 @@
     <div class="container_principal">
         <div class="container_form">
 
-        <form action="./php/scripts/persona/actualizar-persona.script.php" method="POST" class="container_crear_usuario">
+        <form action="./php/scripts/usuario/actualizar-usuario.script.php" method="POST" class="container_crear_usuario">
             <h1>ACTUALIZAR PERFIL</h1>
             <center>
         
             <input type="hidden" class="input_text" name="id" value="<?php echo  $_SESSION['idPersonaUsuarioSenasoft']?>"><br>
             <input type="text" class="input_text" name="usuario "placeholder="Nuevo usuario"><br>
-            <input type="password" class="input_text" name="contraseña" placeholder="Nueva contraseña"><br>
+            <input type="password" class="input_text" name="contraseña" placeholder="Contraseña contraseña"><br>
             <input type="password" class="input_text" name="confirmar" placeholder="Confirmar contraseña"><br>
             <input type="submit" class="btn_input" value="Actualizar">
 
