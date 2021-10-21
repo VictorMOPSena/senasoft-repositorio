@@ -75,6 +75,9 @@
                     if($respuesta["estado"]){
                         $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
                             foreach($resultados as $resultado){
+                                if($resultado->nombreEspecialidad == "No existente"){
+                                    continue;
+                                 }
                 ?>
                                     <option value="<?php echo $resultado->nombreEspecialidad;?>"></option>
                 <?php                       

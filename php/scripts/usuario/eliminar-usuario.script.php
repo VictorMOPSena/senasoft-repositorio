@@ -5,13 +5,14 @@
     require_once '../../classes/usuario.class.php';
     require_once '../../codigos-mensajes.php';
 
-    $idInput = 4;
+    $idInput = $_GET['id'];
 
     $cronogramaClass = new Cronograma();
     $respuesta = $cronogramaClass->EliminarUsuario($idInput);
 
     $usuarioClass = new Usuario();
     $respuesta = $usuarioClass->EliminarUsuario($idInput);
-    echo $codigosMensajes[$respuesta["respuesta"]];
+    $mensaje = $respuesta["respuesta"];
+    header ("location: ../../../ver_usuarios.php?msn=$mensaje");
 
 ?>

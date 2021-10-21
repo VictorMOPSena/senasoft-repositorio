@@ -72,6 +72,9 @@
             if($respuesta["estado"]){
                  $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
                      foreach($resultados as $resultado){
+                        if($resultado->nombresPersona == "No existente"){
+                            continue;
+                         }
                          ?>
                          <tr class="datos">
                              <td><?php echo $resultado->cedulaPersona;?></td>

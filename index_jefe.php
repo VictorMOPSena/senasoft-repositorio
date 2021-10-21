@@ -122,7 +122,7 @@
         </div>
 
         <div class="container_crear_usuario">
-            <a href="crear_usuario_empleado.php">
+            <a href="ver_usuarios.php">
             <div class="icono_crear_usuario">
              <i class="fas fa-user-edit"></i>
             </div>
