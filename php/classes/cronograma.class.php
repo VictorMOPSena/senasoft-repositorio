@@ -396,15 +396,21 @@
 
 
         //Función para actualizar id de usuario
-        function EliminarIdUsuario($idUsuarioInput){
-            $this->contraUsuario = password_hash($this->contraUsuario, PASSWORD_DEFAULT);
+        function SetUsuarioNoExistente($idUsuarioInput){
+            $respuesta = ["estado"=>false, "respuesta"=>"nscune"];
             
-            $stmt = $this->Conectar()->prepare("UPDATE usuario SET nombreUsuario=?, contraUsuario=?, idPersonaUsuario=?, idRolUsuario=? WHERE idUsuario=?");
-            if(!$stmt->execute(array($this->nombreUsuario, $this->contraUsuario, $this->idPersonaUsuario, $this->idRolUsuario, $this->idUsuario))){
+            $stmt = $this->Conectar()->prepare("UPDATE cronogramaactual SET idUsuarioCronogramaActual=1 WHERE idUsuarioCronogramaActual=?");
+            if(!$stmt->execute(array($idUsuarioInput))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;
             }
+
+            $respuesta["estado"] = true;
+            $respuesta["respuesta"] = "unec";
+            
+            $stmt = null;
+            return $respuesta;
         }
 
     }
