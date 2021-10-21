@@ -38,7 +38,8 @@
         
     }
 
-    echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
+    $mensaje = $respuesta["respuesta"];
+    header ('location: ../../../agregar_personal.php?msn=$mensaje');
 
     
 ?>
