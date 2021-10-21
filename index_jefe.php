@@ -39,7 +39,7 @@
                 Bienvenido <?php echo $_SESSION['nombreUsuarioSenasoft']?>
             </div>
             <div class="container_img_profile">
-                <a href="actualizar_usuario.php"><img src="./assets/img/img_profile.jpg" alt=""></a>
+                <a href="actualizar_perfil.php"><img src="./assets/img/img_profile.jpg" alt=""></a>
             </div>
             <div class="container_cerrar_sesion">
                 <a href="./php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>
@@ -58,8 +58,9 @@
             <div class="informacion_ver_personal">
                 <h1>VER EMPELADOS CONTRATADOS</h1>
                 <p>Podra seleccionar esta opcion para <br>
-                    ver los emeplados que actualmente <br>
-                    se encuentran registrados <br>
+                    ver los empleados que actualmente <br>
+                    se encuentran registrados  <br>
+                    en la empresa.
                 </p>
             </div>
             </a>
@@ -74,7 +75,7 @@
                 <h1>VER TURNOS DE LOS EMPLEADOS</h1>
                 <p>Podra seleccionar esta opcion para <br>
                     ver los turnos de la semana <br>
-                    de cada empleado</p>
+                    de cada empleado por cada especialidad</p>
             </div>
             </a>
         </div>

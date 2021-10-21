@@ -30,6 +30,9 @@
         
     }
 
-    echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
+    $mensaje = $respuesta["respuesta"];
+
+    header ("location: ../../../ver_personal.php?msn$mensaje");
+
 
 ?>

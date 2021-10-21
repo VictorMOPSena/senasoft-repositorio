@@ -42,10 +42,13 @@
                 Bienvenido <?php echo $_SESSION['nombreUsuarioSenasoft']?>
             </div>
             <div class="container_img_profile">
-                <a href=""><img src="../assets/img/img_profile.jpg" alt=""></a>
+                <a href="../actualizar_perfil.php"><img src="../assets/img/img_profile.jpg" alt=""></a>
             </div>
             <div class="container_cerrar_sesion">
                 <a href="../php/scripts/sesion/cerrar-sesion.script.php"><i class="fas fa-user"> Cerrar sesion</i></a>
+            </div>
+            <div class="container_regresar">
+                <a href="../index_jefe.php"><i class="fas fa-undo-alt"> Regresar</i></a>
             </div>
         </div>
     </div>

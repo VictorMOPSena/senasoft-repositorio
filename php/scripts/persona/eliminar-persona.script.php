@@ -22,8 +22,10 @@
 
     $personaClass = new Persona();
     $respuesta = $personaClass->EliminarPersona($idPersonaInput);
+
+    $mensaje = $respuesta["respuesta"];
     
-    echo $codigosMensajes[$respuesta["respuesta"]];
+    header ("location: ../../../ver_personal.php");
 
     
 ?>
