@@ -2,6 +2,13 @@ const botonesTurnoDia = document.querySelectorAll('.turno_no_escogido');
 const h1FechaCronograma = document.getElementById('h1FechaCronograma');
 const inputIdUsuario = document.getElementById('idUsuario');
 
+//Ventena emergente de nombres de empleados
+const divVentanaEmergente =  document.getElementById('ventana-emergente');
+const divNombresEmpleados =  document.getElementById('nombres-empleados');
+const botonCerrarVentanaEmergente = document.getElementById('boton-cerrar');
+const botonTurno = document.getElementById('boton-turno');
+let divContenedorPs;
+
 const idUsuario = inputIdUsuario.value;
 
 let fecha = new Date();
@@ -160,21 +167,88 @@ async function AbandonarTurno(horario, fecha) {
     return resultado;
 }
 
+async function ObtenerEmpleadosTurno(horario, fecha) {
+    let data = new URLSearchParams();
+    data.append("horario", horario);
+    data.append("fecha", fecha);
+
+    let ruta = "http://localhost/senasoft-repositorio/php/scripts/cronograma/obtener-empleados-turno.script.php";
+    let request = fetch(ruta, {
+        method: 'post',
+        body: data
+    })
+
+    let peticion = await request;
+    let resultado = await peticion.json();
+    return resultado;
+}
+
+
+
+
+
+botonCerrarVentanaEmergente.addEventListener('click', ()=>{
+    divContenedorPs.remove();
+    divVentanaEmergente.style.display = "none";
+    
+})
+
+
 for (let boton of botonesTurnoDia){
     boton.addEventListener('click', async ()=>{
-        let mensaje = await TomarTurno(boton.getAttribute('dia'), boton.getAttribute('horario'), fechaInicio);
-        if(mensaje=="Ya tomaste este turno"){
-            if(confirm("¿Deseas abadonar el turno?")){
-                let fechaTurno = new Date(fechaInicio);
-                fechaTurno.setDate((fechaTurno.getDate()+1+parseInt(boton.getAttribute('dia'))));
-                fechaTurno = fechaTurno.getFullYear()+'-'+(fechaTurno.getMonth()+1)+'-'+fechaTurno.getDate();
-                mensaje = await AbandonarTurno(boton.getAttribute('horario'), fechaTurno);
-                
+
+        divVentanaEmergente.style.display = "flex";
+
+        let fechaTurno = new Date(fechaInicio);
+        fechaTurno.setDate((fechaTurno.getDate()+1+parseInt(boton.getAttribute('dia'))));
+        fechaTurno = fechaTurno.getFullYear()+'-'+(fechaTurno.getMonth()+1)+'-'+fechaTurno.getDate();
+        mensaje = await ObtenerEmpleadosTurno(boton.getAttribute('horario'), fechaTurno);
+
+
+        let cajaAux = document.createDocumentFragment();
+
+        if(mensaje['estado']){
+            for(let i=0; i<mensaje['datos'][0].length; i++){
+                let p = document.createElement('P');
+                p.innerText = mensaje['datos'][0][i];
+                cajaAux.appendChild(p);
             }
 
         }else{
-            alert(mensaje);
+            let p = document.createElement('P');
+            p.innerText = "No hay empeados";
+            cajaAux.appendChild(p);
         }
+
+        let contenedorPsAux = document.createElement('DIV');
+        divContenedorPs = contenedorPsAux;
+        divContenedorPs.appendChild(cajaAux)
+        divNombresEmpleados.appendChild(divContenedorPs);
+
+        let style = window.getComputedStyle(boton, '::before')
+        let texto = style.getPropertyValue('content');
+        botonTurno.innerText = texto.substring(1,texto.length-1);
+
+        // console.log(color);
+
+        // console.log(mensaje);
+
+
+
+
+        // let mensaje = await TomarTurno(boton.getAttribute('dia'), boton.getAttribute('horario'), fechaInicio);
+        // if(mensaje=="Ya tomaste este turno"){
+        //     if(confirm("¿Deseas abadonar el turno?")){
+        //         let fechaTurno = new Date(fechaInicio);
+        //         fechaTurno.setDate((fechaTurno.getDate()+1+parseInt(boton.getAttribute('dia'))));
+        //         fechaTurno = fechaTurno.getFullYear()+'-'+(fechaTurno.getMonth()+1)+'-'+fechaTurno.getDate();
+        //         mensaje = await AbandonarTurno(boton.getAttribute('horario'), fechaTurno);
+                
+        //     }
+
+        // }else{
+        //     alert(mensaje);
+        // }
         
     })
 }
