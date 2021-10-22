@@ -92,12 +92,10 @@ if(isset($_SESSION['idRolUsuarioSenasoft'])){
     <div id="ventana-emergente">
         <div class="empleados-boton">
             <div id="nombres-empleados">
-                <!-- <div">
-                    <p>nombre</p>
-                </div> -->
+                    <p id="titulo_empleados">Empleados con este turno:</p>
             </div>
-            <button id="boton-turno">Accion</button>
-            <button id="boton-cerrar">Cerrar</button>
+                <button id="boton-turno">Accion</button>
+                <button id="boton-cerrar">Cerrar</button>
         </div>
     </div>
     <script src="./assets/js/escoger-turno.js"></script>
