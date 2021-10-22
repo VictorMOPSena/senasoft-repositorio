@@ -107,14 +107,6 @@
     content:'Disponible';
 }
 
-
-
-
-
-
-
-
-
 #ventana-emergente {
     position: fixed;
     left: 0;
@@ -198,4 +190,26 @@
 #ventana-emergente .empleados-boton #boton-cerrar:hover{
     background-color: var(--btn-backgraund-color-hover);
     color: var(--btn-text-color);
+}
+
+input[type="date"]{
+    background: var(--backgraund-color_menu);
+    padding: var(--padding-s);
+    color: var(--color-text-input);
+    border: none;
+    border-bottom: 1px solid var(--color-text-input);
+    font-family: 'Ubuntu Condensed', sans-serif;
+    margin-left: 45%;
+    margin-top: 3%;
+    font-size: 20px;
+    outline: none;
+    border-radius: 5px;
+   
+}
+
+::-webkit-calendar-picker-indicator{
+   background-color: var(--color-text-input);
+   padding: var(--padding-xs);
+   cursor: pointer;
+   border-radius: 5px;
 }

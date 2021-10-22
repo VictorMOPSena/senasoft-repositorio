@@ -50,7 +50,7 @@ if(isset($_SESSION['idRolUsuarioSenasoft'])){
     <center>
         <h1 id="h1FechaCronograma">Fecha</h1>
     </center>
-
+    
     <input id="calendario" type="date">
 
     <div class="container_principal">
