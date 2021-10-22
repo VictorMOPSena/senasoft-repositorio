@@ -83,6 +83,33 @@
 
 
 
+        //Función para obtener personas por turno
+        function ObtenerEmpleadosTurno($fechaInput, $idEspecialidadInput, $horarioInput){
+            $respuesta = ["estado"=>false, "respuesta"=>"eno"];
+
+            $stmt = $this->Conectar()->prepare("SELECT nombresPersona, apellidosPersona FROM persona INNER JOIN cronogramaactual WHERE fechaCronogramaActual=? AND persona.idPersona=cronogramaactual.idUsuarioCronogramaActual AND idEspecialidadPersona=? AND horarioCronogramaActual=?;");
+            if(!$stmt->execute(array($fechaInput, $idEspecialidadInput, $horarioInput))){
+                $stmt = null;
+                $respuesta["respuesta"] = "estmt";
+                return $respuesta;
+            }
+
+            if($stmt->rowCount()>0){
+                $respuesta["estado"] = true;
+                $respuesta["respuesta"] = "eoc";
+                $respuesta["stmt"] = $stmt;
+
+            }else {
+                $respuesta["respuesta"] = "emne";
+            }
+
+            $stmt = null;
+            return $respuesta;
+
+        }
+
+
+
         //Función para obtener los turnos a partir de la fecha(domingo)
         function ObtenerTurnosFecha($fechaInput, $idEspecialidadInput){
             $respuesta = ["estado"=>false, "respuesta"=>"tsno"];
@@ -111,13 +138,6 @@
                 $respuesta["estado"] = true;
                 $respuesta["respuesta"] = "toc";
                 $respuesta["stmt"] = $stmt;
-
-
-                // $resultados=$stmt->fetchAll(PDO::FETCH_OBJ);
-                // foreach($resultados as $resultado){
-
-                // }
-
 
             }else {
                 $respuesta["respuesta"] = "tsne";
