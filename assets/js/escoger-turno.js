@@ -256,7 +256,7 @@ for (let boton of botonesTurnoDia){
         texto=texto.substring(1,texto.length-1);
 
         if(texto=="Disponible" || texto=="Vacio"){
-            if(turnosTomados<4){
+            if(turnosTomados<5){
                 botonTurno.removeAttribute("disabled");
                 texto = "Tomar turno";
 
