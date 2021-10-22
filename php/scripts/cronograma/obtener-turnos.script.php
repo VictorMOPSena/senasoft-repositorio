@@ -6,15 +6,37 @@
     require_once '../../codigos-mensajes.php';
 
     session_start();
-    // $fechaTurno = $_POST['fecha'];
-    $fechaTurno = "2021-10-17";
+    $fechaTurno = $_POST['fecha'];
+    $idEspecialidad = $_SESSION["idEspecialidadUsuarioSenasoft"];
+
+    $envio['estado'] = false;
+    $envio['datos'] = [];
+
+    $usuarioClass = new Usuario();
+    $respuesta = $usuarioClass->ObtenerNumeroUsuariosEmpleadosEspecialidad($idEspecialidad);
+
+    $envio['cantidadEmpleados']=$respuesta['cantidad'];
 
     $cronogramaClass = new Cronograma();
-    $respuesta = $cronogramaClass->ObtenerTurnosFecha($fechaTurno);
-    print_r($respuesta['datos']);
+    $respuesta = $cronogramaClass->ObtenerTurnosFecha($fechaTurno, $idEspecialidad);
 
-    echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
+    if($respuesta["estado"]){
+        $envio['estado'] = true;
+        $aux = [];
+        $resultados=$respuesta["stmt"]->fetchAll(PDO::FETCH_OBJ);
+        foreach($resultados as $resultado){
+            array_push($aux, $resultado->idUsuarioCronogramaActual);
+            array_push($aux, $resultado->horarioCronogramaActual);
+            array_push($aux, $resultado->fechaCronogramaActual);
+            array_push($envio['datos'], $aux);
+            $aux = [];
+        }
+        
+    }
+    
+
+    // echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
     // echo json_encode($codigosMensajes[$respuesta["respuesta"]]);
-    // echo json_encode($fechaFinal);
+    echo json_encode($envio);
 
 ?>

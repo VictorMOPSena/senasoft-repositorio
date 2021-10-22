@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-10-2021 a las 22:56:13
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 8.0.12
+-- Tiempo de generación: 22-10-2021 a las 06:23:19
+-- Versión del servidor: 10.4.20-MariaDB
+-- Versión de PHP: 8.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,6 +33,32 @@ CREATE TABLE `cronogramaactual` (
   `horarioCronogramaActual` int(11) NOT NULL,
   `fechaCronogramaActual` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `cronogramaactual`
+--
+
+INSERT INTO `cronogramaactual` (`idCronogramaActual`, `idUsuarioCronogramaActual`, `horarioCronogramaActual`, `fechaCronogramaActual`) VALUES
+(24, 3, 2, '2021-10-18'),
+(29, 3, 2, '2021-10-17'),
+(30, 3, 1, '2021-10-21'),
+(31, 3, 2, '2021-10-19'),
+(32, 3, 2, '2021-10-20'),
+(37, 2, 1, '2021-10-23'),
+(38, 2, 2, '2021-10-21'),
+(40, 2, 2, '2021-10-19'),
+(42, 2, 1, '2021-10-18'),
+(43, 2, 2, '2021-10-22'),
+(44, 6, 1, '2021-10-17'),
+(45, 6, 1, '2021-10-21'),
+(47, 6, 2, '2021-10-22'),
+(48, 6, 2, '2021-10-23'),
+(49, 6, 1, '2021-10-18'),
+(54, 5, 2, '2021-10-21'),
+(55, 5, 2, '2021-10-22'),
+(56, 5, 2, '2021-10-23'),
+(57, 5, 2, '2021-10-20'),
+(58, 5, 2, '2021-10-18');
 
 -- --------------------------------------------------------
 
@@ -79,10 +105,11 @@ CREATE TABLE `persona` (
 
 INSERT INTO `persona` (`idPersona`, `cedulaPersona`, `nombresPersona`, `apellidosPersona`, `celularPersona`, `correoPersona`, `direccionPersona`, `idEspecialidadPersona`) VALUES
 (1, '1', 'No existente', 'No existente', '1', 'No existente', 'No existente', 1),
-(2, '1000126434', 'Francisco', 'Morerira', '3143428541', 'francisco@gmail.com', 'Fusagasugá', 2),
-(3, '1020116434', 'Maria Elena', 'Pérez', '3214568973', 'maria@hotmail.com', 'Silvania', 3),
+(2, '1000126434', 'Francisco', 'Morerira', '3143428541', 'francisco@gmail.com', 'Fusagasugá', 5),
+(3, '1020116434', 'Maria Elena', 'Pérez', '3214568973', 'maria@hotmail.com', 'Silvania', 5),
 (4, '1890126434', 'Marcos Samuel', 'Castro', '3214568953', 'marcos@gmail.com', 'Bogotá', 4),
-(5, '3214523126', 'Pedro', 'Fernández', '6598532145', 'pedro@gmail.com', 'Silvania', 5);
+(5, '3214523126', 'Pedro', 'Fernández', '6598532145', 'pedro@gmail.com', 'Silvania', 5),
+(6, '1234545678', 'Marta', 'Molina', '3215365926', 'marta@gmail.com', 'en la ciudad', 4);
 
 -- --------------------------------------------------------
 
@@ -126,8 +153,9 @@ INSERT INTO `usuario` (`idUsuario`, `nombreUsuario`, `contraUsuario`, `idPersona
 (1, 'No existente', 'No existente', 1, 3),
 (2, 'francisco', '$2y$10$RCcFIKVnzH/w/Fw0z5IBmegEqIUeH9CECWm35D6BR23QHCI0h5Dou', 2, 2),
 (3, 'maria', '$2y$10$Ki86P6IdEvlUjv/S/zm9VuuRgY0r4p5IsDCoTjEbL1oWBLSJaLfOe', 3, 2),
-(4, 'marcos', '$2y$10$ZDOXLpwWX58u5JHunGvr/.wb9YAov.Adcd5HMHPrsZykz0fuJp.g.', 4, 2),
-(5, 'pedro', '$2y$10$1i4coGCeREXge7Gs9TpuIeY0u3KJR1h4cMAjskFvQlMGg8K0W7Tv6', 5, 1);
+(4, 'marcos', '$2y$10$ZDOXLpwWX58u5JHunGvr/.wb9YAov.Adcd5HMHPrsZykz0fuJp.g.', 4, 1),
+(5, 'pedro', '$2y$10$1i4coGCeREXge7Gs9TpuIeY0u3KJR1h4cMAjskFvQlMGg8K0W7Tv6', 5, 2),
+(6, 'marta', '$2y$10$SQhbHCUWHLrwXs9DV/0NIuL/RfCqjx/2sXCJyzkLEFrFszvnMRQg6', 6, 2);
 
 --
 -- Índices para tablas volcadas
@@ -175,7 +203,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cronogramaactual`
 --
 ALTER TABLE `cronogramaactual`
-  MODIFY `idCronogramaActual` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCronogramaActual` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `especialidad`
@@ -187,7 +215,7 @@ ALTER TABLE `especialidad`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -199,7 +227,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas

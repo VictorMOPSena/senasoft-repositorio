@@ -6,6 +6,7 @@
         private $horarioCronograma;
         private $fechaCronograma;
         private $usuariosTotalCronograma;
+        private $idEspecialidadCronograma;
 
 
         //Función para validar que los datos ingresados no estén vacíos
@@ -72,17 +73,18 @@
 
 
         //funcion para inicializar los atributos de la clase
-        function SetDatos($idUSuarioInput, $horarioInput, $fechaInput, $usuariosTotalInput){
+        function SetDatos($idUSuarioInput, $horarioInput, $fechaInput, $usuariosTotalInput, $idEspecialidadInput){
             $this->idUsuarioCronograma = $idUSuarioInput;
             $this->horarioCronograma = $horarioInput;
             $this->fechaCronograma = $fechaInput;
             $this->usuariosTotalCronograma = $usuariosTotalInput;
+            $this->idEspecialidadCronograma = $idEspecialidadInput;
         }
 
 
 
         //Función para obtener los turnos a partir de la fecha(domingo)
-        function ObtenerTurnosFecha($fechaInput){
+        function ObtenerTurnosFecha($fechaInput, $idEspecialidadInput){
             $respuesta = ["estado"=>false, "respuesta"=>"tsno"];
 
             $fechaSepara = explode("-", $fechaInput);
@@ -97,8 +99,9 @@
 
             $futuroSabado = date('Y-m-d', strtotime($fechaInput. ' + 6 days'));
 
-            $stmt = $this->Conectar()->prepare("SELECT * FROM cronogramaactual WHERE fechaCronogramaActual BETWEEN ? AND ?;");
-            if(!$stmt->execute(array($fechaInput, $futuroSabado))){
+            $stmt = $this->Conectar()->prepare("SELECT * FROM cronogramaactual INNER JOIN persona WHERE fechaCronogramaActual BETWEEN ? AND ? AND cronogramaactual.idUsuarioCronogramaActual=persona.idPersona AND idEspecialidadPersona=?;");
+            $a="";
+            if(!$stmt->execute(array($fechaInput, $futuroSabado, $idEspecialidadInput))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;
@@ -108,40 +111,13 @@
                 $respuesta["estado"] = true;
                 $respuesta["respuesta"] = "toc";
                 $respuesta["stmt"] = $stmt;
-                $idCronogramas = [];
-                $idUsuarios = [];
-                $horarioCronogramas = [];
-                $fechaCronogramas = [];
 
-                $resultados=$stmt->fetchAll(PDO::FETCH_OBJ);
-                foreach($resultados as $resultado){
-                    array_push($idCronogramas, $resultado->idCronogramaActual);
-                    array_push($idUsuarios, $resultado->idUsuarioCronogramaActual);
-                    array_push($horarioCronogramas, $resultado->horarioCronogramaActual);
-                    array_push($fechaCronogramas, $resultado->fechaCronogramaActual);
-                    // $fechaSeparaAux = explode("-", $resultado->fechaCronogramaActual);
-                    // $mktimeFecha = mktime(0, 0, 0, date($fechaSeparaAux[1]), date($fechaSeparaAux[2]), date($fechaSeparaAux[0]));
 
-                    // $dia = date("l", $mktimeFecha);
-                    // if($dia=="Sunday"){
-                    //     if($resultado->horarioCronogramaActual==1){
-                    //         echo "Hola1";
+                // $resultados=$stmt->fetchAll(PDO::FETCH_OBJ);
+                // foreach($resultados as $resultado){
 
-                    //     }else if($resultado->horarioCronogramaActual==2){
-                    //         echo "Hola2";
+                // }
 
-                    //     }
-                    //     echo "<br>";
-                        
-                    // }
-                }
-
-                $respuesta["datos"] = [];
-                array_push($respuesta["datos"], $idCronogramas);
-                array_push($respuesta["datos"], $idUsuarios);
-                array_push($respuesta["datos"], $horarioCronogramas);
-                array_push($respuesta["datos"], $fechaCronogramas);
-                
 
             }else {
                 $respuesta["respuesta"] = "tsne";
@@ -247,9 +223,9 @@
         function VerificarTurnoLLeno(){
             $respuesta = ["estado"=>false, "respuesta"=>"tllnv"];
 
-            $stmt = $this->Conectar()->prepare("SELECT COUNT(idCronogramaActual) as cantidad FROM cronogramaactual WHERE horarioCronogramaActual=? AND fechaCronogramaActual=?");
+            $stmt = $this->Conectar()->prepare("SELECT COUNT(idCronogramaActual) as cantidad FROM cronogramaactual INNER JOIN persona WHERE cronogramaactual.idUsuarioCronogramaActual=persona.idPersona AND idEspecialidadPersona=? AND horarioCronogramaActual=? AND fechaCronogramaActual=?;");
 
-            if(!$stmt->execute(array($this->horarioCronograma, $this->fechaCronograma))){
+            if(!$stmt->execute(array($this->idEspecialidadCronograma, $this->horarioCronograma, $this->fechaCronograma))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;
@@ -334,8 +310,8 @@
 
 
         //Función para tomar turno
-        function TomarTurno($idUSuarioInput, $horarioInput, $fechaInput, $usuariosTotalInput){
-            $this->SetDatos($idUSuarioInput, $horarioInput, $fechaInput, $usuariosTotalInput);
+        function TomarTurno($idUSuarioInput, $horarioInput, $fechaInput, $usuariosTotalInput, $idEspecialidadInput){
+            $this->SetDatos($idUSuarioInput, $horarioInput, $fechaInput, $usuariosTotalInput, $idEspecialidadInput);
             
 
             $validacion = $this->ValidarDatos();
@@ -348,17 +324,17 @@
                 return $respuesta;
             }
 
+            $respuesta = $this->VerificarTurnoLleno();
+            if(!$respuesta["estado"]){
+                return $respuesta;
+            }
+
             $respuesta = $this->CambiarHorarioTurno();
             if($respuesta["estado"]){
                 return $respuesta;
             }
 
             $respuesta = $this->VerificarCantidadTurnos();
-            if(!$respuesta["estado"]){
-                return $respuesta;
-            }
-
-            $respuesta = $this->VerificarTurnoLleno();
             if(!$respuesta["estado"]){
                 return $respuesta;
             }

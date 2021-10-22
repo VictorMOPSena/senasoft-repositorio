@@ -10,9 +10,13 @@
     $diaInput= $_POST['dia'];
     $horarioInput= $_POST['horario'];
     $fechaTurno = $_POST['fecha'];
-    // $idUsuarioInput = 2;
+    $idEspecialidad = $_SESSION["idEspecialidadUsuarioSenasoft"];
+    // $idUsuarioInput = 5;
+    // $diaInput = 0;
     // $horarioInput= 1;
     // $fechaTurno = "2021-10-14";
+    // $idEspecialidad = 5;
+
 
 
     $fechaSepara = explode("-", $fechaTurno);
@@ -24,9 +28,9 @@
     $respuesta = $usuarioClass->UsuarioExistente("idUsuario",$idUsuarioInput);
 
     if($respuesta["estado"]){
-        $respuesta = $usuarioClass->ObtenerNumeroUsuariosEmpleados();
+        $respuesta = $usuarioClass->ObtenerNumeroUsuariosEmpleadosEspecialidad($idEspecialidad);
         $cronogramaClass = new Cronograma();
-        $respuesta = $cronogramaClass->TomarTurno($idUsuarioInput, $horarioInput, $fechaFinal, $respuesta['cantidad']);
+        $respuesta = $cronogramaClass->TomarTurno($idUsuarioInput, $horarioInput, $fechaFinal, $respuesta['cantidad'], $idEspecialidad);
 
     }
 

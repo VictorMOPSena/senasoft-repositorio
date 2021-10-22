@@ -146,13 +146,13 @@
 
 
 
-        //Función para obtener el número de usuarios
-        function ObtenerNumeroUsuariosEmpleados(){
-            $stmt = $this->Conectar()->prepare("SELECT COUNT(idUsuario) as cantidad FROM usuario WHERE idRolUsuario=?");
+        //Función para obtener el número de usuarios por especialidad
+        function ObtenerNumeroUsuariosEmpleadosEspecialidad($idEspecialidad){
+            $stmt = $this->Conectar()->prepare("SELECT COUNT(idUsuario) as cantidad FROM usuario INNER JOIN persona WHERE usuario.idUsuario=persona.idPersona AND idRolUsuario=2 AND idEspecialidadPersona=?;");
 
             $respuesta = ["estado"=>false, "respuesta"=>"neu"];
 
-            if(!$stmt->execute(array(2))){
+            if(!$stmt->execute(array($idEspecialidad))){
                 $stmt = null;
                 $respuesta["respuesta"] = "estmt";
                 return $respuesta;

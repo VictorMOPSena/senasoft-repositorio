@@ -35,7 +35,7 @@
 </head>
 <body>
 <div class="container_menu">
-    
+        <input id="idUsuario" type="hidden" value="<?php echo $_SESSION['idUsuarioSenasoft']?>">
         <div class="container_img_logo">
             <img src="../assets/img/Logo.png" alt="">
         </div>

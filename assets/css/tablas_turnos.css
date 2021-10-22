@@ -13,7 +13,7 @@
     height: auto;
     right: 15%;
     position: absolute;
-    margin-top: 200px;
+    margin-top: 100px;
 }
 
 .container_principal .container_tabla_turnos .tabla_turnos{
@@ -43,22 +43,29 @@
     font-family: 'Ubuntu Condensed', sans-serif;
 }
 
-.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .btn_turno {
-    width: 100px;
-    height: 100px;
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_escogido,
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_disponible,
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_escogido,
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_en_proceso {
+    width: 50px;
+    height: 50px;
     margin: 0 auto;
     cursor: pointer;
     border: solid black 1px;
 }
 
-.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_disponible {
-    background-color: rgb(176, 255, 216);
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_escogido {
+    background-color: rgb(202, 199, 199);
 }
 
 .container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_disponible {
     background-color: rgb(255, 166, 166);
 }
 
-.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_Escogido {
-    background-color: rgb(198, 199, 255);
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_escogido {
+    background-color: rgb(176, 255, 216);
+}
+
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_en_proceso {
+    background-color: rgb(255, 246, 162);
 }

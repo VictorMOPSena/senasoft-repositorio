@@ -5,11 +5,10 @@
     require_once '../../classes/usuario.class.php';
     require_once '../../codigos-mensajes.php';
 
-    // $idUsuarioInput = $_SESSION["idUsuarioSenasoft"];
-    // session_start();
-    $idUsuarioInput=2;
-    $horarioInput=1;
-    $fechaTurno ="2021-10-21";
+    session_start();
+    $idUsuarioInput = $_SESSION["idUsuarioSenasoft"];
+    $horarioInput= $_POST['horario'];
+    $fechaTurno = $_POST['fecha'];
 
 
     $usuarioClass = new Usuario();
@@ -21,12 +20,6 @@
 
     }
 
-    echo $codigosMensajes[$respuesta["respuesta"]]."<br>";
-
-
-    
-    
-
-
+    echo json_encode($codigosMensajes[$respuesta["respuesta"]]);
 
 ?>
