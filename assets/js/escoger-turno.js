@@ -34,10 +34,6 @@ calendarioInput.value = fechaInicio;
 calendarioInput.setAttribute("max", fechaHoy);
 calendarioInput.addEventListener('input', function(e){
     let dia = new Date(this.value).getUTCDay();
-    let fechaAux = new Date(calendarioInput.value);
-    
-
-    console.log(fechaAux);
     if(![0].includes(dia)){
       e.preventDefault();
       calendarioInput.value = fechaInicio;
