@@ -26,16 +26,14 @@
 
 .container_menu .container_perfil{
     color: var(--color-text-menu);
-    background-color: red;
     position: absolute;
-    width: 25%;
+    width: 20%;
     min-height: 80px;
     right: 30px;
 }
 
 .container_menu .container_perfil .container_name_user{
     position: relative;
-    background: turquoise;
     min-width: 11%;
     height: 20px;
     margin-left: 10px;
