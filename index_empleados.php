@@ -51,6 +51,8 @@ if(isset($_SESSION['idRolUsuarioSenasoft'])){
         <h1 id="h1FechaCronograma">Fecha</h1>
     </center>
 
+    <input id="calendario" type="date">
+
     <div class="container_principal">
         <div class="container_tabla_turnos">
             <table class="tabla_turnos">

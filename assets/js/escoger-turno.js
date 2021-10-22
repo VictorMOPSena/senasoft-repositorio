@@ -1,6 +1,9 @@
 const botonesTurnoDia = document.querySelectorAll('.turno_no_escogido');
 const h1FechaCronograma = document.getElementById('h1FechaCronograma');
 const inputIdUsuario = document.getElementById('idUsuario');
+const calendarioInput = document.getElementById('calendario');
+
+
 
 //Ventena emergente de nombres de empleados
 const divVentanaEmergente =  document.getElementById('ventana-emergente');
@@ -23,6 +26,24 @@ fecha.setDate(fecha.getDate()+6);
 fechaFin = fecha.getFullYear()+'-'+(fecha.getMonth()+1)+'-'+fecha.getDate();
 
 h1FechaCronograma.innerText = `Cronograma del ${fechaInicio} al ${fechaFin}`;
+
+
+
+calendarioInput.value = fechaInicio;
+calendarioInput.addEventListener('input', function(e){
+    let dia = new Date(this.value).getUTCDay();
+    console.log(dia);
+    if(![0].includes(dia)){
+      e.preventDefault();
+      this.value = '';
+      alert('Seleccione un domingo');
+  
+    }else{
+        
+
+    }
+});
+
 
 
 
