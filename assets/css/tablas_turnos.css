@@ -1,4 +1,5 @@
 @import url(barra_usuario.css);
+@import url(botones_turnos.css);
 
 .container_principal{
     width: 100%;
@@ -17,13 +18,15 @@
 }
 
 .container_principal .container_tabla_turnos .tabla_turnos{
-    width: 100%;
+    min-width: 100%;
+    font-size: 25px;
     height: auto;
     border-collapse: collapse;
 }
 
 .container_principal .container_tabla_turnos .tabla_turnos .titulos_tabla th{
     background: var(--backgraund-color_menu);
+    max-width: 100%;
     height: 70px;
     font-family: 'Ubuntu Condensed', sans-serif;
     text-align: center;
@@ -31,7 +34,6 @@
 }
 
 .container_principal .container_tabla_turnos .tabla_turnos .info_turnos {
-    height: 2px;
     height: 150px;
 }
 
@@ -43,35 +45,69 @@
     font-family: 'Ubuntu Condensed', sans-serif;
 }
 
+#h1FechaCronograma{
+    font-family: 'Ubuntu Condensed', sans-serif;
+    font-size: 50px;
+    margin-top: 50px;
+}
+
+
 .container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_escogido,
 .container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_disponible,
 .container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_escogido,
 .container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_en_proceso {
-    width: 50px;
-    height: 50px;
-    margin: 0 auto;
+    display: inline-block;
+    width: 60%;
+    margin: 0;
+    padding: var(--padding-s);
+    font-size: 20px;
+    border: 0;
+    border-radius: 0.4rem;
+    box-shadow: -1px 1px 8px rgba(0, 0, 0, 0.4);
+    appearance: none;
     cursor: pointer;
-    border: solid black 1px;
+    transition: 1s;
 }
+
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_escogido:hover,
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_disponible:hover,
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_escogido:hover,
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_en_proceso:hover {
+    background-color: white;
+    padding: var(--padding);
+}
+
 
 .container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_escogido {
     background-color: rgb(202, 199, 199);
+}
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_escogido::before {
+    content:'Vacio';
 }
 
 .container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_disponible {
     background-color: rgb(255, 166, 166);
 }
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_disponible::before{
+    content: 'Lleno';
+}
 
 .container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_escogido {
     background-color: rgb(176, 255, 216);
 }
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_escogido:before {
+    content: 'Escogido';
+}
+
 
 .container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_en_proceso {
     background-color: rgb(255, 246, 162);
 }
 .container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_en_proceso::before {
-    content: "Hola";
+    content:'Disponible';
 }
+
+
 
 
 
