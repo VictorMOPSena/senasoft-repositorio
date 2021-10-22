@@ -10,6 +10,7 @@ const botonTurno = document.getElementById('boton-turno');
 let divContenedorPs;
 
 const idUsuario = inputIdUsuario.value;
+let turnosTomados = 0;
 
 let fecha = new Date();
 do {
@@ -108,13 +109,14 @@ async function LLamarObtenerTurnos(){
             }
         }
 
+        turnosTomados = 0;
         for(let i=0; i<fechasRecibidas.length; i++){
             let datosAux = fechasRecibidas[i].split("-");
             for (let boton of botonesTurnoDia){
                 if(boton.getAttribute('horario')==datosAux[0] && boton.getAttribute('dia')==datosAux[1]){
                     if(idsRecibidas[i]==idUsuario){
                         boton.setAttribute('class','turno_escogido');
-
+                        turnosTomados++;
                     }
                 }
             }
@@ -186,11 +188,35 @@ async function ObtenerEmpleadosTurno(horario, fecha) {
 
 
 
-
-botonCerrarVentanaEmergente.addEventListener('click', ()=>{
+function CerrarVentanaEmergente(){
     divContenedorPs.remove();
     divVentanaEmergente.style.display = "none";
+}
+
+botonCerrarVentanaEmergente.addEventListener('click', ()=>{
+    CerrarVentanaEmergente();
     
+})
+
+
+async function AccionBotonTurno(){
+    let mensaje = await TomarTurno(botonTurno.getAttribute('dia'), botonTurno.getAttribute('horario'), fechaInicio);
+    if(botonTurno.innerText=="Dejar turno"){
+        let fechaTurno = new Date(fechaInicio);
+        fechaTurno.setDate((fechaTurno.getDate()+1+parseInt(botonTurno.getAttribute('dia'))));
+        fechaTurno = fechaTurno.getFullYear()+'-'+(fechaTurno.getMonth()+1)+'-'+fechaTurno.getDate();
+        mensaje = await AbandonarTurno(botonTurno.getAttribute('horario'), fechaTurno);
+
+    }
+
+    CerrarVentanaEmergente();
+
+    console.log(mensaje);
+
+}
+
+botonTurno.addEventListener('click', ()=>{
+    AccionBotonTurno();
 })
 
 
@@ -202,7 +228,7 @@ for (let boton of botonesTurnoDia){
         let fechaTurno = new Date(fechaInicio);
         fechaTurno.setDate((fechaTurno.getDate()+1+parseInt(boton.getAttribute('dia'))));
         fechaTurno = fechaTurno.getFullYear()+'-'+(fechaTurno.getMonth()+1)+'-'+fechaTurno.getDate();
-        mensaje = await ObtenerEmpleadosTurno(boton.getAttribute('horario'), fechaTurno);
+        let = mensaje = await ObtenerEmpleadosTurno(boton.getAttribute('horario'), fechaTurno);
 
 
         let cajaAux = document.createDocumentFragment();
@@ -227,29 +253,51 @@ for (let boton of botonesTurnoDia){
 
         let style = window.getComputedStyle(boton, '::before')
         let texto = style.getPropertyValue('content');
-        botonTurno.innerText = texto.substring(1,texto.length-1);
+        texto=texto.substring(1,texto.length-1);
 
-        // console.log(color);
+        if(texto=="Disponible" || texto=="Vacio"){
+            if(turnosTomados<4){
+                botonTurno.removeAttribute("disabled");
+                texto = "Tomar turno";
 
-        // console.log(mensaje);
+            }else{
+                let botonOtroHorario;
+                for (let botonAux of botonesTurnoDia){
+                    if(boton.getAttribute('dia')==botonAux.getAttribute('dia') && boton.getAttribute('horario')!=botonAux.getAttribute('horario')){
+                        botonOtroHorario = botonAux;
+                    }
+                }
 
+                let style = window.getComputedStyle(botonOtroHorario, '::before')
+                let textoAux = style.getPropertyValue('content');
+                textoAux=textoAux.substring(1,textoAux.length-1);
 
+                if(textoAux!="Escogido"){
+                    botonTurno.setAttribute("disabled", true);
+                    texto = "No puedes tomar más turnos";
 
+                }else {
+                    botonTurno.removeAttribute("disabled");
+                    texto = "Tomar turno";
 
-        // let mensaje = await TomarTurno(boton.getAttribute('dia'), boton.getAttribute('horario'), fechaInicio);
-        // if(mensaje=="Ya tomaste este turno"){
-        //     if(confirm("¿Deseas abadonar el turno?")){
-        //         let fechaTurno = new Date(fechaInicio);
-        //         fechaTurno.setDate((fechaTurno.getDate()+1+parseInt(boton.getAttribute('dia'))));
-        //         fechaTurno = fechaTurno.getFullYear()+'-'+(fechaTurno.getMonth()+1)+'-'+fechaTurno.getDate();
-        //         mensaje = await AbandonarTurno(boton.getAttribute('horario'), fechaTurno);
-                
-        //     }
+                }       
+            }
+            
 
-        // }else{
-        //     alert(mensaje);
-        // }
-        
+        }else if(texto=="Escogido"){
+            botonTurno.removeAttribute("disabled");
+            texto = "Dejar turno";
+
+        }else if(texto=="Lleno"){
+            botonTurno.setAttribute("disabled", true);
+            texto = "Turno lleno";
+
+        }
+
+        botonTurno.innerText = texto;
+        botonTurno.setAttribute("dia", boton.getAttribute('dia'));
+        botonTurno.setAttribute("horario", boton.getAttribute('horario'));
+
     })
 }
 
