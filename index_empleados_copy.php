@@ -47,7 +47,6 @@ if(isset($_SESSION['idRolUsuarioSenasoft'])){
             </div>
         </div>
     </div>
-
     <center>
         <h1 id="h1FechaCronograma">Fecha</h1>
     </center>
@@ -88,6 +87,17 @@ if(isset($_SESSION['idRolUsuarioSenasoft'])){
                     <td><div dia="6" horario="2" class="turno_no_escogido"></td>
                 </tr>
             </table>
+        </div>
+    </div>
+    <div id="ventana-emergente">
+        <div class="empleados-boton">
+            <div id="nombres-empleados">
+                <!-- <div">
+                    <p>nombre</p>
+                </div> -->
+            </div>
+            <button id="boton-turno">Accion</button>
+            <button id="boton-cerrar">Cerrar</button>
         </div>
     </div>
     <script src="./assets/js/escoger-turno.js"></script>
