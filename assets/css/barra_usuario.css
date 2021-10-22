@@ -27,15 +27,16 @@
 .container_menu .container_perfil{
     color: var(--color-text-menu);
     position: absolute;
-    width: 50%;
+    width: 20%;
     min-height: 80px;
-    right: 200px;
+    right: 30px;
 }
 
 .container_menu .container_perfil .container_name_user{
     position: relative;
-    width: 50%;
-    height: 30px;
+    min-width: 11%;
+    height: 20px;
+    margin-left: 10px;
     margin-top: 30px;
     float: left;
     text-align: right;
@@ -59,8 +60,9 @@
 
 .container_menu .container_perfil .container_cerrar_sesion{
     position: absolute;
-    width:14%;
-    right: 150px;
+    min-width:30px;
+    left: 180px;
+    padding: 2px;
     margin-top: 30px;
     background: var(--btn-backgraund-color);
     border-radius: 20px;
