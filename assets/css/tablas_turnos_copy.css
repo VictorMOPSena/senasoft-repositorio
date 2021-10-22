@@ -1,0 +1,71 @@
+@import url(barra_usuario.css);
+
+.container_principal{
+    width: 100%;
+    min-height: 890px;
+    position: relative;
+}
+
+.container_principal .container_tabla_turnos{
+    color: var(--color-text-input);
+    border: 1px solid var(--backgraund-color_menu);
+    width: 70%;
+    height: auto;
+    right: 15%;
+    position: absolute;
+    margin-top: 100px;
+}
+
+.container_principal .container_tabla_turnos .tabla_turnos{
+    width: 100%;
+    height: auto;
+    border-collapse: collapse;
+}
+
+.container_principal .container_tabla_turnos .tabla_turnos .titulos_tabla th{
+    background: var(--backgraund-color_menu);
+    height: 70px;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos {
+    height: 2px;
+    height: 150px;
+}
+
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos td{
+    text-align: center;
+    color: black;
+    vertical-align: middle;
+    border-collapse: collapse;
+    font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_escogido,
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_disponible,
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_escogido,
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_en_proceso {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    cursor: pointer;
+    border: solid black 1px;
+}
+
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_escogido {
+    background-color: rgb(202, 199, 199);
+}
+
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_no_disponible {
+    background-color: rgb(255, 166, 166);
+}
+
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_escogido {
+    background-color: rgb(176, 255, 216);
+}
+
+.container_principal .container_tabla_turnos .tabla_turnos .info_turnos .turno_en_proceso {
+    background-color: rgb(255, 246, 162);
+}
